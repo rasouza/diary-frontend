@@ -38,8 +38,7 @@ class Login extends React.Component {
                 <Button
                   className="btn-neutral btn-icon"
                   color="default"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
+                  href={`${process.env.REACT_APP_USERS_URL}/accept-login/rasouza?login_challenge=${this.getQuerystring('login_challenge')}`}
                 >
                   <span className="btn-inner--icon">
                     <img
