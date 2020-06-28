@@ -19,9 +19,10 @@ import Index from "pages/index.js";
 import Profile from "pages/examples/Profile.js";
 import Maps from "pages/examples/Maps.js";
 import Register from "pages/examples/Register.js";
-import Login from "pages/examples/Login.js";
+import Login from "pages/Login/Login";
 import Tables from "pages/examples/Tables.js";
 import Icons from "pages/examples/Icons.js";
+import Callback from "pages/Login/Callback";
 
 var routes = [
   {
@@ -64,6 +65,13 @@ var routes = [
     name: "Login",
     icon: "ni ni-key-25 text-info",
     component: Login,
+    layout: "/auth",
+  },
+  {
+    path: "/callback",
+    name: "Callback",
+    icon: "ni ni-key-25 text-info",
+    component: Callback,
     layout: "/auth",
   },
   {
