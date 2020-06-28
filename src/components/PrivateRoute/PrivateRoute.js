@@ -1,15 +1,16 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { isAuthenticated } from "services/AuthService";
 
 const PrivateRoute = ({ children, ...props }) => {
-  const isAuthenticated = false; // Mock
+  const auth = isAuthenticated();
   const redirect = () => window.location = `${process.env.REACT_APP_USERS_URL}/auth`;
 
   return <Route 
     path={props.path} 
     key={props.key}
-    { ...( isAuthenticated && { component: props.component } ) }
-    render={() => isAuthenticated ? children : redirect()} 
+    { ...( auth && { component: props.component } ) }
+    render={() => auth ? children : redirect()} 
   />
 }
 

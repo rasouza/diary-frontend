@@ -1,14 +1,10 @@
-import jwt from "jsonwebtoken";
-import storage from 'localforage';
+import storage from 'local-storage';
 
-
-const saveJWT = async (hash) => {
+export const saveJWT = (hash) => {
   const token = hash.substr(1);
-  const decoded = jwt.decode(token);
 
   try {
-    await storage.setItem('jwt', token)
-    await storage.setItem('login', decoded)
+    storage.set('jwt', token)
   } 
   catch (err) {
     console.log(err);
