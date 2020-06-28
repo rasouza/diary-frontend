@@ -15,13 +15,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Index from "views/index.js";
-import Profile from "views/examples/Profile.js";
-import Maps from "views/examples/Maps.js";
-import Register from "views/examples/Register.js";
-import Login from "views/examples/Login.js";
-import Tables from "views/examples/Tables.js";
-import Icons from "views/examples/Icons.js";
+import Index from "pages/index.js";
+import Profile from "pages/examples/Profile.js";
+import Maps from "pages/examples/Maps.js";
+import Register from "pages/examples/Register.js";
+import Login from "pages/examples/Login.js";
+import Tables from "pages/examples/Tables.js";
+import Icons from "pages/examples/Icons.js";
 
 var routes = [
   {
