@@ -17,6 +17,7 @@
 */
 import React from "react";
 import { Link } from "react-router-dom";
+import storage from "local-storage";
 // reactstrap components
 import {
   DropdownMenu,
@@ -37,6 +38,7 @@ import {
 
 class AdminNavbar extends React.Component {
   render() {
+    const { avatar, name } = storage('login');
     return (
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -66,12 +68,12 @@ class AdminNavbar extends React.Component {
                     <span className="avatar avatar-sm rounded-circle">
                       <img
                         alt="..."
-                        src={require("assets/img/theme/team-4-800x800.jpg")}
+                        src={avatar}
                       />
                     </span>
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
-                        Jessica Jones
+                        {name}
                       </span>
                     </Media>
                   </Media>
