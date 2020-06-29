@@ -1,0 +1,9 @@
+export default {
+  use: "sig",
+  kty: "RSA",
+  kid: "public:60dfdbea-dfcc-40a9-ab7d-fe3d0ff74f9b",
+  alg: "RS256",
+  n:
+    "r_nEYyitbytHWy_olyFQKrYugYbaMGuarpbxPY3br1BSl0mkwhYAghjWiznvCEe_-CZYwlNO-WNb0TObK8lL3tXBU2rb_SuEtG088d-p6rz8bZUcQ44yLXG5ShyP1GzGgTHUYFsxVm-NSeBGDqnU3JsCcChT7uK1P965KpTh9ph_he0K6uWnKu_xpecqYHfA2Eri1ymh2r33l2xyuU4MGt694kHvH5k537wGybef4ABWaBp8Ih1KDUjl3egbSpbKlynkVhOmzZPRf03GZ-cQHKT2Garfmpyqtgu0YD7K8kNLU5B9UKQeaB2olkNCtfq-Cuto_XScrvoLolRyfcBEDXfaOEOh284gjWUKg8kkiOa5vVQ1l5eI0Q54lHjkSVV9bmQIPrYOTIQRqHEViQNjdX9j3Q-HPRLfLk9IclBiniuMpJQMdwgU-tasopPSZ_-TIfeJUFAQINd_F8GxCKNyl3t9iPhWX6w8fG0IFWQq4tQ9fh_0H_wc4FOAGTFWWRf22BEbe6r3MrmiN4oeuM74P61LzKfyNIco4SueVSTpLNE_2Zy1_Y98wQ5u2BVDfQ8ZqJXyLi77gU016zTFcYjvyIv-IQqCS_EsYNqOUARLdjINB6v4KXTdR-wYxIIqLFNEwJbFJKT8j1HPTRS5nArTB_n77dJUaFj7oQf9xQd9Av0",
+  e: "AQAB",
+};
