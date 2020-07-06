@@ -1,11 +1,10 @@
 import jwt from "jsonwebtoken";
 import storage from "local-storage";
 import jwkToPem from "jwk-to-pem";
-import jwks from "jwks";
 
 export const isAuthenticated = () => {  
   try {
-    const pem = jwkToPem(jwks);
+    const pem = jwkToPem(window.JWKS);
     const token = storage.get('jwt');
 
     const decoded = jwt.verify(token, pem);

@@ -1,4 +1,5 @@
-export default {
+window.USERS_URL='http://localhost:8000';
+window.JWKS = {
   use: "sig",
   kty: "RSA",
   kid: "public:60dfdbea-dfcc-40a9-ab7d-fe3d0ff74f9b",
