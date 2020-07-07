@@ -1,3 +1,22 @@
+# v0.2.0 (Tue Jul 07 2020)
+
+#### 🚀 Enhancement
+
+- implements JWT parsing upon login only [#13](https://github.com/rasouza/diary-frontend/pull/13) ([@rasouza](https://github.com/rasouza))
+- creates diary microservices in docker-compose [#10](https://github.com/rasouza/diary-frontend/pull/10) ([@rasouza](https://github.com/rasouza))
+- Auto Release notes [#9](https://github.com/rasouza/diary-frontend/pull/9) ([@rasouza](https://github.com/rasouza))
+
+#### 🐛 Bug Fix
+
+- Bump websocket-extensions from 0.1.3 to 0.1.4 [#1](https://github.com/rasouza/diary-frontend/pull/1) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Rodrigo Souza ([@rasouza](https://github.com/rasouza))
+
+---
+
 ## [1.1.0] 2020-02-10
 ### Bug fixing
 - https://github.com/creativetimofficial/argon-dashboard-react/issues/18 (Added this in live docs, we need for our product to have a homepage prop inside the package.json. If build is not working, just delete the homepage prop from inside the package.json, or configure it to your own specs.)
