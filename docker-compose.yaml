@@ -1,0 +1,102 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12.2
+    environment:
+      - POSTGRES_USER=diary_user
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=diary
+    ports:
+      - 5432:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  idp:
+    image: oryd/hydra:v1.4.5
+    command: serve all --dangerous-force-http
+    ports:
+      - "4444:4444"
+      - "4445:4445"
+    depends_on:
+      - idp_migrate
+      - db
+    environment:
+      DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
+      URLS_SELF_ISSUER: http://localhost:4444
+      URLS_CONSENT: http://localhost:8000/consent
+      URLS_LOGIN: http://localhost:3000/auth/login
+      URLS_LOGOUT: http://localhost:3000/auth/logout
+      OIDC_SUBJECT_IDENTIFIERS_SUPPORTED_TYPES: public,pairwise
+      SECRETS_SYSTEM: youReallyNeedToChangeThis
+      OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT: youReallyNeedToChangeThis
+
+  idp_client:
+    image: oryd/hydra:v1.4.5
+    command: >
+      clients create
+      --endpoint http://idp:4445
+      --id diary-users
+      --name diary-users
+      --secret secret
+      --grant-types authorization_code,refresh_token
+      --callbacks http://localhost:8000/oauth2/callback
+      --response-types code,id_token
+      --scope openid,offline
+      --token-endpoint-auth-method client_secret_post
+    depends_on:
+      - idp_migrate
+    environment:
+      DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
+
+  idp_migrate:
+    image: oryd/hydra:v1.4.5
+    command: migrate sql -e --yes
+    depends_on:
+      - db
+    environment:
+      DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
+
+  users:
+    image: rasouza/diary-users
+    ports:
+      - 8000:8000
+    depends_on: 
+      - idp
+      - db
+    environment:
+      APP_DEBUG: "true"
+      APP_KEY: base64:b5fQDSAd0mTd4mIO5ED+fhjsiQORaOQj3/WTSy7macw=
+      APP_ENV: development
+      APP_URL: http://localhost:8000
+      GITHUB_CLIENT_ID: d7f69e4ab712c7c36ad6
+      GITHUB_CLIENT_SECRET: 584bde0a1041557c316ebf89e928c14462c765d7
+      IDP_CLIENT_ID: diary-users
+      IDP_CLIENT_SECRET: secret
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: diary
+      DB_SCHEMA: users
+      DB_USERNAME: diary_user
+      DB_PASSWORD: secret
+      FRONTEND_URL: http://localhost:3000
+      IDP_EXTERNAL_URL: http://localhost:4444
+      IDP_ADMIN_URL: http://idp:4445
+      IDP_URL: http://idp:4444
+
+  users_migrate:
+    image: rasouza/diary-users
+    command: php artisan migrate
+    depends_on: 
+      - db
+    environment:
+      APP_DEBUG: "true"
+      APP_ENV: development
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: diary
+      DB_SCHEMA: users
+      DB_USERNAME: diary_user
+      DB_PASSWORD: secret
