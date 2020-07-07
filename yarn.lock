@@ -7,6 +7,15 @@
   resolved "https://registry.yarnpkg.com/@auto-it/bot-list/-/bot-list-9.41.1.tgz#d7d9000d34a3b3dc603b04367ace27e373adc60f"
   integrity sha512-jsl6JYi4hchjaEPEZFvQ5nR0Q5nAhEXb8As714o+t7kjh4LSBPTh1pjN+C8PIgYuLp7PavI1QSMTug3NRV+XfA==
 
+"@auto-it/conventional-commits@^9.41.1":
+  version "9.41.1"
+  resolved "https://registry.yarnpkg.com/@auto-it/conventional-commits/-/conventional-commits-9.41.1.tgz#202e6b1eb7091af60f0eb7532f748b3ed4d544e5"
+  integrity sha512-HwYreHx3ROqAWic3pUqrpEAFsu/OGn481BX8ZuwMG7sFO8crsva8eUjcayq7P3DJuidke7paBFqhpmLVDb4mkg==
+  dependencies:
+    "@auto-it/core" "^9.41.1"
+    parse-commit-message "4.0.0"
+    tslib "2.0.0"
+
 "@auto-it/core@^9.41.1":
   version "9.41.1"
   resolved "https://registry.yarnpkg.com/@auto-it/core/-/core-9.41.1.tgz#6b1caff74f21b5a0ec0b5fd0b31f592d04206b49"
@@ -9134,6 +9143,11 @@ parse-author@^2.0.0:
   integrity sha1-00YL8d3Q367tQtp1QkLmX7aEqB8=
   dependencies:
     author-regex "^1.0.0"
+
+parse-commit-message@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/parse-commit-message/-/parse-commit-message-4.0.0.tgz#e24d53231c720224a96086ac33c8e9e0a3dae557"
+  integrity sha512-i06BJjUoGvIGJaiaLKW4WEM9V8+b98dLxxXCmK5mM2egKMnP29kTlweW2uMnwVJjG0v0W7kPGt/K4sSZVlLmvA==
 
 parse-filepath@^1.0.1:
   version "1.0.2"

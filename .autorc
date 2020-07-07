@@ -2,7 +2,8 @@
   "plugins": [
     "git-tag",
     "first-time-contributor",
-    "released"
+    "released",
+    "conventional-commits"
   ],
   "owner": "rasouza",
   "repo": "diary-frontend",

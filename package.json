@@ -54,6 +54,7 @@
     "reactstrap": "8.4.1"
   },
   "devDependencies": {
+    "@auto-it/conventional-commits": "^9.41.1",
     "@auto-it/first-time-contributor": "^9.41.1",
     "@auto-it/git-tag": "^9.41.1",
     "@auto-it/released": "^9.41.1",
