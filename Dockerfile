@@ -7,8 +7,7 @@ FROM node:$NODE_VERSION as build
 ARG APP_DIR
 WORKDIR $APP_DIR
 
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json yarn.lock ./
 
 RUN yarn install
 
