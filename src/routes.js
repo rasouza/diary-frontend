@@ -16,13 +16,9 @@
 
 */
 import Index from "pages/index.js";
-import Profile from "pages/examples/Profile.js";
-import Maps from "pages/examples/Maps.js";
-import Register from "pages/examples/Register.js";
-import Login from "pages/Login/Login";
-import Tables from "pages/examples/Tables.js";
-import Icons from "pages/examples/Icons.js";
-import Callback from "pages/Login/Callback";
+import Story from "pages/Story/Story";
+import Profile from "pages/Profile/Profile";
+import Icons from "pages/examples/Icons";
 
 var routes = [
   {
@@ -33,53 +29,27 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-planet text-blue",
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    component: Maps,
+    path: "/story",
+    name: "Create Story",
+    icon: "ni ni-fat-add text-blue",
+    component: Story,
     layout: "/admin",
   },
   {
     path: "/user-profile",
-    name: "User Profile",
-    icon: "ni ni-single-02 text-yellow",
+    name: "Profile",
+    icon: "ni ni-circle-08 text-blue",
     component: Profile,
     layout: "/admin",
+    hidden: true,
   },
   {
-    path: "/tables",
-    name: "Tables",
-    icon: "ni ni-bullet-list-67 text-red",
-    component: Tables,
+    path: "/icons",
+    name: "Icons",
+    icon: "ni ni-circle-08 text-blue",
+    component: Icons,
     layout: "/admin",
-  },
-  {
-    path: "/login",
-    name: "Login",
-    icon: "ni ni-key-25 text-info",
-    component: Login,
-    layout: "/auth",
-  },
-  {
-    path: "/callback",
-    name: "Callback",
-    icon: "ni ni-key-25 text-info",
-    component: Callback,
-    layout: "/auth",
-  },
-  {
-    path: "/register",
-    name: "Register",
-    icon: "ni ni-circle-08 text-pink",
-    component: Register,
-    layout: "/auth",
+    hidden: true,
   },
 ];
 export default routes;
