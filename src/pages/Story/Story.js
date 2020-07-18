@@ -56,7 +56,8 @@ class Profile extends React.Component {
                     <Col className="text-right" xs="4">
                       <Button
                         color="primary"
-                        href="#pablo"
+                        href="#"
+                        disabled
                         onClick={(e) => e.preventDefault()}
                         size="sm"
                       >
@@ -139,7 +140,7 @@ class Profile extends React.Component {
                       <Button
                         block
                         color="success"
-                        href="#pablo"
+                        href="#"
                         onClick={(e) => e.preventDefault()}
                       >
                         <span className="btn-inner--icon">
