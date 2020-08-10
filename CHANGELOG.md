@@ -1,3 +1,21 @@
+# v0.3.0 (Mon Aug 10 2020)
+
+#### 🚀 Enhancement
+
+- [DIA-8] Draws Story forms [#16](https://github.com/rasouza/diary-frontend/pull/16) ([@rasouza](https://github.com/rasouza))
+- [DIA-7] Hide unwanted links in Sidebar [#15](https://github.com/rasouza/diary-frontend/pull/15) ([@rasouza](https://github.com/rasouza))
+- [DIA-6] Feature Flag: disable login [#14](https://github.com/rasouza/diary-frontend/pull/14) ([@rasouza](https://github.com/rasouza))
+
+#### ⚠️ Pushed to `master`
+
+- chore: saves up 1 command in Dockerfile ([@rasouza](https://github.com/rasouza))
+
+#### Authors: 1
+
+- Rodrigo Souza ([@rasouza](https://github.com/rasouza))
+
+---
+
 # v0.2.0 (Tue Jul 07 2020)
 
 #### 🚀 Enhancement
