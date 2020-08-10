@@ -17,6 +17,8 @@
 */
 import Index from "pages/index.js";
 import Story from "pages/Story/Story";
+import Login from "pages/Login/Login";
+import Callback from "pages/Login/Callback";
 
 var routes = [
   {
@@ -32,6 +34,22 @@ var routes = [
     icon: "ni ni-fat-add text-blue",
     component: Story,
     layout: "/admin",
+  },
+  {
+    path: "/login",
+    name: "Login",
+    icon: "ni ni-key-25 text-info",
+    component: Login,
+    layout: "/auth",
+    hidden: true,
+  },
+  {
+    path: "/callback",
+    name: "Callback",
+    icon: "ni ni-key-25 text-info",
+    component: Callback,
+    layout: "/auth",
+    hidden: true,
   },
 ];
 export default routes;
