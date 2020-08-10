@@ -17,8 +17,6 @@
 */
 import Index from "pages/index.js";
 import Story from "pages/Story/Story";
-import Profile from "pages/Profile/Profile";
-import Icons from "pages/examples/Icons";
 
 var routes = [
   {
@@ -34,22 +32,6 @@ var routes = [
     icon: "ni ni-fat-add text-blue",
     component: Story,
     layout: "/admin",
-  },
-  {
-    path: "/user-profile",
-    name: "Profile",
-    icon: "ni ni-circle-08 text-blue",
-    component: Profile,
-    layout: "/admin",
-    hidden: true,
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-circle-08 text-blue",
-    component: Icons,
-    layout: "/admin",
-    hidden: true,
   },
 ];
 export default routes;
