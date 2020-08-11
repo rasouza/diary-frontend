@@ -15,23 +15,33 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Index from "pages/index.js";
 import Story from "pages/Story/Story";
+import Login from "pages/Login/Login";
+import Callback from "pages/Login/Callback";
 
 var routes = [
   {
     path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: Index,
-    layout: "/admin",
-  },
-  {
-    path: "/story",
     name: "Create Story",
     icon: "ni ni-fat-add text-blue",
     component: Story,
     layout: "/admin",
+  },
+  {
+    path: "/login",
+    name: "Login",
+    icon: "ni ni-key-25 text-info",
+    component: Login,
+    layout: "/auth",
+    hidden: true,
+  },
+  {
+    path: "/callback",
+    name: "Callback",
+    icon: "ni ni-key-25 text-info",
+    component: Callback,
+    layout: "/auth",
+    hidden: true,
   },
 ];
 export default routes;
