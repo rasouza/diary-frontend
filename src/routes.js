@@ -15,7 +15,6 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Index from "pages/index.js";
 import Story from "pages/Story/Story";
 import Login from "pages/Login/Login";
 import Callback from "pages/Login/Callback";
