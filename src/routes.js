@@ -23,13 +23,6 @@ import Callback from "pages/Login/Callback";
 var routes = [
   {
     path: "/index",
-    name: "Dashboard",
-    icon: "ni ni-tv-2 text-primary",
-    component: Index,
-    layout: "/admin",
-  },
-  {
-    path: "/story",
     name: "Create Story",
     icon: "ni ni-fat-add text-blue",
     component: Story,
