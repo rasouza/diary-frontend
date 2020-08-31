@@ -108,6 +108,8 @@ class Sidebar extends React.Component {
   // this function creates the links and collapses that appear in the sidebar (left menu)
   createLinks = routes => {
     return routes.map((prop, key) => {
+      const hidden = prop.hidden || false;
+      console.log('hidden', hidden)
       if (prop.redirect) {
         return null;
       }
@@ -153,26 +155,28 @@ class Sidebar extends React.Component {
           className={this.activeRoute(prop.layout + prop.path)}
           key={key}
         >
-          <NavLink
-            to={prop.layout + prop.path}
-            activeClassName=""
-            onClick={this.closeSidenav}
-            tag={NavLinkRRD}
-          >
-            {prop.icon !== undefined ? (
-              <>
-                <i className={prop.icon} />
-                <span className="nav-link-text">{prop.name}</span>
-              </>
-            ) : prop.miniName !== undefined ? (
-              <>
-                <span className="sidenav-mini-icon"> {prop.miniName} </span>
-                <span className="sidenav-normal"> {prop.name} </span>
-              </>
-            ) : (
-              prop.name
-            )}
-          </NavLink>
+          { !hidden && 
+            <NavLink
+              to={prop.layout + prop.path}
+              activeClassName=""
+              onClick={this.closeSidenav}
+              tag={NavLinkRRD}
+            >
+              {prop.icon !== undefined ? (
+                <>
+                  <i className={prop.icon} />
+                  <span className="nav-link-text">{prop.name}</span>
+                </>
+              ) : prop.miniName !== undefined ? (
+                <>
+                  <span className="sidenav-mini-icon"> {prop.miniName} </span>
+                  <span className="sidenav-normal"> {prop.name} </span>
+                </>
+              ) : (
+                prop.name
+              )}
+            </NavLink>
+          }
         </NavItem>
       );
     });
