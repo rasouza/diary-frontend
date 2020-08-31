@@ -21,13 +21,12 @@ import PropTypes from "prop-types";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Button,
   Container,
   Row,
   Col
 } from "reactstrap";
 
-class TimelineHeader extends React.Component {
+class SimpleHeader extends React.Component {
   render() {
     return (
       <>
@@ -58,14 +57,14 @@ class TimelineHeader extends React.Component {
                     </BreadcrumbItem>
                   </Breadcrumb>
                 </Col>
-                <Col className="mt-3 mt-md-0 text-md-right" lg="6" xs="5">
+                {/* <Col className="mt-3 mt-md-0 text-md-right" lg="6" xs="5">
                   <Button className="btn-neutral" color="default" size="sm">
                     New
                   </Button>
                   <Button className="btn-neutral" color="default" size="sm">
                     Filters
                   </Button>
-                </Col>
+                </Col> */}
               </Row>
             </div>
           </Container>
@@ -75,9 +74,9 @@ class TimelineHeader extends React.Component {
   }
 }
 
-TimelineHeader.propTypes = {
+SimpleHeader.propTypes = {
   name: PropTypes.string,
   parentName: PropTypes.string
 };
 
-export default TimelineHeader;
+export default SimpleHeader;
