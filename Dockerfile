@@ -20,7 +20,7 @@ WORKDIR $APP_DIR
 
 COPY --from=build $APP_DIR/ .
 
-CMD ["yarn", "run", "eslint", "src/**/*.js"]
+CMD ["yarn", "run", "eslint", "src"]
 
 # # Unit tests
 # FROM node:$NODE_VERSION as unit-test
