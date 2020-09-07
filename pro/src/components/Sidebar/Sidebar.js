@@ -109,7 +109,6 @@ class Sidebar extends React.Component {
   createLinks = routes => {
     return routes.map((prop, key) => {
       const hidden = prop.hidden || false;
-      console.log('hidden', hidden)
       if (prop.redirect) {
         return null;
       }
@@ -210,7 +209,7 @@ class Sidebar extends React.Component {
           <div className="ml-auto">
             <div
               className={classnames("sidenav-toggler d-none d-xl-block", {
-                active: this.props.sidenavOpen
+                active: this.props.sidenavOpen,
               })}
               onClick={this.props.toggleSidenav}
             >
@@ -232,11 +231,8 @@ class Sidebar extends React.Component {
             </h6>
             <Nav className="mb-md-3" navbar>
               <NavItem>
-                <NavLink
-                  href="https://100daysofcode.com"
-                  target="_blank"
-                >
-                  <i className="ni ni-book-bookmark" />
+                <NavLink href="https://100daysofcode.com" target="_blank">
+                  <i className="ni ni-single-copy-04" />
                   <span className="nav-link-text">100 Days of Code</span>
                 </NavLink>
               </NavItem>

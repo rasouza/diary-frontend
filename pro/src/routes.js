@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Login from "views/pages/examples/Login";
+import Login from "views/Login";
 import Callback from "views/Login/Callback";
 
 import Story from "views/Story";
