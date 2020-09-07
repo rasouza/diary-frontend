@@ -8,9 +8,8 @@ const PrivateRoute = ({ children, ...props }) => {
 
   return <Route 
     path={props.path} 
-    key={props.key}
-    { ...( auth && { component: props.component } ) }
     render={() => auth ? children : redirect()} 
+    {...props}
   />
 }
 

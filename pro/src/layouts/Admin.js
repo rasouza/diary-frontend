@@ -16,12 +16,11 @@
 */
 import React from "react";
 // react library for routing
-import { Switch, Redirect } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import PrivateRoute from "components/PrivateRoute"
 
 import routes from "routes.js";
 
@@ -43,7 +42,7 @@ class Admin extends React.Component {
       }
       if (prop.layout === "/admin") {
         return (
-          <PrivateRoute
+          <Route
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}

@@ -39,10 +39,12 @@ import RTLLayout from "layouts/RTL.js";
 import AuthLayout from "layouts/Auth.js";
 import IndexView from "views/Index.js";
 
+import PrivateRoute from "components/PrivateRoute"
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
+      <PrivateRoute path="/admin" render={props => <AdminLayout {...props} />} />
       <Route path="/rtl" render={props => <RTLLayout {...props} />} />
       <Route path="/auth" render={props => <AuthLayout {...props} />} />
       <Route path="/" render={props => <IndexView {...props} />} />
