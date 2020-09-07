@@ -1,12 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard React - v1.1.0
+* Argon Dashboard PRO React - v1.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -16,18 +15,16 @@
 
 */
 import React from "react";
+// react library for routing
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
   UncontrolledCollapse,
   NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
-  Nav,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 class AdminNavbar extends React.Component {
@@ -35,31 +32,54 @@ class AdminNavbar extends React.Component {
     return (
       <>
         <Navbar
-          className="navbar-top navbar-horizontal navbar-dark"
-          expand="md"
+          className="navbar-horizontal navbar-main navbar-dark navbar-transparent"
+          expand="lg"
+          id="navbar-main"
         >
-          <Container className="px-4">
+          <Container>
             <NavbarBrand to="/" tag={Link}>
-              <img alt="..." src={require("assets/img/brand/argon-react-white.png")} />
+              <img
+                alt="..."
+                src={require("assets/img/brand/logo-white.png")}
+              />
             </NavbarBrand>
-            <button className="navbar-toggler" id="navbar-collapse-main">
+            <button
+              aria-controls="navbar-collapse"
+              aria-expanded={false}
+              aria-label="Toggle navigation"
+              className="navbar-toggler"
+              data-target="#navbar-collapse"
+              data-toggle="collapse"
+              id="navbar-collapse"
+              type="button"
+            >
               <span className="navbar-toggler-icon" />
             </button>
-            <UncontrolledCollapse navbar toggler="#navbar-collapse-main">
-              <div className="navbar-collapse-header d-md-none">
+            <UncontrolledCollapse
+              className="navbar-custom-collapse"
+              navbar
+              toggler="#navbar-collapse"
+            >
+              <div className="navbar-collapse-header">
                 <Row>
                   <Col className="collapse-brand" xs="6">
-                    <Link to="/">
+                    <Link to="/admin/dashboard">
                       <img
                         alt="..."
-                        src={require("assets/img/brand/argon-react.png")}
+                        src={require("assets/img/brand/blue.png")}
                       />
                     </Link>
                   </Col>
                   <Col className="collapse-close" xs="6">
                     <button
+                      aria-controls="navbar-collapse"
+                      aria-expanded={false}
+                      aria-label="Toggle navigation"
                       className="navbar-toggler"
-                      id="navbar-collapse-main"
+                      data-target="#navbar-collapse"
+                      data-toggle="collapse"
+                      id="navbar-collapse"
+                      type="button"
                     >
                       <span />
                       <span />
@@ -67,44 +87,6 @@ class AdminNavbar extends React.Component {
                   </Col>
                 </Row>
               </div>
-              <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <NavLink className="nav-link-icon" to="/" tag={Link}>
-                    <i className="ni ni-planet" />
-                    <span className="nav-link-inner--text">Dashboard</span>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    to="/auth/register"
-                    tag={Link}
-                  >
-                    <i className="ni ni-circle-08" />
-                    <span className="nav-link-inner--text">Register</span>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    to="/auth/login"
-                    tag={Link}
-                  >
-                    <i className="ni ni-key-25" />
-                    <span className="nav-link-inner--text">Login</span>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className="nav-link-icon"
-                    to="/admin/user-profile"
-                    tag={Link}
-                  >
-                    <i className="ni ni-single-02" />
-                    <span className="nav-link-inner--text">Profile</span>
-                  </NavLink>
-                </NavItem>
-              </Nav>
             </UncontrolledCollapse>
           </Container>
         </Navbar>

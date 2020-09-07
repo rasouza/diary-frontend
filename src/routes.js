@@ -1,12 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard React - v1.1.0
+* Argon Dashboard PRO React - v1.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -15,11 +14,12 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Story from "pages/Story/Story";
-import Login from "pages/Login/Login";
-import Callback from "pages/Login/Callback";
+import Login from "views/Login";
+import Callback from "views/Login/Callback";
 
-var routes = [
+import Story from "views/Story";
+
+const routes = [
   {
     path: "/index",
     name: "Create Story",
@@ -44,4 +44,5 @@ var routes = [
     hidden: true,
   },
 ];
+
 export default routes;

@@ -1,92 +1,88 @@
-# v0.3.0 (Mon Aug 10 2020)
-
-#### 🚀 Enhancement
-
-- [DIA-8] Draws Story forms [#16](https://github.com/rasouza/diary-frontend/pull/16) ([@rasouza](https://github.com/rasouza))
-- [DIA-7] Hide unwanted links in Sidebar [#15](https://github.com/rasouza/diary-frontend/pull/15) ([@rasouza](https://github.com/rasouza))
-- [DIA-6] Feature Flag: disable login [#14](https://github.com/rasouza/diary-frontend/pull/14) ([@rasouza](https://github.com/rasouza))
-
-#### ⚠️ Pushed to `master`
-
-- chore: saves up 1 command in Dockerfile ([@rasouza](https://github.com/rasouza))
-
-#### Authors: 1
-
-- Rodrigo Souza ([@rasouza](https://github.com/rasouza))
-
----
-
-# v0.2.0 (Tue Jul 07 2020)
-
-#### 🚀 Enhancement
-
-- implements JWT parsing upon login only [#13](https://github.com/rasouza/diary-frontend/pull/13) ([@rasouza](https://github.com/rasouza))
-- creates diary microservices in docker-compose [#10](https://github.com/rasouza/diary-frontend/pull/10) ([@rasouza](https://github.com/rasouza))
-- Auto Release notes [#9](https://github.com/rasouza/diary-frontend/pull/9) ([@rasouza](https://github.com/rasouza))
-
-#### 🐛 Bug Fix
-
-- Bump websocket-extensions from 0.1.3 to 0.1.4 [#1](https://github.com/rasouza/diary-frontend/pull/1) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-
-#### Authors: 2
-
-- [@dependabot[bot]](https://github.com/dependabot[bot])
-- Rodrigo Souza ([@rasouza](https://github.com/rasouza))
-
----
-
-## [1.1.0] 2020-02-10
+## [1.1.0] 2020-02-21
 ### Bug fixing
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/18 (Added this in live docs, we need for our product to have a homepage prop inside the package.json. If build is not working, just delete the homepage prop from inside the package.json, or configure it to your own specs.)
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/17
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/15
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/12
-- https://github.com/creativetimofficial/argon-dashboard-react/issues/3
-- Changed `componentWillMount` with `constructor` function inside `src/views/Index.js` (this was for initializing the charts)
+- Change the usage of `componentWillMount` to the usage of `constructor`
+- Move `maxBarThickness` inside charts variables from the global initialization
+- Add `scrollTop` on `componentDidMount` for `Auth` layout
+- Github:
+  - https://github.com/creativetimofficial/ct-argon-dashboard-pro-react/issues/15
+  - https://github.com/creativetimofficial/ct-argon-dashboard-pro-react/issues/14
+  - https://github.com/creativetimofficial/ct-argon-dashboard-pro-react/issues/13
+  - https://github.com/creativetimofficial/ct-argon-dashboard-pro-react/issues/8
+  - https://github.com/creativetimofficial/ct-argon-dashboard-pro-react/issues/6
+  - https://github.com/creativetimofficial/ct-argon-dashboard-pro-react/issues/2
 ### Major style changes
-- Changed the whole `src/assets/scss/*` folder
-- Changed the whole `src/assets/css/*` folder
+- Changed almost all files from the scss folder (`src/assets/scss/*`)
 ### Deleted components
 ### Added components
+- Added page and layout for RTL Support
 ### Deleted dependencies
 ### Added dependencies
-+ eslint-plugin-flowtype@3.13.0 (To stop following Warning: `npm **WARN** eslint-config-react-app@5.2.0 requires a peer of eslint-plugin-flowtype@3.x but none is installed. You must install peer dependencies yourself.`)
-+ @fortawesome/fontawesome-free@5.12.1 (Easier to maintain as a dependency, rather than having to download new versions)
-+ gulp@4.0.2 (For licenses copyrights)
-+ gulp-append-prepend@1.0.8 (For licenses copyrights)
++ gulp@4.0.2 (For licensing)
++ gulp-append-prepend@1.0.8 (For licensing)
 ### Updated dependencies
 ```
-chart.js                     2.7.3   →     2.9.3
-node-sass                   4.11.0   →    4.13.1
-nouislider                  13.1.1   →    14.1.1
-react                       16.8.4   →   16.12.0
-react-chartjs-2              2.7.4   →     2.9.0
-react-copy-to-clipboard      5.0.1   →     5.0.2
-react-dom                   16.8.4   →   16.12.0
-react-router-dom             4.3.1   →     5.1.2
-react-scripts                2.1.8   →     3.3.1
-reactstrap                   7.1.0   →     8.4.1
-@types/googlemaps          3.30.18   →    3.39.2
-@types/react                16.8.7   →   16.9.19
-typescript                3.3.3333   →     3.7.5
+@fullcalendar/core                   4.0.2   →     4.4.0
+@fullcalendar/daygrid                4.0.1   →     4.4.0
+@fullcalendar/interaction            4.0.2   →     4.4.0
+chart.js                             2.8.0   →     2.9.3
+dropzone                             5.5.1   →     5.7.0
+node-sass                           4.11.0   →    4.13.1
+nouislider                          13.1.4   →    14.1.1
+react                               16.8.6   →   16.12.0
+react-bootstrap-sweetalert           4.4.1   →     5.1.9
+react-bootstrap-table-next           3.1.0   →     3.3.5
+react-bootstrap-table2-paginator     2.0.5   →     2.1.0
+react-bootstrap-table2-toolkit       1.4.0   →     2.1.2
+react-chartjs-2                      2.7.6   →     2.9.0
+react-copy-to-clipboard              5.0.1   →     5.0.2
+react-dom                           16.8.6   →   16.12.0
+react-jvectormap                     0.0.6   →    0.0.15
+react-perfect-scrollbar              1.4.4   →     1.5.8
+react-router                         5.0.0   →     5.1.2
+react-router-dom                     5.0.0   →     5.1.2
+react-scripts                        2.1.8   →     3.4.0
+react-to-print                       2.1.0   →     2.5.1
+reactstrap                           8.0.0   →     8.4.1
+@types/googlemaps                  3.30.19   →    3.39.2
+@types/react                       16.8.13   →   16.9.21
+typescript                           3.4.3   →     3.7.5
 ```
 ### Warning
-** The following warnings could not be solved, due to some of our dependencies, however, they do not affect the functionality or the UI of the product: **
+**The following warnings could not be solved, due to some of our dependencies, however, they do not affect the functionality or the UI of the product:**
 ```
+npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
 npm WARN deprecated core-js@2.6.11: core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
 npm WARN deprecated popper.js@1.16.1: Popper changed home, find its new releases at @popperjs/core
 ```
-** The following warning could not be solved due to the usage of `react-google-maps` (Note: if the warning will persist after React changes version to 17, we'll drop the support for `react-google-maps` and replace them with other react library for maps):**
+**The following warning could not be solved due to the usage of react-google-maps and react-jvectormap (Note: if the warning will persist after React changes version to 17, we'll drop the support for react-google-maps and react-jvectormap, and replace them with other react library for maps):**
 ```
-backend.js:6 Warning: componentWillMount has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details.
+Warning: componentWillMount has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details.
 
 * Move code with side effects to componentDidMount, and set initial state in the constructor.
 * Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 17.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
 
-Please update the following components: withScriptjs(withGoogleMap(Component))
+Please update the following components: e
+```
+**The following warning could not be solved due to the usage of DateTime, Quill, Select2, TagsInput (Note: if the warning will persist after React changes version to 17, we'll drop the support for DateTime, Quill, Select2, TagsInput, and replace them with other libraries for date pickers, live editors, selects and tags inputs):**
+```
+react-dom.development.js:12357 Warning: componentWillReceiveProps has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://fb.me/react-derived-state
+* Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 17.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: DateTime, Quill, Select2, TagsInput
+```
+```
+react-dom.development.js:12357 Warning: componentWillUpdate has been renamed, and is not recommended for use. See https://fb.me/react-unsafe-component-lifecycles for details.
+
+* Move data fetching code or side effects to componentDidUpdate.
+* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 17.x, only the UNSAFE_ name will work. To rename all deprecated lifecycles to their new names, you can run `npx react-codemod rename-unsafe-lifecycles` in your project source folder.
+
+Please update the following components: Quill
 ```
 
-## [1.0.0] 2019-03-13
+## [1.0.0] 2019-04-10
 ### Original Release
 - Added Reactstrap as base framework
-- Added design from Argon Dashboard by Creative Tim
+- Added design from Argon Dashboard PRO by Creative Tim

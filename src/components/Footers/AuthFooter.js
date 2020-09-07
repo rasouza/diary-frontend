@@ -1,3 +1,19 @@
+/*!
+
+=========================================================
+* Argon Dashboard PRO React - v1.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 /*eslint-disable*/
 import React from "react";
 
@@ -8,12 +24,12 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <footer className="py-5">
+        <footer className="py-5" id="footer-main">
           <Container>
             <Row className="align-items-center justify-content-xl-between">
               <Col xl="6">
                 <div className="copyright text-center text-xl-left text-muted">
-                  © {(new Date()).getFullYear()}{" "}
+                  © {new Date().getFullYear()}{" "}
                   <a
                     className="font-weight-bold ml-1"
                     href="https://rasouza.com.br"
@@ -24,16 +40,7 @@ class Login extends React.Component {
                 </div>
               </Col>
               <Col xl="6">
-                <Nav className="nav-footer justify-content-center justify-content-xl-end">
-                  <NavItem>
-                    <NavLink
-                      href="https://github.com/rasouza/diary-frontend/blob/master/LICENSE?ref=adr-auth-footer"
-                      target="_blank"
-                    >
-                      MIT License
-                    </NavLink>
-                  </NavItem>
-                </Nav>
+                
               </Col>
             </Row>
           </Container>

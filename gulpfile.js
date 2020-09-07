@@ -1,7 +1,7 @@
 const gulp = require("gulp");
 const gap = require("gulp-append-prepend");
 
-gulp.task("licenses", async function() {
+gulp.task("licenses", function(done) {
   // this is to add Creative Tim licenses in the production mode for the minified js
   gulp
     .src("build/static/js/*chunk.js", { base: "./" })
@@ -9,12 +9,11 @@ gulp.task("licenses", async function() {
       gap.prependText(`/*!
 
 =========================================================
-* Argon Dashboard React - v1.1.0
+* Argon Dashboard PRO React - v1.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Copyright 2020 Creative Tim (http://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -33,12 +32,11 @@ gulp.task("licenses", async function() {
       gap.prependText(`<!--
 
 =========================================================
-* Argon Dashboard React - v1.1.0
+* Argon Dashboard PRO React - v1.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Copyright 2020 Creative Tim (http://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -57,12 +55,11 @@ gulp.task("licenses", async function() {
       gap.prependText(`/*!
 
 =========================================================
-* Argon Dashboard React - v1.1.0
+* Argon Dashboard PRO React - v1.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Copyright 2020 Creative Tim (http://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -73,5 +70,6 @@ gulp.task("licenses", async function() {
 */`)
     )
     .pipe(gulp.dest("./", { overwrite: true }));
+  done();
   return;
 });

@@ -1,12 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard React - v1.1.0
+* Argon Dashboard PRO React - v1.1.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -16,28 +15,34 @@
 
 */
 import React from "react";
-import { Switch, Redirect } from "react-router-dom";
-// reactstrap components
-import { Container } from "reactstrap";
+// react library for routing
+import { Switch, Redirect, Route } from "react-router-dom";
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 
 import routes from "routes.js";
 
 class Admin extends React.Component {
+  state = {
+    sidenavOpen: true
+  };
   componentDidUpdate(e) {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.mainContent.scrollTop = 0;
+    if (e.history.pathname !== e.location.pathname) {
+      document.documentElement.scrollTop = 0;
+      document.scrollingElement.scrollTop = 0;
+      this.refs.mainContent.scrollTop = 0;
+    }
   }
   getRoutes = routes => {
     return routes.map((prop, key) => {
+      if (prop.collapse) {
+        return this.getRoutes(prop.views);
+      }
       if (prop.layout === "/admin") {
         return (
-          <PrivateRoute
+          <Route
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
@@ -60,31 +65,61 @@ class Admin extends React.Component {
     }
     return "Brand";
   };
+  // toggles collapse between mini sidenav and normal
+  toggleSidenav = e => {
+    if (document.body.classList.contains("g-sidenav-pinned")) {
+      document.body.classList.remove("g-sidenav-pinned");
+      document.body.classList.add("g-sidenav-hidden");
+    } else {
+      document.body.classList.add("g-sidenav-pinned");
+      document.body.classList.remove("g-sidenav-hidden");
+    }
+    this.setState({
+      sidenavOpen: !this.state.sidenavOpen
+    });
+  };
+  getNavbarTheme = () => {
+    return this.props.location.pathname.indexOf(
+      "admin/alternative-dashboard"
+    ) === -1
+      ? "dark"
+      : "light";
+  };
   render() {
     return (
       <>
         <Sidebar
           {...this.props}
           routes={routes}
+          toggleSidenav={this.toggleSidenav}
+          sidenavOpen={this.state.sidenavOpen}
           logo={{
-            innerLink: "/admin/index",
-            imgSrc: require("assets/img/brand/logo2.png"),
+            innerLink: "/",
+            imgSrc: require("assets/img/brand/logo.png"),
             imgAlt: "..."
           }}
         />
-        <div className="main-content" ref="mainContent">
+        <div
+          className="main-content"
+          ref="mainContent"
+          onClick={this.closeSidenav}
+        >
           <AdminNavbar
             {...this.props}
+            theme={this.getNavbarTheme()}
+            toggleSidenav={this.toggleSidenav}
+            sidenavOpen={this.state.sidenavOpen}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
           <Switch>
             {this.getRoutes(routes)}
-            <Redirect from="*" to="/admin/index" />
+            <Redirect from="*" to="/admin/dashboard" />
           </Switch>
-          <Container fluid>
-            <AdminFooter />
-          </Container>
+          <AdminFooter />
         </div>
+        {this.state.sidenavOpen ? (
+          <div className="backdrop d-xl-none" onClick={this.toggleSidenav} />
+        ) : null}
       </>
     );
   }
