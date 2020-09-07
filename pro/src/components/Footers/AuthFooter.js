@@ -32,48 +32,15 @@ class Login extends React.Component {
                   © {new Date().getFullYear()}{" "}
                   <a
                     className="font-weight-bold ml-1"
-                    href="https://www.creative-tim.com?ref=adpr-auth-footer"
+                    href="https://rasouza.com.br"
                     target="_blank"
                   >
-                    Creative Tim
+                    R. A. Souza
                   </a>
                 </div>
               </Col>
               <Col xl="6">
-                <Nav className="nav-footer justify-content-center justify-content-xl-end">
-                  <NavItem>
-                    <NavLink
-                      href="https://www.creative-tim.com?ref=adpr-auth-footer"
-                      target="_blank"
-                    >
-                      Creative Tim
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      href="https://www.creative-tim.com/presentation?ref=adpr-auth-footer"
-                      target="_blank"
-                    >
-                      About Us
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      href="http://blog.creative-tim.com?ref=adpr-auth-footer"
-                      target="_blank"
-                    >
-                      Blog
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      href="https://www.creative-tim.com/license?ref=adpr-auth-footer"
-                      target="_blank"
-                    >
-                      License
-                    </NavLink>
-                  </NavItem>
-                </Nav>
+                
               </Col>
             </Row>
           </Container>
