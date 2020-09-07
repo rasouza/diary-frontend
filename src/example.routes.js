@@ -40,7 +40,6 @@ import Typography from "views/pages/components/Typography.js";
 import Validation from "views/pages/forms/Validation.js";
 import Vector from "views/pages/maps/Vector.js";
 import Widgets from "views/pages/Widgets.js";
-import Story from "views/pages/Story";
 
 const routes = [
   {
