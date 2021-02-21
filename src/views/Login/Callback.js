@@ -1,9 +1,7 @@
-import React from 'react';
-import { saveJWT } from 'services/auth';
+import React, { useEffect } from 'react';
 
 const Callback = props => {
-  saveJWT(props.location.hash);
-  
+  // Save user session  
   return <div />
 }
 

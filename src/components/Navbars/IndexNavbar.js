@@ -104,9 +104,9 @@ class AdminNavbar extends React.Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink to="/auth/login" tag={Link}>
+                  <a class="nav-link" href={`${window.IDP_URL}/self-service/login/browser`} tag={Link}>
                     <span className="nav-link-inner--text">Login</span>
-                  </NavLink>
+                  </a>
                 </NavItem>
                 <NavItem>
                   <NavLink to="/auth/register" tag={Link}>
