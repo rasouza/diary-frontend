@@ -6,10 +6,9 @@ services:
     environment:
       - DSN=sqlite:///var/lib/sqlite/db.sqlite?_fk=true&mode=rwc
     volumes:
-      - type: volume
-        source: kratos-sqlite
+      - type: bind
+        source: ./.db
         target: /var/lib/sqlite
-        read_only: false
       - type: bind
         source: ./.kratos
         target: /etc/config/kratos
@@ -43,14 +42,13 @@ services:
     restart: unless-stopped
     environment:
       - DSN=sqlite:///var/lib/sqlite/db.sqlite?_fk=true
-      - LOG_LEVEL=trace
+      - LOG_LEVEL=debug
     command:
       serve -c /etc/config/kratos/kratos.yml --dev
     volumes:
-      - type: volume
-        source: kratos-sqlite
+      - type: bind
+        source: ./.db
         target: /var/lib/sqlite
-        read_only: false
       - type: bind
         source: ./.kratos
         target: /etc/config/kratos
@@ -67,7 +65,3 @@ services:
 
 networks:
   intranet:
-
-volumes:
-  kratos-sqlite:
-  
