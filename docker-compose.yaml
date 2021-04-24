@@ -1,106 +1,67 @@
-version: '3'
+version: '3.7'
 
 services:
-  db:
-    image: postgres:12.2
+  kratos-migrate:
+    image: oryd/kratos:v0.5.5-alpha.1-sqlite
     environment:
-      - POSTGRES_USER=diary_user
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=diary
-    ports:
-      - 5432:5432
+      - DSN=sqlite:///var/lib/sqlite/db.sqlite?_fk=true&mode=rwc
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-
-  idp:
-    image: oryd/hydra:v1.7.4
-    ports:
-      - "4444:4444" # Public port
-      - "4445:4445" # Admin port
+      - type: bind
+        source: ./.db
+        target: /var/lib/sqlite
+      - type: bind
+        source: ./.kratos
+        target: /etc/config/kratos
     command:
-      serve all --dangerous-force-http
-    depends_on:
-      - idp-migrate
+      -c /etc/config/kratos/kratos.yml migrate sql -e --yes
+    restart: on-failure
+    networks:
+      - intranet
+
+  kratos-selfservice-ui-node:
+    image: oryd/kratos-selfservice-ui-node:v0.5.0-alpha.1
     environment:
-      DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
-      URLS_SELF_ISSUER: http://localhost:4444
-      URLS_CONSENT: http://localhost:8000/consent
-      URLS_LOGIN: http://localhost:3000/auth/login
-      URLS_LOGOUT: http://localhost:3000/auth/logout
-      SECRETS_SYSTEM: youReallyNeedToChangeThis
-      OIDC_SUBJECT_IDENTIFIERS_SUPPORTED_TYPES: public,pairwise
-      OIDC_SUBJECT_IDENTIFIERS_PAIRWISE_SALT: youReallyNeedToChangeThis
-      SERVE_COOKIES_SAME_SITE_MODE: Lax
+      - KRATOS_BROWSER_URL=http://127.0.0.1:4433/
+      - KRATOS_PUBLIC_URL=http://kratos:4433/
+      - KRATOS_ADMIN_URL=http://kratos:4434/
+      - PORT=4455
+      - SECURITY_MODE=
+    ports:
+      - "4455:4455"
+    networks:
+      - intranet
+    restart: on-failure
+      
+  kratos:
+    depends_on:
+      - kratos-migrate
+    image: oryd/kratos:v0.5.5-alpha.1-sqlite
+    ports:
+      - "4433:4433" # public
+      - "4434:4434" # admin
     restart: unless-stopped
-
-  idp-migrate:
-    image: oryd/hydra:v1.7.4
     environment:
-      DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
+      - DSN=sqlite:///var/lib/sqlite/db.sqlite?_fk=true
+      - LOG_LEVEL=debug
     command:
-      migrate sql -e --yes
-    restart: on-failure
+      serve -c /etc/config/kratos/kratos.yml --dev
+    volumes:
+      - type: bind
+        source: ./.db
+        target: /var/lib/sqlite
+      - type: bind
+        source: ./.kratos
+        target: /etc/config/kratos
+    networks:
+      - intranet
 
-  idp-client:
-    image: oryd/hydra:v1.7.4
-    command: >
-      clients create
-      --endpoint http://idp:4445
-      --id diary-users
-      --name diary-users
-      --secret secret
-      --grant-types authorization_code,refresh_token
-      --callbacks http://localhost:8000/oauth2/callback
-      --response-types code,id_token
-      --scope openid,offline
-      --token-endpoint-auth-method client_secret_post
-    depends_on:
-      - idp-migrate
-    environment:
-      DSN: postgres://diary_user:secret@db:5432/diary?search_path=idp
-
-  users:
-    image: rasouza/diary-users
+  mailslurper:
+    image: oryd/mailslurper:latest-smtps
     ports:
-      - 8000:8000
-    depends_on: 
-      - idp
-      - db
-    environment:
-      APP_DEBUG: "true"
-      APP_KEY: base64:b5fQDSAd0mTd4mIO5ED+fhjsiQORaOQj3/WTSy7macw=
-      APP_ENV: development
-      APP_URL: http://localhost:8000
-      GITHUB_CLIENT_ID: d7f69e4ab712c7c36ad6
-      GITHUB_CLIENT_SECRET: 584bde0a1041557c316ebf89e928c14462c765d7
-      IDP_CLIENT_ID: diary-users
-      IDP_CLIENT_SECRET: secret
-      DB_CONNECTION: pgsql
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_DATABASE: diary
-      DB_SCHEMA: users
-      DB_USERNAME: diary_user
-      DB_PASSWORD: secret
-      FRONTEND_URL: http://localhost:3000
-      IDP_EXTERNAL_URL: http://localhost:4444
-      IDP_ADMIN_URL: http://idp:4445
-      IDP_URL: http://idp:4444
+      - "4436:4436"
+      - "4437:4437"
+    networks:
+      - intranet
 
-  users-migrate:
-    image: rasouza/diary-users
-    command: php artisan migrate
-    depends_on: 
-      - db
-    environment:
-      APP_DEBUG: "true"
-      APP_ENV: development
-      DB_CONNECTION: pgsql
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_DATABASE: diary
-      DB_SCHEMA: users
-      DB_USERNAME: diary_user
-      DB_PASSWORD: secret
-    restart: on-failure
-  
+networks:
+  intranet:

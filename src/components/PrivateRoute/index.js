@@ -3,13 +3,15 @@ import { Route } from "react-router-dom";
 import { isAuthenticated } from "services/auth";
 
 const PrivateRoute = ({ children, ...props }) => {
-  const auth = isAuthenticated();
-  const redirect = () => (window.location = `${window.USERS_URL}/auth`);
+  const LOGIN_URL = `${window.IDP_URL}/self-service/login/browser`
+  const redirect = () => { window.location = LOGIN_URL }
 
+  console.log('isAuthenticated()', isAuthenticated())
   return <Route 
     path={props.path} 
-    render={() => auth ? children : redirect()} 
+    render={() => isAuthenticated() ? children : redirect()} 
     {...props}
+    component={isAuthenticated() ? props.component : null}
   />
 }
 
