@@ -15,6 +15,7 @@
 
 */
 import Login from "views/Login";
+import Logout from "views/Login/Logout";
 import Callback from "views/Login/Callback";
 
 import Story from "views/Story";
@@ -32,6 +33,14 @@ const routes = [
     name: "Login",
     icon: "ni ni-key-25 text-info",
     component: Login,
+    layout: "/auth",
+    hidden: true,
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    icon: "ni ni-key-25 text-info",
+    component: Logout,
     layout: "/auth",
     hidden: true,
   },
