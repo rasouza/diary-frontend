@@ -26,5 +26,8 @@ export const saveJWT = (hash) => {
   });
 };
 
+export const parseJWT = token => jwt.verify(token, window.JWT_SECRET)
+export const saveAuth = token => { storage.set('login', token) }
+
 export const isAuthenticated = () =>
   storage.get("login") != null || window.DISABLE_LOGIN;
