@@ -33,7 +33,10 @@ import {
   Container,
 } from "reactstrap";
 
+import { getLogin } from "services/auth"
+
 class AdminNavbar extends React.Component {
+  login = getLogin()
   // function that on mobile devices makes the search open
   openSearch = () => {
     document.body.classList.add("g-navbar-search-showing");
@@ -98,12 +101,12 @@ class AdminNavbar extends React.Component {
                       <span className="avatar avatar-sm rounded-circle">
                         <img
                           alt="..."
-                          src={require("assets/img/theme/team-4.jpg")}
+                          src={this.login.picture}
                         />
                       </span>
                       <Media className="ml-2 d-none d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
-                          John Snow
+                          {this.login.name}
                         </span>
                       </Media>
                     </Media>
