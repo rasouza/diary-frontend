@@ -142,8 +142,7 @@ class AdminNavbar extends React.Component {
                     </DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
+                      href={`${window.IDP_URL}/self-service/browser/flows/logout`}
                     >
                       <i className="ni ni-user-run" />
                       <span>Logout</span>
