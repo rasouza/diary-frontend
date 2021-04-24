@@ -83,32 +83,6 @@ class AdminNavbar extends React.Component {
         >
           <Container fluid>
             <Collapse navbar isOpen={true}>
-              <Form
-                className={classnames(
-                  "navbar-search form-inline mr-sm-3",
-                  { "navbar-search-light": this.props.theme === "dark" },
-                  { "navbar-search-dark": this.props.theme === "light" }
-                )}
-              >
-                <FormGroup className="mb-0">
-                  <InputGroup className="input-group-alternative input-group-merge">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="fas fa-search" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input placeholder="Search" type="text" />
-                  </InputGroup>
-                </FormGroup>
-                <button
-                  aria-label="Close"
-                  className="close"
-                  type="button"
-                  onClick={this.closeSearch}
-                >
-                  <span aria-hidden={true}>×</span>
-                </button>
-              </Form>
 
               <Nav className="align-items-center ml-md-auto" navbar>
                 <NavItem className="d-xl-none">
@@ -126,11 +100,6 @@ class AdminNavbar extends React.Component {
                       <i className="sidenav-toggler-line" />
                     </div>
                   </div>
-                </NavItem>
-                <NavItem className="d-sm-none">
-                  <NavLink onClick={this.openSearch}>
-                    <i className="ni ni-zoom-split-in" />
-                  </NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav>
                   <DropdownToggle className="nav-link" color="" tag="a">
