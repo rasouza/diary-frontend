@@ -1,7 +1,6 @@
 {
   "plugins": [
     "git-tag",
-    "first-time-contributor",
     "released",
     "conventional-commits"
   ],
