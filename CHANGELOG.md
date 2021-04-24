@@ -1,3 +1,30 @@
+# v0.4.0 (Sat Apr 24 2021)
+
+#### 🚀 Enhancement
+
+- [DIA-29] Implement Login using Kratos IdP [#23](https://github.com/rasouza/diary-frontend/pull/23) ([@rasouza](https://github.com/rasouza))
+- [DIA-25] Migrate to pro version [#19](https://github.com/rasouza/diary-frontend/pull/19) ([@rasouza](https://github.com/rasouza))
+
+#### 🐛 Bug Fix
+
+- [DIA-27] Add redirect rules to Netlify [#21](https://github.com/rasouza/diary-frontend/pull/21) ([@rasouza](https://github.com/rasouza))
+- [DIA-23] Tweaks in template [#18](https://github.com/rasouza/diary-frontend/pull/18) ([@rasouza](https://github.com/rasouza))
+- Bump elliptic from 6.5.2 to 6.5.3 [#17](https://github.com/rasouza/diary-frontend/pull/17) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### 🔩 Dependency Updates
+
+- Bump elliptic from 6.5.3 to 6.5.4 [#24](https://github.com/rasouza/diary-frontend/pull/24) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump y18n from 3.2.1 to 3.2.2 [#25](https://github.com/rasouza/diary-frontend/pull/25) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump ssri from 6.0.1 to 6.0.2 [#26](https://github.com/rasouza/diary-frontend/pull/26) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump ini from 1.3.5 to 1.3.8 [#22](https://github.com/rasouza/diary-frontend/pull/22) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Rodrigo Souza ([@rasouza](https://github.com/rasouza))
+
+---
+
 ## [1.1.0] 2020-02-21
 ### Bug fixing
 - Change the usage of `componentWillMount` to the usage of `constructor`
