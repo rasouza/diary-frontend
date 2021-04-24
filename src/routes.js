@@ -21,7 +21,7 @@ import Story from "views/Story";
 
 const routes = [
   {
-    path: "/index",
+    path: "/",
     name: "Create Story",
     icon: "ni ni-fat-add text-blue",
     component: Story,
