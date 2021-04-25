@@ -1,3 +1,15 @@
+# v0.4.1 (Sun Apr 25 2021)
+
+#### 🐛 Bug Fix
+
+- [DIA-28] Whitelabel template and Logout function [#27](https://github.com/rasouza/diary-frontend/pull/27) ([@rasouza](https://github.com/rasouza))
+
+#### Authors: 1
+
+- Rodrigo Souza ([@rasouza](https://github.com/rasouza))
+
+---
+
 # v0.4.0 (Sat Apr 24 2021)
 
 #### 🚀 Enhancement
