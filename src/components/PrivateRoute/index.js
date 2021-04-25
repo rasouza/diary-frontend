@@ -6,7 +6,6 @@ const PrivateRoute = ({ children, ...props }) => {
   const LOGIN_URL = `${window.IDP_URL}/self-service/login/browser`
   const redirect = () => { window.location = LOGIN_URL }
 
-  console.log('isAuthenticated()', isAuthenticated())
   return <Route 
     path={props.path} 
     render={() => isAuthenticated() ? children : redirect()} 
