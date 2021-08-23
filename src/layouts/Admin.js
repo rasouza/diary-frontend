@@ -25,7 +25,6 @@ import NotificationAlert from "react-notification-alert";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
@@ -33,8 +32,7 @@ var ps;
 
 function Admin(props) {
   const location = useLocation();
-  const [sidebarMini, setSidebarMini] = React.useState(true);
-  const [backgroundColor, setBackgroundColor] = React.useState("blue");
+  const [, setSidebarMini] = React.useState(true);
   const notificationAlert = React.useRef();
   const mainPanel = React.useRef();
   React.useEffect(() => {
@@ -76,9 +74,7 @@ function Admin(props) {
     };
     notificationAlert.current.notificationAlert(options);
   };
-  const handleColorClick = (color) => {
-    setBackgroundColor(color);
-  };
+  
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
@@ -124,7 +120,7 @@ function Admin(props) {
         {...props}
         routes={routes}
         minimizeSidebar={minimizeSidebar}
-        backgroundColor={backgroundColor}
+        backgroundColor="yellow"
       />
       <div className="main-panel" ref={mainPanel}>
         <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
@@ -139,12 +135,6 @@ function Admin(props) {
           )
         }
       </div>
-      <FixedPlugin
-        handleMiniClick={minimizeSidebar}
-        sidebarMini={sidebarMini}
-        bgColor={backgroundColor}
-        handleColorClick={handleColorClick}
-      />
     </div>
   );
 }

@@ -27,7 +27,7 @@ import { Nav, Collapse, Button } from "reactstrap";
 
 // core components
 import avatar from "assets/img/ryan.jpg";
-import logo from "logo-white.svg";
+import logo from "assets/img/logo.png";
 
 var ps;
 
@@ -157,7 +157,7 @@ function Sidebar(props) {
   };
   return (
     <>
-      <div className="sidebar" data-color={props.backgroundColor}>
+      <div className="sidebar" data-color="black">
         <div className="logo">
           <a
             href="https://www.creative-tim.com?ref=nudr-sidebar"
@@ -173,7 +173,7 @@ function Sidebar(props) {
             className="simple-text logo-normal"
             target="_blank"
           >
-            Creative Tim
+            My Code Diary
           </a>
           <div className="navbar-minimize">
             <Button
