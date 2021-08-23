@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard PRO React - v1.1.0
+* Now UI Dashboard PRO React - v1.5.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -14,71 +14,61 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+/*eslint-disable*/
 import React from "react";
-// react library for routing
-import { NavLink as NavLinkRRD, Link } from "react-router-dom";
-// nodejs library that concatenates classes
-import classnames from "classnames";
-// nodejs library to set properties for components
-import { PropTypes } from "prop-types";
-// react library that creates nice scrollbar on windows devices
-import PerfectScrollbar from "react-perfect-scrollbar";
-// reactstrap components
-import {
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav
-} from "reactstrap";
+import { NavLink } from "react-router-dom";
+// used for making the prop types of this component
+import PropTypes from "prop-types";
+// javascript plugin used to create scrollbars on windows
+import PerfectScrollbar from "perfect-scrollbar";
 
-class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapseOpen: false,
-      ...this.getCollapseStates(props.routes)
+// reactstrap components
+import { Nav, Collapse, Button } from "reactstrap";
+
+// core components
+import avatar from "assets/img/ryan.jpg";
+import logo from "logo-white.svg";
+
+var ps;
+
+function Sidebar(props) {
+  const [openAvatar, setOpenAvatar] = React.useState(false);
+  const [collapseStates, setCollapseStates] = React.useState({});
+  const sidebar = React.useRef();
+  React.useEffect(() => {
+    // if you are using a Windows Machine, the scrollbars will have a Mac look
+    if (navigator.platform.indexOf("Win") > -1) {
+      ps = new PerfectScrollbar(sidebar.current, {
+        suppressScrollX: true,
+        suppressScrollY: false,
+      });
+    }
+    return function cleanup() {
+      // we need to destroy the false scrollbar when we navigate
+      // to a page that doesn't have this component rendered
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+      }
+      // to stop the warning of calling setState of unmounted component
+      var id = window.setTimeout(null, 0);
+      while (id--) {
+        window.clearTimeout(id);
+      }
     };
-  }
-  // verifies if routeName is the one active (in browser input)
-  activeRoute = routeName => {
-    return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
-  };
-  // makes the sidenav normal on hover (actually when mouse enters on it)
-  onMouseEnterSidenav = () => {
-    if (!document.body.classList.contains("g-sidenav-pinned")) {
-      document.body.classList.add("g-sidenav-show");
-    }
-  };
-  // makes the sidenav mini on hover (actually when mouse leaves from it)
-  onMouseLeaveSidenav = () => {
-    if (!document.body.classList.contains("g-sidenav-pinned")) {
-      document.body.classList.remove("g-sidenav-show");
-    }
-  };
-  // toggles collapse between opened and closed (true/false)
-  toggleCollapse = () => {
-    this.setState({
-      collapseOpen: !this.state.collapseOpen
-    });
-  };
-  // closes the collapse
-  closeCollapse = () => {
-    this.setState({
-      collapseOpen: false
-    });
-  };
+  });
+  React.useEffect(() => {
+    setCollapseStates(getCollapseStates(props.routes));
+  }, []);
   // this creates the intial state of this component based on the collapse routes
-  // that it gets through this.props.routes
-  getCollapseStates = routes => {
+  // that it gets through props.routes
+  const getCollapseStates = (routes) => {
     let initialState = {};
     routes.map((prop, key) => {
       if (prop.collapse) {
         initialState = {
-          [prop.state]: this.getCollapseInitialState(prop.views),
-          ...this.getCollapseStates(prop.views),
-          ...initialState
+          [prop.state]: getCollapseInitialState(prop.views),
+          ...getCollapseStates(prop.views),
+          ...initialState,
         };
       }
       return null;
@@ -88,207 +78,187 @@ class Sidebar extends React.Component {
   // this verifies if any of the collapses should be default opened on a rerender of this component
   // for example, on the refresh of the page,
   // while on the src/views/forms/RegularForms.js - route /admin/regular-forms
-  getCollapseInitialState(routes) {
+  const getCollapseInitialState = (routes) => {
     for (let i = 0; i < routes.length; i++) {
-      if (routes[i].collapse && this.getCollapseInitialState(routes[i].views)) {
+      if (routes[i].collapse && getCollapseInitialState(routes[i].views)) {
         return true;
       } else if (window.location.href.indexOf(routes[i].path) !== -1) {
         return true;
       }
     }
     return false;
-  }
-  // this is used on mobile devices, when a user navigates
-  // the sidebar will autoclose
-  closeSidenav = () => {
-    if (window.innerWidth < 1200) {
-      this.props.toggleSidenav();
-    }
   };
   // this function creates the links and collapses that appear in the sidebar (left menu)
-  createLinks = routes => {
+  const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      const hidden = prop.hidden || false;
-      if (prop.redirect) {
-        return null;
-      }
       if (prop.collapse) {
         var st = {};
-        st[prop["state"]] = !this.state[prop.state];
+        st[prop["state"]] = !collapseStates[prop.state];
         return (
-          <NavItem key={key}>
-            <NavLink
+          <li
+            className={getCollapseInitialState(prop.views) ? "active" : ""}
+            key={key}
+          >
+            <a
               href="#pablo"
               data-toggle="collapse"
-              aria-expanded={this.state[prop.state]}
-              className={classnames({
-                active: this.getCollapseInitialState(prop.views)
-              })}
-              onClick={e => {
+              aria-expanded={collapseStates[prop.state]}
+              onClick={(e) => {
                 e.preventDefault();
-                this.setState(st);
+                setCollapseStates(st);
               }}
-            >
-              {prop.icon ? (
-                <>
-                  <i className={prop.icon} />
-                  <span className="nav-link-text">{prop.name}</span>
-                </>
-              ) : prop.miniName ? (
-                <>
-                  <span className="sidenav-mini-icon"> {prop.miniName} </span>
-                  <span className="sidenav-normal"> {prop.name} </span>
-                </>
-              ) : null}
-            </NavLink>
-            <Collapse isOpen={this.state[prop.state]}>
-              <Nav className="nav-sm flex-column">
-                {this.createLinks(prop.views)}
-              </Nav>
-            </Collapse>
-          </NavItem>
-        );
-      }
-      return (
-        <NavItem
-          className={this.activeRoute(prop.layout + prop.path)}
-          key={key}
-        >
-          { !hidden && 
-            <NavLink
-              to={prop.layout + prop.path}
-              activeClassName=""
-              onClick={this.closeSidenav}
-              tag={NavLinkRRD}
             >
               {prop.icon !== undefined ? (
                 <>
                   <i className={prop.icon} />
-                  <span className="nav-link-text">{prop.name}</span>
-                </>
-              ) : prop.miniName !== undefined ? (
-                <>
-                  <span className="sidenav-mini-icon"> {prop.miniName} </span>
-                  <span className="sidenav-normal"> {prop.name} </span>
+                  <p>
+                    {prop.name}
+                    <b className="caret" />
+                  </p>
                 </>
               ) : (
-                prop.name
+                <>
+                  <span className="sidebar-mini-icon">{prop.mini}</span>
+                  <span className="sidebar-normal">
+                    {prop.name}
+                    <b className="caret" />
+                  </span>
+                </>
               )}
-            </NavLink>
-          }
-        </NavItem>
+            </a>
+            <Collapse isOpen={collapseStates[prop.state]}>
+              <ul className="nav">{createLinks(prop.views)}</ul>
+            </Collapse>
+          </li>
+        );
+      }
+      return (
+        <li className={activeRoute(prop.layout + prop.path)} key={key}>
+          <NavLink to={prop.layout + prop.path} activeClassName="">
+            {prop.icon !== undefined ? (
+              <>
+                <i className={prop.icon} />
+                <p>{prop.name}</p>
+              </>
+            ) : (
+              <>
+                <span className="sidebar-mini-icon">{prop.mini}</span>
+                <span className="sidebar-normal">{prop.name}</span>
+              </>
+            )}
+          </NavLink>
+        </li>
       );
     });
   };
-  render() {
-    const { routes, logo } = this.props;
-    let navbarBrandProps;
-    if (logo && logo.innerLink) {
-      navbarBrandProps = {
-        to: logo.innerLink,
-        tag: Link
-      };
-    } else if (logo && logo.outterLink) {
-      navbarBrandProps = {
-        href: logo.outterLink,
-        target: "_blank"
-      };
-    }
-    const scrollBarInner = (
-      <div className="scrollbar-inner">
-        <div className="sidenav-header d-flex align-items-center">
-          {logo ? (
-            <NavbarBrand {...navbarBrandProps}>
-              <img
-                alt={logo.imgAlt}
-                className="navbar-brand-img"
-                src={logo.imgSrc}
-              />
-            </NavbarBrand>
-          ) : null}
-          <div className="ml-auto">
-            <div
-              className={classnames("sidenav-toggler d-none d-xl-block", {
-                active: this.props.sidenavOpen,
-              })}
-              onClick={this.props.toggleSidenav}
-            >
-              <div className="sidenav-toggler-inner">
-                <i className="sidenav-toggler-line" />
-                <i className="sidenav-toggler-line" />
-                <i className="sidenav-toggler-line" />
-              </div>
+  // verifies if routeName is the one active (in browser input)
+  const activeRoute = (routeName) => {
+    return window.location.href.indexOf(routeName) > -1 ? "active" : "";
+  };
+  return (
+    <>
+      <div className="sidebar" data-color={props.backgroundColor}>
+        <div className="logo">
+          <a
+            href="https://www.creative-tim.com?ref=nudr-sidebar"
+            className="simple-text logo-mini"
+            target="_blank"
+          >
+            <div className="logo-img">
+              <img src={logo} alt="react-logo" />
             </div>
+          </a>
+          <a
+            href="https://www.creative-tim.com?ref=nudr-sidebar"
+            className="simple-text logo-normal"
+            target="_blank"
+          >
+            Creative Tim
+          </a>
+          <div className="navbar-minimize">
+            <Button
+              outline
+              className="btn-round btn-icon"
+              color="neutral"
+              id="minimizeSidebar"
+              onClick={() => props.minimizeSidebar()}
+            >
+              <i className="now-ui-icons text_align-center visible-on-sidebar-regular" />
+              <i className="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini" />
+            </Button>
           </div>
         </div>
-        <div className="navbar-inner">
-          <Collapse navbar isOpen={true}>
-            <Nav navbar>{this.createLinks(routes)}</Nav>
-            <hr className="my-3" />
-            <h6 className="navbar-heading p-0 text-muted">
-              <span className="docs-normal">Read about</span>
-              <span className="docs-mini">D</span>
-            </h6>
-            <Nav className="mb-md-3" navbar>
-              <NavItem>
-                <NavLink href="https://100daysofcode.com" target="_blank">
-                  <i className="ni ni-single-copy-04" />
-                  <span className="nav-link-text">100 Days of Code</span>
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
+
+        <div className="sidebar-wrapper" ref={sidebar}>
+          <div className="user">
+            <div className="photo">
+              <img src={avatar} alt="Avatar" />
+            </div>
+            <div className="info">
+              <a
+                href="#pablo"
+                data-toggle="collapse"
+                aria-expanded={openAvatar}
+                onClick={() => setOpenAvatar(!openAvatar)}
+              >
+                <span>
+                  Ryan Gosling
+                  <b className="caret" />
+                </span>
+              </a>
+              <Collapse isOpen={openAvatar}>
+                <ul className="nav">
+                  <li>
+                    <a href="#pablo" onClick={(e) => e.preventDefault}>
+                      <span className="sidebar-mini-icon">MP</span>
+                      <span className="sidebar-normal">My Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#pablo" onClick={(e) => e.preventDefault}>
+                      <span className="sidebar-mini-icon">EP</span>
+                      <span className="sidebar-normal">Edit Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#pablo" onClick={(e) => e.preventDefault}>
+                      <span className="sidebar-mini-icon">S</span>
+                      <span className="sidebar-normal">Settings</span>
+                    </a>
+                  </li>
+                </ul>
+              </Collapse>
+            </div>
+          </div>
+          <Nav>{createLinks(props.routes)}</Nav>
         </div>
       </div>
-    );
-    return (
-      <Navbar
-        className={
-          "sidenav navbar-vertical navbar-expand-xs navbar-light bg-white " +
-          (this.props.rtlActive ? "" : "fixed-left")
-        }
-        onMouseEnter={this.onMouseEnterSidenav}
-        onMouseLeave={this.onMouseLeaveSidenav}
-      >
-        {navigator.platform.indexOf("Win") > -1 ? (
-          <PerfectScrollbar>{scrollBarInner}</PerfectScrollbar>
-        ) : (
-          scrollBarInner
-        )}
-      </Navbar>
-    );
-  }
+    </>
+  );
 }
 
 Sidebar.defaultProps = {
-  routes: [{}],
-  toggleSidenav: () => {},
-  sidenavOpen: false,
-  rtlActive: false
+  routes: [],
+  showNotification: false,
+  backgroundColor: "blue",
+  minimizeSidebar: () => {},
 };
 
 Sidebar.propTypes = {
-  // function used to make sidenav mini or normal
-  toggleSidenav: PropTypes.func,
-  // prop to know if the sidenav is mini or normal
-  sidenavOpen: PropTypes.bool,
-  // links that will be displayed inside the component
+  // links that are rendered
   routes: PropTypes.arrayOf(PropTypes.object),
-  // logo
-  logo: PropTypes.shape({
-    // innerLink is for links that will direct the user within the app
-    // it will be rendered as <Link to="...">...</Link> tag
-    innerLink: PropTypes.string,
-    // outterLink is for links that will direct the user outside the app
-    // it will be rendered as simple <a href="...">...</a> tag
-    outterLink: PropTypes.string,
-    // the image src of the logo
-    imgSrc: PropTypes.string.isRequired,
-    // the alt for the img
-    imgAlt: PropTypes.string.isRequired
-  }),
-  // rtl active, this will make the sidebar to stay on the right side
-  rtlActive: PropTypes.bool
+  // if you want to show a notification when switching between mini sidebar and normal
+  showNotification: PropTypes.bool,
+  // background color for the component
+  backgroundColor: PropTypes.oneOf([
+    "blue",
+    "yellow",
+    "green",
+    "orange",
+    "red",
+  ]),
+  // function that is called upon pressing the button near the logo
+  minimizeSidebar: PropTypes.func,
 };
 
 export default Sidebar;

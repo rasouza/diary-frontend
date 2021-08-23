@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard PRO React - v1.1.0
+* Now UI Dashboard PRO React - v1.5.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -15,84 +15,79 @@
 
 */
 import React from "react";
-// react library for routing
 import { Link } from "react-router-dom";
-// reactstrap components
 import {
-  UncontrolledCollapse,
-  NavbarBrand,
+  Collapse,
   Navbar,
+  NavbarToggler,
+  Nav,
+  NavItem,
   Container,
-  Row,
-  Col,
 } from "reactstrap";
 
-class AdminNavbar extends React.Component {
-  render() {
-    return (
-      <>
-        <Navbar
-          className="navbar-horizontal navbar-main navbar-dark navbar-transparent"
-          expand="lg"
-          id="navbar-main"
-        >
-          <Container>
-            <NavbarBrand to="/" tag={Link}>
-              <img
-                alt="..."
-                src={require("assets/img/brand/logo-white.png")}
-              />
-            </NavbarBrand>
-            <button
-              aria-controls="navbar-collapse"
-              aria-expanded={false}
-              aria-label="Toggle navigation"
-              className="navbar-toggler"
-              data-target="#navbar-collapse"
-              data-toggle="collapse"
-              id="navbar-collapse"
-              type="button"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <UncontrolledCollapse
-              className="navbar-custom-collapse"
-              navbar
-              toggler="#navbar-collapse"
-            >
-              <div className="navbar-collapse-header">
-                <Row>
-                  <Col className="collapse-brand" xs="6">
-                    <Link to="/admin/dashboard">
-                      <img
-                        alt="..."
-                        src={require("assets/img/brand/blue.png")}
-                      />
-                    </Link>
-                  </Col>
-                  <Col className="collapse-close" xs="6">
-                    <button
-                      aria-controls="navbar-collapse"
-                      aria-expanded={false}
-                      aria-label="Toggle navigation"
-                      className="navbar-toggler"
-                      data-target="#navbar-collapse"
-                      data-toggle="collapse"
-                      id="navbar-collapse"
-                      type="button"
-                    >
-                      <span />
-                      <span />
-                    </button>
-                  </Col>
-                </Row>
-              </div>
-            </UncontrolledCollapse>
-          </Container>
-        </Navbar>
-      </>
-    );
-  }
+function AuthNavbar() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+  // verifies if routeName is the one active (in browser input)
+  const activeRoute = (routeName) => {
+    return window.location.href.indexOf(routeName) > -1 ? "active" : "";
+  };
+  return (
+    <Navbar
+      expand="lg"
+      className={
+        isOpen
+          ? "bg-white navbar-absolute"
+          : "navbar-transparent navbar-absolute"
+      }
+    >
+      <Container fluid>
+        <div className="navbar-wrapper">
+          <div className="navbar-toggle">
+            <NavbarToggler onClick={toggle}>
+              <span className="navbar-toggler-bar bar1" />
+              <span className="navbar-toggler-bar bar2" />
+              <span className="navbar-toggler-bar bar3" />
+            </NavbarToggler>
+          </div>
+          <Link to="/" className="navbar-brand">
+            Now Ui Dashboard Pro - React
+          </Link>
+        </div>
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <Link to="/admin/dashboard" className="nav-link">
+                <i className="now-ui-icons design_bullet-list-67" /> Dashboard
+              </Link>
+            </NavItem>
+            <NavItem className={activeRoute("/auth/register-page")}>
+              <Link to="/auth/register-page" className="nav-link">
+                <i className="now-ui-icons tech_mobile" /> Register
+              </Link>
+            </NavItem>
+            <NavItem className={activeRoute("/auth/login-page")}>
+              <Link to="/auth/login-page" className="nav-link">
+                <i className="now-ui-icons users_circle-08" /> Login
+              </Link>
+            </NavItem>
+            <NavItem className={activeRoute("/auth/pricing-page")}>
+              <Link to="/auth/pricing-page" className="nav-link">
+                <i className="now-ui-icons business_money-coins" /> Pricing
+              </Link>
+            </NavItem>
+            <NavItem className={activeRoute("/auth/lock-screen-page")}>
+              <Link to="/auth/lock-screen-page" className="nav-link">
+                <i className="now-ui-icons ui-1_lock-circle-open" /> Lock
+              </Link>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Container>
+    </Navbar>
+  );
 }
 
-export default AdminNavbar;
+export default AuthNavbar;

@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard PRO React - v1.1.0
+* Now UI Dashboard PRO React - v1.5.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -15,36 +15,78 @@
 
 */
 import React from "react";
-// react library for routing
-import { Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
+// javascript plugin used to create scrollbars on windows
+import PerfectScrollbar from "perfect-scrollbar";
+// react plugin for creating notifications
+import NotificationAlert from "react-notification-alert";
+
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import AdminFooter from "components/Footers/AdminFooter.js";
+import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-
-import PrivateRoute from "components/PrivateRoute"
+import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
-class Admin extends React.Component {
-  state = {
-    sidenavOpen: true
-  };
-  componentDidUpdate(e) {
-    if (e.history.pathname !== e.location.pathname) {
-      document.documentElement.scrollTop = 0;
-      document.scrollingElement.scrollTop = 0;
-      this.refs.mainContent.scrollTop = 0;
+var ps;
+
+function Admin(props) {
+  const location = useLocation();
+  const [sidebarMini, setSidebarMini] = React.useState(true);
+  const [backgroundColor, setBackgroundColor] = React.useState("blue");
+  const notificationAlert = React.useRef();
+  const mainPanel = React.useRef();
+  React.useEffect(() => {
+    if (navigator.platform.indexOf("Win") > -1) {
+      document.documentElement.className += " perfect-scrollbar-on";
+      document.documentElement.classList.remove("perfect-scrollbar-off");
+      ps = new PerfectScrollbar(mainPanel.current);
     }
-  }
-  getRoutes = routes => {
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+        document.documentElement.className += " perfect-scrollbar-off";
+        document.documentElement.classList.remove("perfect-scrollbar-on");
+      }
+    };
+  });
+  React.useEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.scrollingElement.scrollTop = 0;
+    mainPanel.current.scrollTop = 0;
+  }, [location]);
+  const minimizeSidebar = () => {
+    var message = "Sidebar mini ";
+    if (document.body.classList.contains("sidebar-mini")) {
+      setSidebarMini(false);
+      message += "deactivated...";
+    } else {
+      setSidebarMini(true);
+      message += "activated...";
+    }
+    document.body.classList.toggle("sidebar-mini");
+    var options = {};
+    options = {
+      place: "tr",
+      message: message,
+      type: "info",
+      icon: "now-ui-icons ui-1_bell-53",
+      autoDismiss: 7,
+    };
+    notificationAlert.current.notificationAlert(options);
+  };
+  const handleColorClick = (color) => {
+    setBackgroundColor(color);
+  };
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
-        return this.getRoutes(prop.views);
+        return getRoutes(prop.views);
       }
       if (prop.layout === "/admin") {
         return (
-          <PrivateRoute
+          <Route
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
@@ -55,76 +97,56 @@ class Admin extends React.Component {
       }
     });
   };
-  getBrandText = path => {
+  const getActiveRoute = (routes) => {
+    let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
-      if (
-        this.props.location.pathname.indexOf(
-          routes[i].layout + routes[i].path
-        ) !== -1
-      ) {
-        return routes[i].name;
+      if (routes[i].collapse) {
+        let collapseActiveRoute = getActiveRoute(routes[i].views);
+        if (collapseActiveRoute !== activeRoute) {
+          return collapseActiveRoute;
+        }
+      } else {
+        if (
+          window.location.pathname.indexOf(
+            routes[i].layout + routes[i].path
+          ) !== -1
+        ) {
+          return routes[i].name;
+        }
       }
     }
-    return "Brand";
+    return activeRoute;
   };
-  // toggles collapse between mini sidenav and normal
-  toggleSidenav = e => {
-    if (document.body.classList.contains("g-sidenav-pinned")) {
-      document.body.classList.remove("g-sidenav-pinned");
-      document.body.classList.add("g-sidenav-hidden");
-    } else {
-      document.body.classList.add("g-sidenav-pinned");
-      document.body.classList.remove("g-sidenav-hidden");
-    }
-    this.setState({
-      sidenavOpen: !this.state.sidenavOpen
-    });
-  };
-  getNavbarTheme = () => {
-    return this.props.location.pathname.indexOf(
-      "admin/alternative-dashboard"
-    ) === -1
-      ? "dark"
-      : "light";
-  };
-  render() {
-    return (
-      <>
-        <Sidebar
-          {...this.props}
-          routes={routes}
-          toggleSidenav={this.toggleSidenav}
-          sidenavOpen={this.state.sidenavOpen}
-          logo={{
-            innerLink: "/",
-            imgSrc: require("assets/img/brand/logo.png"),
-            imgAlt: "..."
-          }}
-        />
-        <div
-          className="main-content"
-          ref="mainContent"
-          onClick={this.closeSidenav}
-        >
-          <AdminNavbar
-            {...this.props}
-            theme={this.getNavbarTheme()}
-            toggleSidenav={this.toggleSidenav}
-            sidenavOpen={this.state.sidenavOpen}
-            brandText={this.getBrandText(this.props.location.pathname)}
-          />
-          <Switch>
-            {this.getRoutes(routes)}
-            <Redirect from="*" to="/admin/dashboard" />
-          </Switch>
-          <AdminFooter />
-        </div>
-        {this.state.sidenavOpen ? (
-          <div className="backdrop d-xl-none" onClick={this.toggleSidenav} />
-        ) : null}
-      </>
-    );
-  }
+  return (
+    <div className="wrapper">
+      <NotificationAlert ref={notificationAlert} />
+      <Sidebar
+        {...props}
+        routes={routes}
+        minimizeSidebar={minimizeSidebar}
+        backgroundColor={backgroundColor}
+      />
+      <div className="main-panel" ref={mainPanel}>
+        <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
+        <Switch>
+          {getRoutes(routes)}
+          <Redirect from="/admin" to="/admin/dashboard" />
+        </Switch>
+        {
+          // we don't want the Footer to be rendered on full screen maps page
+          window.location.href.indexOf("full-screen-maps") !== -1 ? null : (
+            <Footer fluid />
+          )
+        }
+      </div>
+      <FixedPlugin
+        handleMiniClick={minimizeSidebar}
+        sidebarMini={sidebarMini}
+        bgColor={backgroundColor}
+        handleColorClick={handleColorClick}
+      />
+    </div>
+  );
 }
 
 export default Admin;

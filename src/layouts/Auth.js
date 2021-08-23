@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard PRO React - v1.1.0
+* Now UI Dashboard PRO React - v1.5.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -15,36 +15,21 @@
 
 */
 import React from "react";
-// react library for routing
 import { Route, Switch, Redirect } from "react-router-dom";
 
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import AuthFooter from "components/Footers/AuthFooter.js";
+import Footer from "components/Footer/Footer.js";
+import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
-class Auth extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.mainContent.scrollTop = 0;
-    document.body.classList.add("bg-default");
-  }
-  componentWillUnmount() {
-    document.body.classList.remove("bg-default");
-  }
-  componentDidUpdate(e) {
-    if (e.history.pathname !== e.location.pathname) {
-      document.documentElement.scrollTop = 0;
-      document.scrollingElement.scrollTop = 0;
-      this.refs.mainContent.scrollTop = 0;
-    }
-  }
-  getRoutes = routes => {
+function Auth(props) {
+  const [filterColor, setFilterColor] = React.useState("yellow");
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
-        return this.getRoutes(prop.views);
+        return getRoutes(prop.views);
       }
       if (prop.layout === "/auth") {
         return (
@@ -59,20 +44,24 @@ class Auth extends React.Component {
       }
     });
   };
-  render() {
-    return (
-      <>
-        <div className="main-content" ref="mainContent">
-          <AuthNavbar />
+  const handleColorClick = (color) => {
+    setFilterColor(color);
+  };
+  return (
+    <>
+      <AuthNavbar {...props} />
+      <div className="wrapper wrapper-full-page">
+        <div className="full-page section-image" filter-color={filterColor}>
           <Switch>
-            {this.getRoutes(routes)}
-            <Redirect from="*" to="/auth/login" />
+            {getRoutes(routes)}
+            <Redirect from="/auth" to="/auth/login-page" />
           </Switch>
+          <Footer fluid />
         </div>
-        <AuthFooter />
-      </>
-    );
-  }
+      </div>
+      <FixedPlugin bgColor={filterColor} handleColorClick={handleColorClick} />
+    </>
+  );
 }
 
 export default Auth;

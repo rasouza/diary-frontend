@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard PRO React - v1.1.0
+* Now UI Dashboard PRO React - v1.5.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -15,160 +15,168 @@
 
 */
 import React from "react";
-// nodejs library that concatenates classes
-import classnames from "classnames";
-// nodejs library to set properties for components
+import { Link, useLocation } from "react-router-dom";
+// used for making the prop types of this component
 import PropTypes from "prop-types";
+
 // reactstrap components
 import {
   Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  Dropdown,
+  DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Media,
-  Navbar,
-  NavItem,
-  Nav,
   Container,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
 } from "reactstrap";
 
-import { getLogin } from "services/auth"
-
-class AdminNavbar extends React.Component {
-  login = getLogin()
-  // function that on mobile devices makes the search open
-  openSearch = () => {
-    document.body.classList.add("g-navbar-search-showing");
-    setTimeout(function() {
-      document.body.classList.remove("g-navbar-search-showing");
-      document.body.classList.add("g-navbar-search-show");
-    }, 150);
-    setTimeout(function() {
-      document.body.classList.add("g-navbar-search-shown");
-    }, 300);
+function AdminNavbar(props) {
+  const location = useLocation();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [color, setColor] = React.useState("transparent");
+  const sidebarToggle = React.useRef();
+  const toggle = () => {
+    if (isOpen) {
+      setColor("transparent");
+    } else {
+      setColor("white");
+    }
+    setIsOpen(!isOpen);
   };
-  // function that on mobile devices makes the search close
-  closeSearch = () => {
-    document.body.classList.remove("g-navbar-search-shown");
-    setTimeout(function() {
-      document.body.classList.remove("g-navbar-search-show");
-      document.body.classList.add("g-navbar-search-hiding");
-    }, 150);
-    setTimeout(function() {
-      document.body.classList.remove("g-navbar-search-hiding");
-      document.body.classList.add("g-navbar-search-hidden");
-    }, 300);
-    setTimeout(function() {
-      document.body.classList.remove("g-navbar-search-hidden");
-    }, 500);
+  const dropdownToggle = (e) => {
+    setDropdownOpen(!dropdownOpen);
   };
-  render() {
-    return (
-      <>
-        <Navbar
-          className={classnames(
-            "navbar-top navbar-expand border-bottom",
-            { "navbar-dark bg-info": this.props.theme === "dark" },
-            { "navbar-light bg-secondary": this.props.theme === "light" }
-          )}
-        >
-          <Container fluid>
-            <Collapse navbar isOpen={true}>
+  const openSidebar = () => {
+    document.documentElement.classList.toggle("nav-open");
+    sidebarToggle.current.classList.toggle("toggled");
+  };
+  // function that adds color white/transparent to the navbar on resize (this is for the collapse)
+  const updateColor = () => {
+    if (window.innerWidth < 993 && isOpen) {
+      setColor("white");
+    } else {
+      setColor("transparent");
+    }
+  };
+  React.useEffect(() => {
+    window.addEventListener("resize", updateColor);
+    // eslint-disable-next-line
+  }, []);
+  React.useEffect(() => {
+    if (
+      window.innerWidth < 993 &&
+      document.documentElement.className.indexOf("nav-open") !== -1
+    ) {
+      document.documentElement.classList.toggle("nav-open");
+      sidebarToggle.current.classList.toggle("toggled");
+    }
+  }, [location]);
+  return (
+    // add or remove classes depending if we are on full-screen-maps page or not
+    <Navbar
+      color={
+        window.location.href.indexOf("full-screen-maps") !== -1
+          ? "white"
+          : color
+      }
+      expand="lg"
+      className={
+        window.location.href.indexOf("full-screen-maps") !== -1
+          ? "navbar-absolute "
+          : "navbar-absolute " +
+            (color === "transparent" ? "navbar-transparent " : "")
+      }
+    >
+      <Container fluid>
+        <div className="navbar-wrapper">
+          <div className="navbar-toggle">
+            <button
+              type="button"
+              ref={sidebarToggle}
+              className="navbar-toggler"
+              onClick={() => openSidebar()}
+            >
+              <span className="navbar-toggler-bar bar1" />
+              <span className="navbar-toggler-bar bar2" />
+              <span className="navbar-toggler-bar bar3" />
+            </button>
+          </div>
+          <NavbarBrand href="/">{props.brandText}</NavbarBrand>
+        </div>
+        <NavbarToggler onClick={toggle}>
+          <span className="navbar-toggler-bar navbar-kebab" />
+          <span className="navbar-toggler-bar navbar-kebab" />
+          <span className="navbar-toggler-bar navbar-kebab" />
+        </NavbarToggler>
+        <Collapse isOpen={isOpen} navbar className="justify-content-end">
+          <form>
+            <InputGroup className="no-border">
+              <Input placeholder="Search..." />
 
-              <Nav className="align-items-center ml-md-auto" navbar>
-                <NavItem className="d-xl-none">
-                  <div
-                    className={classnames(
-                      "pr-3 sidenav-toggler",
-                      { active: this.props.sidenavOpen },
-                      { "sidenav-toggler-dark": this.props.theme === "dark" }
-                    )}
-                    onClick={this.props.toggleSidenav}
-                  >
-                    <div className="sidenav-toggler-inner">
-                      <i className="sidenav-toggler-line" />
-                      <i className="sidenav-toggler-line" />
-                      <i className="sidenav-toggler-line" />
-                    </div>
-                  </div>
-                </NavItem>
-              </Nav>
-              <Nav className="align-items-center ml-auto ml-md-0" navbar>
-                <UncontrolledDropdown nav>
-                  <DropdownToggle className="nav-link pr-0" color="" tag="a">
-                    <Media className="align-items-center">
-                      <span className="avatar avatar-sm rounded-circle">
-                        <img
-                          alt="..."
-                          src={this.login.picture}
-                        />
-                      </span>
-                      <Media className="ml-2 d-none d-lg-block">
-                        <span className="mb-0 text-sm font-weight-bold">
-                          {this.login.name}
-                        </span>
-                      </Media>
-                    </Media>
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem className="noti-title" header tag="div">
-                      <h6 className="text-overflow m-0">Welcome!</h6>
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
-                    >
-                      <i className="ni ni-single-02" />
-                      <span>My profile</span>
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
-                    >
-                      <i className="ni ni-settings-gear-65" />
-                      <span>Settings</span>
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
-                    >
-                      <i className="ni ni-calendar-grid-58" />
-                      <span>Activity</span>
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
-                    >
-                      <i className="ni ni-support-16" />
-                      <span>Support</span>
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem
-                      href={`${window.IDP_URL}/self-service/browser/flows/logout`}
-                    >
-                      <i className="ni ni-user-run" />
-                      <span>Logout</span>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Nav>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </>
-    );
-  }
+              <InputGroupAddon addonType="append">
+                <InputGroupText>
+                  <i className="now-ui-icons ui-1_zoom-bold" />
+                </InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </form>
+          <Nav navbar>
+            <NavItem>
+              <Link to="#pablo" className="nav-link">
+                <i className="now-ui-icons media-2_sound-wave" />
+                <p>
+                  <span className="d-lg-none d-md-block">Stats</span>
+                </p>
+              </Link>
+            </NavItem>
+            <Dropdown
+              nav
+              isOpen={dropdownOpen}
+              toggle={(e) => dropdownToggle(e)}
+            >
+              <DropdownToggle caret nav>
+                <i className="now-ui-icons location_world" />
+                <p>
+                  <span className="d-lg-none d-md-block">Some Actions</span>
+                </p>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem tag="a">Action</DropdownItem>
+                <DropdownItem tag="a">Another Action</DropdownItem>
+                <DropdownItem tag="a">Something else here</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            <NavItem>
+              <Link to="#pablo" className="nav-link">
+                <i className="now-ui-icons users_single-02" />
+                <p>
+                  <span className="d-lg-none d-md-block">Account</span>
+                </p>
+              </Link>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Container>
+    </Navbar>
+  );
 }
+
 AdminNavbar.defaultProps = {
-  toggleSidenav: () => {},
-  sidenavOpen: false,
-  theme: "dark"
+  brandText: "Default Brand Text",
 };
+
 AdminNavbar.propTypes = {
-  toggleSidenav: PropTypes.func,
-  sidenavOpen: PropTypes.bool,
-  theme: PropTypes.oneOf(["dark", "light"])
+  // string for the page name
+  brandText: PropTypes.string,
 };
 
 export default AdminNavbar;
