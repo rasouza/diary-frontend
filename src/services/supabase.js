@@ -1,7 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 
 const db = createClient(window.SUPABASE_URL, window.SUPABASE_KEY)
-console.log(`base_url`, `${window.BASE_URL}/auth`)
 
 const dummyUser = {
   full_name: 'Ryan Gosling',
@@ -21,11 +20,14 @@ export function getUser() {
 }
 
 export function githubSignIn() {
-  return db.auth.signIn({provider: 'github'}, { redirectTo: `${window.BASE_URL}/auth`})
+  return db.auth.signIn(
+    { provider: 'github' },
+    { redirectTo: `${window.BASE_URL}/auth` }
+  )
 }
 
 export function twitterSignIn() {
-  return db.auth.signIn({provider: 'twitter'})
+  return db.auth.signIn({ provider: 'twitter' })
 }
 
 export function signOut() {

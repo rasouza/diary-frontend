@@ -14,281 +14,281 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import Dashboard from "views/Dashboard/Dashboard.js";
-import Buttons from "views/Components/Buttons.js";
-import GridSystem from "views/Components/GridSystem.js";
-import Panels from "views/Components/Panels.js";
-import SweetAlert from "views/Components/SweetAlertPage.js";
-import Notifications from "views/Components/Notifications.js";
-import Icons from "views/Components/Icons.js";
-import Typography from "views/Components/Typography.js";
-import RegularForms from "views/Forms/RegularForms.js";
-import ExtendedForms from "views/Forms/ExtendedForms.js";
-import ValidationForms from "views/Forms/ValidationForms.js";
-import Wizard from "views/Forms/Wizard/Wizard.js";
-import RegularTables from "views/Tables/RegularTables.js";
-import ExtendedTables from "views/Tables/ExtendedTables.js";
-import ReactTable from "views/Tables/ReactTable.js";
-import GoogleMaps from "views/Maps/GoogleMaps.js";
-import FullScreenMap from "views/Maps/FullScreenMap.js";
-import VectorMap from "views/Maps/VectorMap.js";
-import Charts from "views/Charts/Charts.js";
-import Calendar from "views/Calendar/Calendar.js";
-import Widgets from "views/Widgets/Widgets.js";
-import UserPage from "views/Pages/UserPage.js";
-import TimelinePage from "views/Pages/TimelinePage.js";
-import RTL from "views/Pages/RTL.js";
-import PricingPage from "views/Pages/PricingPage.js";
-import LoginPage from "views/Pages/LoginPage.js";
-import AuthPage from "views/Pages/AuthPage.js";
-import LockScreenPage from "views/Pages/LockScreenPage.js";
+import Dashboard from 'views/Dashboard/Dashboard'
+import Buttons from 'views/Components/Buttons'
+import GridSystem from 'views/Components/GridSystem'
+import Panels from 'views/Components/Panels'
+import SweetAlert from 'views/Components/SweetAlertPage'
+import Notifications from 'views/Components/Notifications'
+import Icons from 'views/Components/Icons'
+import Typography from 'views/Components/Typography'
+import RegularForms from 'views/Forms/RegularForms'
+import ExtendedForms from 'views/Forms/ExtendedForms'
+import ValidationForms from 'views/Forms/ValidationForms'
+import Wizard from 'views/Forms/Wizard/Wizard'
+import RegularTables from 'views/Tables/RegularTables'
+import ExtendedTables from 'views/Tables/ExtendedTables'
+import ReactTable from 'views/Tables/ReactTable'
+import GoogleMaps from 'views/Maps/GoogleMaps'
+import FullScreenMap from 'views/Maps/FullScreenMap'
+import VectorMap from 'views/Maps/VectorMap'
+import Charts from 'views/Charts/Charts'
+import Calendar from 'views/Calendar/Calendar'
+import Widgets from 'views/Widgets/Widgets'
+import UserPage from 'views/Pages/UserPage'
+import TimelinePage from 'views/Pages/TimelinePage'
+import RTL from 'views/Pages/RTL'
+import PricingPage from 'views/Pages/PricingPage'
+import LoginPage from 'views/Pages/LoginPage'
+import AuthPage from 'views/Pages/AuthPage'
+import LockScreenPage from 'views/Pages/LockScreenPage'
 
-let routes = [
+const routes = [
   {
-    path: "/",
-    name: "Auth Page",
-    short: "Auth",
-    mini: "AU",
+    path: '/',
+    name: 'Auth Page',
+    short: 'Auth',
+    mini: 'AU',
     component: AuthPage,
-    layout: "/auth",
+    layout: '/auth'
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "now-ui-icons design_app",
+    path: '/dashboard',
+    name: 'Dashboard',
+    icon: 'now-ui-icons design_app',
     component: Dashboard,
-    layout: "/admin",
+    layout: '/admin'
   },
   {
     collapse: true,
-    path: "/pages",
-    name: "Pages",
-    state: "openPages",
-    icon: "now-ui-icons design_image",
+    path: '/pages',
+    name: 'Pages',
+    state: 'openPages',
+    icon: 'now-ui-icons design_image',
     views: [
       {
-        path: "/timeline-page",
-        name: "Timeline Page",
-        mini: "TP",
+        path: '/timeline-page',
+        name: 'Timeline Page',
+        mini: 'TP',
         component: TimelinePage,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/user-page",
-        name: "User Profile",
-        mini: "UP",
+        path: '/user-page',
+        name: 'User Profile',
+        mini: 'UP',
         component: UserPage,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/rtl-support",
-        name: "RTL Support",
-        mini: "RS",
+        path: '/rtl-support',
+        name: 'RTL Support',
+        mini: 'RS',
         component: RTL,
-        layout: "/admin",
-      },      
+        layout: '/admin'
+      },
       {
-        path: "/login-page",
-        name: "Login Page",
-        short: "Login",
-        mini: "LP",
+        path: '/login-page',
+        name: 'Login Page',
+        short: 'Login',
+        mini: 'LP',
         component: LoginPage,
-        layout: "/auth",
+        layout: '/auth'
       },
       {
-        path: "/pricing-page",
-        name: "Pricing Page",
-        short: "Pricing",
-        mini: "PP",
+        path: '/pricing-page',
+        name: 'Pricing Page',
+        short: 'Pricing',
+        mini: 'PP',
         component: PricingPage,
-        layout: "/auth",
+        layout: '/auth'
       },
       {
-        path: "/lock-screen-page",
-        name: "Lock Screen Page",
-        short: "Lock",
-        mini: "LSP",
+        path: '/lock-screen-page',
+        name: 'Lock Screen Page',
+        short: 'Lock',
+        mini: 'LSP',
         component: LockScreenPage,
-        layout: "/auth",
-      },
-    ],
+        layout: '/auth'
+      }
+    ]
   },
   {
     collapse: true,
-    path: "/components",
-    name: "Components",
-    state: "openComponents",
-    icon: "now-ui-icons education_atom",
+    path: '/components',
+    name: 'Components',
+    state: 'openComponents',
+    icon: 'now-ui-icons education_atom',
     views: [
       {
-        path: "/buttons",
-        name: "Buttons",
-        mini: "B",
+        path: '/buttons',
+        name: 'Buttons',
+        mini: 'B',
         component: Buttons,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/grid-system",
-        name: "Grid System",
-        mini: "GS",
+        path: '/grid-system',
+        name: 'Grid System',
+        mini: 'GS',
         component: GridSystem,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/panels",
-        name: "Panels",
-        mini: "P",
+        path: '/panels',
+        name: 'Panels',
+        mini: 'P',
         component: Panels,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/sweet-alert",
-        name: "Sweet Alert",
-        mini: "SA",
+        path: '/sweet-alert',
+        name: 'Sweet Alert',
+        mini: 'SA',
         component: SweetAlert,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/notifications",
-        name: "Notifications",
-        mini: "N",
+        path: '/notifications',
+        name: 'Notifications',
+        mini: 'N',
         component: Notifications,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/icons",
-        name: "Icons",
-        mini: "I",
+        path: '/icons',
+        name: 'Icons',
+        mini: 'I',
         component: Icons,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/typography",
-        name: "Typography",
-        mini: "T",
+        path: '/typography',
+        name: 'Typography',
+        mini: 'T',
         component: Typography,
-        layout: "/admin",
-      },
-    ],
+        layout: '/admin'
+      }
+    ]
   },
   {
     collapse: true,
-    path: "/forms",
-    name: "Forms",
-    state: "openForms",
-    icon: "now-ui-icons design_bullet-list-67",
+    path: '/forms',
+    name: 'Forms',
+    state: 'openForms',
+    icon: 'now-ui-icons design_bullet-list-67',
     views: [
       {
-        path: "/regular-forms",
-        name: "Regular Forms",
-        mini: "RF",
+        path: '/regular-forms',
+        name: 'Regular Forms',
+        mini: 'RF',
         component: RegularForms,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/extended-forms",
-        name: "Extended Forms",
-        mini: "EF",
+        path: '/extended-forms',
+        name: 'Extended Forms',
+        mini: 'EF',
         component: ExtendedForms,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/validation-forms",
-        name: "Validation Forms",
-        mini: "VF",
+        path: '/validation-forms',
+        name: 'Validation Forms',
+        mini: 'VF',
         component: ValidationForms,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/wizard",
-        name: "Wizard",
-        mini: "W",
+        path: '/wizard',
+        name: 'Wizard',
+        mini: 'W',
         component: Wizard,
-        layout: "/admin",
-      },
-    ],
+        layout: '/admin'
+      }
+    ]
   },
   {
     collapse: true,
-    path: "/tables",
-    name: "Tables",
-    state: "openTables",
-    icon: "now-ui-icons files_single-copy-04",
+    path: '/tables',
+    name: 'Tables',
+    state: 'openTables',
+    icon: 'now-ui-icons files_single-copy-04',
     views: [
       {
-        path: "/regular-tables",
-        name: "Regular Tables",
-        mini: "RT",
+        path: '/regular-tables',
+        name: 'Regular Tables',
+        mini: 'RT',
         component: RegularTables,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/extended-tables",
-        name: "Extended Tables",
-        mini: "ET",
+        path: '/extended-tables',
+        name: 'Extended Tables',
+        mini: 'ET',
         component: ExtendedTables,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/react-table",
-        name: "React Table",
-        mini: "RT",
+        path: '/react-table',
+        name: 'React Table',
+        mini: 'RT',
         component: ReactTable,
-        layout: "/admin",
-      },
-    ],
+        layout: '/admin'
+      }
+    ]
   },
   {
     collapse: true,
-    path: "/maps",
-    name: "Maps",
-    state: "openMaps",
-    icon: "now-ui-icons location_pin",
+    path: '/maps',
+    name: 'Maps',
+    state: 'openMaps',
+    icon: 'now-ui-icons location_pin',
     views: [
       {
-        path: "/google-maps",
-        name: "Google Maps",
-        mini: "GM",
+        path: '/google-maps',
+        name: 'Google Maps',
+        mini: 'GM',
         component: GoogleMaps,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/full-screen-maps",
-        name: "Full Screen Map",
-        mini: "FSM",
+        path: '/full-screen-maps',
+        name: 'Full Screen Map',
+        mini: 'FSM',
         component: FullScreenMap,
-        layout: "/admin",
+        layout: '/admin'
       },
       {
-        path: "/vector-maps",
-        name: "Vector Map",
-        mini: "VM",
+        path: '/vector-maps',
+        name: 'Vector Map',
+        mini: 'VM',
         component: VectorMap,
-        layout: "/admin",
-      },
-    ],
+        layout: '/admin'
+      }
+    ]
   },
   {
-    path: "/widgets",
-    name: "Widgets",
-    icon: "now-ui-icons objects_diamond",
+    path: '/widgets',
+    name: 'Widgets',
+    icon: 'now-ui-icons objects_diamond',
     component: Widgets,
-    layout: "/admin",
+    layout: '/admin'
   },
   {
-    path: "/charts",
-    name: "Charts",
-    icon: "now-ui-icons business_chart-pie-36",
+    path: '/charts',
+    name: 'Charts',
+    icon: 'now-ui-icons business_chart-pie-36',
     component: Charts,
-    layout: "/admin",
+    layout: '/admin'
   },
   {
-    path: "/calendar",
-    name: "Calendar",
-    icon: "now-ui-icons media-1_album",
+    path: '/calendar',
+    name: 'Calendar',
+    icon: 'now-ui-icons media-1_album',
     component: Calendar,
-    layout: "/admin",
-  },
-];
+    layout: '/admin'
+  }
+]
 
-export default routes;
+export default routes
