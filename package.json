@@ -1,8 +1,8 @@
 {
-  "name": "now-ui-dashboard-pro-react",
+  "name": "diary-frontend",
   "version": "1.5.0",
   "private": true,
-  "homepage": "https://demos.creative-tim.com/now-ui-dashboard-pro-react/#/",
+  "homepage": "https://diary.rasouza.dev",
   "dependencies": {
     "@supabase/supabase-js": "^1.22.2",
     "bootstrap": "4.6.0",
