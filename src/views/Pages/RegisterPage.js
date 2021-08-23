@@ -26,17 +26,11 @@ import {
   Col,
   Button,
 } from "reactstrap";
-import { createClient } from '@supabase/supabase-js'
+import { githubSignIn, twitterSignIn } from 'services/supabase'
 // core components
 import bgImage from "assets/img/bg16.jpg";
 
-
-const db = createClient('https://cggwvqtadgufjgzxreuq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyOTU4MTk0MSwiZXhwIjoxOTQ1MTU3OTQxfQ.dFX_AxjSbjy9o34c-al9msFtJxVtUPmX0ZzW3saxOxc')
-const githubSignIn = () => db.auth.signIn({provider: 'github'})
-const twitterSignIn = () => db.auth.signIn({provider: 'twitter'})
-
 function RegisterPage() {
-  console.log('db', db.auth.user())
   
   React.useEffect(() => {
     document.body.classList.add("register-page");

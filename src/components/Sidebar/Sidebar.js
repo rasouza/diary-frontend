@@ -29,9 +29,13 @@ import { Nav, Collapse, Button } from "reactstrap";
 import avatar from "assets/img/ryan.jpg";
 import logo from "assets/img/logo.png";
 
+import { getUser } from 'services/supabase'
+
+
 var ps;
 
 function Sidebar(props) {
+  const { user_metadata: { avatar_url, full_name }} = getUser()
   const [openAvatar, setOpenAvatar] = React.useState(false);
   const [collapseStates, setCollapseStates] = React.useState({});
   const sidebar = React.useRef();
@@ -192,7 +196,7 @@ function Sidebar(props) {
         <div className="sidebar-wrapper" ref={sidebar}>
           <div className="user">
             <div className="photo">
-              <img src={avatar} alt="Avatar" />
+              <img src={avatar_url} alt="Avatar" />
             </div>
             <div className="info">
               <a
@@ -202,7 +206,7 @@ function Sidebar(props) {
                 onClick={() => setOpenAvatar(!openAvatar)}
               >
                 <span>
-                  Ryan Gosling
+                  {full_name}
                   <b className="caret" />
                 </span>
               </a>
