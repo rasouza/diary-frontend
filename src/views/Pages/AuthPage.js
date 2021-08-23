@@ -29,8 +29,10 @@ import {
 import { githubSignIn, twitterSignIn } from 'services/supabase'
 // core components
 import bgImage from "assets/img/bg16.jpg";
+import { getUser } from "services/supabase";
+import { Redirect } from "react-router-dom";
 
-function RegisterPage() {
+function AuthPage() {
   
   React.useEffect(() => {
     document.body.classList.add("register-page");
@@ -38,6 +40,9 @@ function RegisterPage() {
       document.body.classList.remove("register-page");
     };
   }, []);
+
+  if (getUser()) return (<Redirect to='/' />)
+
   return (
     <>
       <div className="content">
@@ -72,4 +77,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default AuthPage;

@@ -20,12 +20,11 @@ import { Route, Switch, Redirect } from "react-router-dom";
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footer/Footer.js";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
 function Auth(props) {
-  const [filterColor, setFilterColor] = React.useState("yellow");
+  const [filterColor,] = React.useState("yellow");
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.collapse) {
@@ -44,9 +43,7 @@ function Auth(props) {
       }
     });
   };
-  const handleColorClick = (color) => {
-    setFilterColor(color);
-  };
+
   return (
     <>
       <AuthNavbar {...props} />
@@ -59,7 +56,6 @@ function Auth(props) {
           <Footer fluid />
         </div>
       </div>
-      <FixedPlugin bgColor={filterColor} handleColorClick={handleColorClick} />
     </>
   );
 }

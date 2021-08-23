@@ -15,7 +15,7 @@
 
 */
 import React from "react";
-import { Route, Switch, Redirect, useLocation } from "react-router-dom";
+import { Switch, Redirect, useLocation } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 // react plugin for creating notifications
@@ -25,6 +25,7 @@ import NotificationAlert from "react-notification-alert";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import PrivateRoute from "components/PrivateRoute/PrivateRoute"
 
 import routes from "routes.js";
 
@@ -82,7 +83,7 @@ function Admin(props) {
       }
       if (prop.layout === "/admin") {
         return (
-          <Route
+          <PrivateRoute
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}

@@ -26,16 +26,15 @@ import PerfectScrollbar from "perfect-scrollbar";
 import { Nav, Collapse, Button } from "reactstrap";
 
 // core components
-import avatar from "assets/img/ryan.jpg";
 import logo from "assets/img/logo.png";
 
-import { getUser } from 'services/supabase'
+import { getUser, signOut } from 'services/supabase'
 
 
 var ps;
 
 function Sidebar(props) {
-  const { user_metadata: { avatar_url, full_name }} = getUser()
+  const { avatar_url, full_name } = getUser() || {}
   const [openAvatar, setOpenAvatar] = React.useState(false);
   const [collapseStates, setCollapseStates] = React.useState({});
   const sidebar = React.useRef();
@@ -136,23 +135,25 @@ function Sidebar(props) {
           </li>
         );
       }
-      return (
-        <li className={activeRoute(prop.layout + prop.path)} key={key}>
-          <NavLink to={prop.layout + prop.path} activeClassName="">
-            {prop.icon !== undefined ? (
-              <>
-                <i className={prop.icon} />
-                <p>{prop.name}</p>
-              </>
-            ) : (
-              <>
-                <span className="sidebar-mini-icon">{prop.mini}</span>
-                <span className="sidebar-normal">{prop.name}</span>
-              </>
-            )}
-          </NavLink>
-        </li>
-      );
+      if (prop.layout && prop.layout === '/admin') {
+        return (
+          <li className={activeRoute(prop.layout + prop.path)} key={key}>
+            <NavLink to={prop.layout + prop.path} activeClassName="">
+              {prop.icon !== undefined ? (
+                <>
+                  <i className={prop.icon} />
+                  <p>{prop.name}</p>
+                </>
+              ) : (
+                <>
+                  <span className="sidebar-mini-icon">{prop.mini}</span>
+                  <span className="sidebar-normal">{prop.name}</span>
+                </>
+              )}
+            </NavLink>
+          </li>
+        );
+      }
     });
   };
   // verifies if routeName is the one active (in browser input)
@@ -228,6 +229,12 @@ function Sidebar(props) {
                     <a href="#pablo" onClick={(e) => e.preventDefault}>
                       <span className="sidebar-mini-icon">S</span>
                       <span className="sidebar-normal">Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" onClick={signOut}>
+                      <i className="ui-1_simple-remove now-ui-icons" />
+                      <span className="sidebar-normal">Logout</span>
                     </a>
                   </li>
                 </ul>

@@ -40,10 +40,18 @@ import TimelinePage from "views/Pages/TimelinePage.js";
 import RTL from "views/Pages/RTL.js";
 import PricingPage from "views/Pages/PricingPage.js";
 import LoginPage from "views/Pages/LoginPage.js";
-import RegisterPage from "views/Pages/RegisterPage.js";
+import AuthPage from "views/Pages/AuthPage.js";
 import LockScreenPage from "views/Pages/LockScreenPage.js";
 
 let routes = [
+  {
+    path: "/",
+    name: "Auth Page",
+    short: "Auth",
+    mini: "AU",
+    component: AuthPage,
+    layout: "/auth",
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -78,15 +86,7 @@ let routes = [
         mini: "RS",
         component: RTL,
         layout: "/admin",
-      },
-      {
-        path: "/register-page",
-        name: "Register Page",
-        short: "Register",
-        mini: "RP",
-        component: RegisterPage,
-        layout: "/auth",
-      },
+      },      
       {
         path: "/login-page",
         name: "Login Page",
