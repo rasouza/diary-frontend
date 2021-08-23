@@ -165,7 +165,7 @@ function Sidebar(props) {
       <div className="sidebar" data-color="black">
         <div className="logo">
           <a
-            href="https://www.creative-tim.com?ref=nudr-sidebar"
+            href="#"
             className="simple-text logo-mini"
             target="_blank"
           >
@@ -174,11 +174,11 @@ function Sidebar(props) {
             </div>
           </a>
           <a
-            href="https://www.creative-tim.com?ref=nudr-sidebar"
+            href="#"
             className="simple-text logo-normal"
             target="_blank"
           >
-            My Code Diary
+            Coding Diary
           </a>
           <div className="navbar-minimize">
             <Button
@@ -202,43 +202,11 @@ function Sidebar(props) {
             <div className="info">
               <a
                 href="#pablo"
-                data-toggle="collapse"
-                aria-expanded={openAvatar}
-                onClick={() => setOpenAvatar(!openAvatar)}
               >
                 <span>
                   {full_name}
-                  <b className="caret" />
                 </span>
-              </a>
-              <Collapse isOpen={openAvatar}>
-                <ul className="nav">
-                  <li>
-                    <a href="#pablo" onClick={(e) => e.preventDefault}>
-                      <span className="sidebar-mini-icon">MP</span>
-                      <span className="sidebar-normal">My Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#pablo" onClick={(e) => e.preventDefault}>
-                      <span className="sidebar-mini-icon">EP</span>
-                      <span className="sidebar-normal">Edit Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#pablo" onClick={(e) => e.preventDefault}>
-                      <span className="sidebar-mini-icon">S</span>
-                      <span className="sidebar-normal">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" onClick={signOut}>
-                      <i className="ui-1_simple-remove now-ui-icons" />
-                      <span className="sidebar-normal">Logout</span>
-                    </a>
-                  </li>
-                </ul>
-              </Collapse>
+              </a>              
             </div>
           </div>
           <Nav>{createLinks(props.routes)}</Nav>
