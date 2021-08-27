@@ -21,6 +21,9 @@
         "react/display-name": "off"
     },
     "settings": {
+        "react": {
+            "version": "detect"
+        },
         "import/resolver": {
          "node": {
            "paths": ["src"]

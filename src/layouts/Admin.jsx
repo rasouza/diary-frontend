@@ -33,7 +33,6 @@ let ps
 
 function Admin(props) {
   const location = useLocation()
-  const [, setSidebarMini] = React.useState(true)
   const notificationAlert = React.useRef()
   const mainPanel = React.useRef()
   React.useEffect(() => {
@@ -55,26 +54,6 @@ function Admin(props) {
     document.scrollingElement.scrollTop = 0
     mainPanel.current.scrollTop = 0
   }, [location])
-  const minimizeSidebar = () => {
-    let message = 'Sidebar mini '
-    if (document.body.classList.contains('sidebar-mini')) {
-      setSidebarMini(false)
-      message += 'deactivated...'
-    } else {
-      setSidebarMini(true)
-      message += 'activated...'
-    }
-    document.body.classList.toggle('sidebar-mini')
-    let options = {}
-    options = {
-      place: 'tr',
-      message,
-      type: 'info',
-      icon: 'now-ui-icons ui-1_bell-53',
-      autoDismiss: 7
-    }
-    notificationAlert.current.notificationAlert(options)
-  }
 
   const getRoutes = (routes) =>
     routes.map((prop, key) => {
@@ -115,7 +94,7 @@ function Admin(props) {
       <Sidebar
         {...props}
         routes={routes}
-        minimizeSidebar={minimizeSidebar}
+        minimizeSidebar={() => document.body.classList.toggle('sidebar-mini')}
         backgroundColor="yellow"
       />
       <div className="main-panel" ref={mainPanel}>

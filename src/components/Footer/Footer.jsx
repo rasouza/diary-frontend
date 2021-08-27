@@ -7,19 +7,6 @@ function Footer(props) {
   return (
     <footer className={'footer' + (props.default ? ' footer-default' : '')}>
       <Container fluid={props.fluid}>
-        <nav>
-          <ul>
-            <li>
-              <a
-                href="https://rasouza.com.br"
-                className="mr-4-px"
-                target="_blank"
-                rel="noreferrer">
-                R. A. Souza
-              </a>
-            </li>
-          </ul>
-        </nav>
         <div className="copyright">
           &copy; {1900 + new Date().getYear()}, Coded by{' '}
           <a href="https://rasouza.com.br" target="_blank" rel="noreferrer">

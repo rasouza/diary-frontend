@@ -40,8 +40,9 @@ import TimelinePage from 'views/Pages/TimelinePage'
 import RTL from 'views/Pages/RTL'
 import PricingPage from 'views/Pages/PricingPage'
 import LoginPage from 'views/Pages/LoginPage'
-import AuthPage from 'views/Pages/AuthPage'
 import LockScreenPage from 'views/Pages/LockScreenPage'
+import Auth from 'pages/Auth/Auth'
+import Story from 'pages/Story/Story'
 
 const routes = [
   {
@@ -49,8 +50,16 @@ const routes = [
     name: 'Auth Page',
     short: 'Auth',
     mini: 'AU',
-    component: AuthPage,
+    component: Auth,
     layout: '/auth'
+  },
+  {
+    path: '/story',
+    name: 'New story',
+    short: 'Story',
+    icon: 'now-ui-icons ui-1_simple-add',
+    component: Story,
+    layout: '/admin'
   },
   {
     path: '/dashboard',
