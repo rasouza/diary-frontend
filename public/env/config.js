@@ -1,5 +1,5 @@
-window.IDP_URL = "http://127.0.0.1:4433";
-window.JWKS_URI = "http://localhost:4444/.well-known/jwks.json";
-window.JWKS_KID = "public:b6adcd37-7162-4708-94bb-c01a947682ca";
-window.DISABLE_LOGIN = false;
-window.JWT_SECRET = "shhh"
+window.ENABLE_LOGIN = true
+window.SUPABASE_URL = 'https://cggwvqtadgufjgzxreuq.supabase.co'
+window.SUPABASE_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYyOTU4MTk0MSwiZXhwIjoxOTQ1MTU3OTQxfQ.dFX_AxjSbjy9o34c-al9msFtJxVtUPmX0ZzW3saxOxc'
+window.BASE_URL = 'http://localhost:3000'

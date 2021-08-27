@@ -1,11 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard PRO React - v1.1.0
+* Now UI Dashboard PRO React - v1.5.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 * Coded by Creative Tim
 
@@ -14,640 +14,495 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import React from 'react'
+import {
+  UncontrolledButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from 'reactstrap'
+
+import taskImage1 from 'assets/img/ryan.jpg'
+import taskImage2 from 'assets/img/eva.jpg'
+
+import taskRTLImage1 from 'assets/img/emilyz.jpg'
+import taskRTLImage2 from 'assets/img/james.jpg'
+import taskRTLImage3 from 'assets/img/mike.jpg'
+
+// ##############################
+// // // tasks list for Tasks card in Dashboard view
+// #############################
+
+const tasks = [
+  {
+    checked: true,
+    image: taskImage1,
+    text: 'Sign contract for "What are conference organizers afraid of?"'
+  },
+  {
+    checked: false,
+    image: taskImage1,
+    text: 'Lines From Great Russian Literature? Or E-mails From My Boss?'
+  },
+  {
+    checked: true,
+    image: taskImage2,
+    text: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit'
+  }
+]
+
+// ##############################
+// // // tasks list for Tasks card in RTL view
+// #############################
+
+const tasksRTL = [
+  {
+    checked: true,
+    image: taskRTLImage1,
+    text: 'توقيع عقد "ما يخشاه منظمو المؤتمر؟"	'
+  },
+  {
+    checked: false,
+    image: taskRTLImage2,
+    text: 'خطوط من الأدب الروسي العظيم؟ أو رسائل البريد الإلكتروني من بلدي بوس؟	'
+  },
+  {
+    checked: true,
+    image: taskRTLImage3,
+    text: 'مغمورة: بعد مرور عام ، تقييم ما فقد وما تم العثور عليه عندما اجتاحت الأمطار المدمرة مترو ديترويت	'
+  }
+]
+
+// ##############################
+// // // table head data and table body data for Tables view
+// #############################
+
+const thead = ['Name', 'Country', 'City', 'Salary']
+const tbody = [
+  {
+    className: 'table-success',
+    data: ['Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738']
+  },
+  {
+    className: '',
+    data: ['Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789']
+  },
+  {
+    className: 'table-info',
+    data: ['Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142']
+  },
+  {
+    className: '',
+    data: ['Philip Chaney', 'Korea, South', 'Overland Park', '$38,735']
+  },
+  {
+    className: 'table-danger',
+    data: ['Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542']
+  },
+  { className: '', data: ['Mason Porter', 'Chile', 'Gloucester', '$78,615'] },
+  {
+    className: 'table-warning',
+    data: ['Jon Porter', 'Portugal', 'Gloucester', '$98,615']
+  }
+]
+
+// ##############################
+// // // stories for Timeline view
+// #############################
+
+const stories = [
+  {
+    // First story
+    inverted: true,
+    badgeColor: 'danger',
+    badgeIcon: 'now-ui-icons business_briefcase-24',
+    title: 'Some Title',
+    titleColor: 'danger',
+    body: (
+      <p>
+        Wifey made the best Father&apos;s Day meal ever. So thankful so happy so
+        blessed. Thank you for making my family We just had fun with the
+        “future” theme !!! It was a fun night all together ... The always rude
+        Kanye Show at 2am Sold Out Famous viewing @ Figueroa and 12th in
+        downtown.
+      </p>
+    ),
+    footerTitle: '11 hours ago via Twitter'
+  },
+  {
+    // Second story
+    badgeColor: 'success',
+    badgeIcon: 'now-ui-icons design-2_ruler-pencil',
+    title: 'Another One',
+    titleColor: 'success',
+    body: (
+      <p>
+        Thank God for the support of my wife and real friends. I also wanted to
+        point out that it’s the first album to go number 1 off of streaming!!! I
+        love you Ellen and also my number one design rule of anything I do from
+        shoes to music to homes is that Kim has to like it....
+      </p>
+    )
+  },
+  {
+    // Third story
+    inverted: true,
+    badgeColor: 'info',
+    badgeIcon: 'now-ui-icons gestures_tap-01',
+    title: 'Another Title',
+    titleColor: 'info',
+    body: (
+      <div>
+        <p>
+          Called I Miss the Old Kanye That’s all it was Kanye And I love you
+          like Kanye loves Kanye Famous viewing @ Figueroa and 12th in downtown
+          LA 11:10PM
+        </p>
+        <p>
+          What if Kanye made a song about Kanye Royère doesn&apos;t make a Polar
+          bear bed but the Polar bear couch is my favorite piece of furniture we
+          own It wasn’t any Kanyes Set on his goals Kanye
+        </p>
+        <hr />
+      </div>
+    ),
+    footer: (
+      <UncontrolledButtonDropdown group={false}>
+        <DropdownToggle caret className="btn-round" color="info">
+          <i className="now-ui-icons design_bullet-list-67" />{' '}
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem header>Header</DropdownItem>
+          <DropdownItem disabled>Action</DropdownItem>
+          <DropdownItem>Another Action</DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem>Another Action</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledButtonDropdown>
+    )
+  },
+  {
+    // Fourth story
+    badgeColor: 'warning',
+    badgeIcon: 'now-ui-icons ui-1_send',
+    title: 'Another One',
+    titleColor: 'warning',
+    body: (
+      <p>
+        Tune into Big Boy&apos;s 92.3 I&apos;m about to play the first single
+        from Cruel Winter also to Kim’s hair and makeup Lorraine jewelry and the
+        whole style squad at Balmain and the Yeezy team. Thank you Anna for the
+        invite thank you to the whole Vogue team
+      </p>
+    )
+  }
+]
+
+// ##############################
+// // // stories for Widgets view
+// #############################
+
+const widgetStories = [
+  {
+    // First story
+    inverted: true,
+    badgeColor: 'danger',
+    badgeIcon: 'now-ui-icons business_briefcase-24',
+    title: 'Some Title',
+    titleColor: 'danger',
+    body: (
+      <p>
+        Wifey made the best Father&apos;s Day meal ever. So thankful so happy so
+        blessed. Thank you for making my family We just had fun with the
+        “future” theme !!! It was a fun night all together ... The always rude
+        Kanye Show at 2am Sold Out Famous viewing @ Figueroa and 12th in
+        downtown.
+      </p>
+    ),
+    footerTitle: '11 hours ago via Twitter'
+  },
+  {
+    // Second story
+    inverted: true,
+    badgeColor: 'success',
+    badgeIcon: 'now-ui-icons design-2_ruler-pencil',
+    title: 'Another One',
+    titleColor: 'success',
+    body: (
+      <p>
+        Thank God for the support of my wife and real friends. I also wanted to
+        point out that it’s the first album to go number 1 off of streaming!!! I
+        love you Ellen and also my number one design rule of anything I do from
+        shoes to music to homes is that Kim has to like it....
+      </p>
+    )
+  },
+  {
+    // Third story
+    inverted: true,
+    badgeColor: 'info',
+    badgeIcon: 'now-ui-icons gestures_tap-01',
+    title: 'Another Title',
+    titleColor: 'info',
+    body: (
+      <div>
+        <p>
+          Called I Miss the Old Kanye That’s all it was Kanye And I love you
+          like Kanye loves Kanye Famous viewing @ Figueroa and 12th in downtown
+          LA 11:10PM
+        </p>
+        <p>
+          What if Kanye made a song about Kanye Royère doesn&apos;t make a Polar
+          bear bed but the Polar bear couch is my favorite piece of furniture we
+          own It wasn’t any Kanyes Set on his goals Kanye
+        </p>
+        <hr />
+      </div>
+    ),
+    footer: (
+      <UncontrolledButtonDropdown group={false}>
+        <DropdownToggle caret className="btn-round" color="info">
+          <i className="now-ui-icons design_bullet-list-67" />
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem header>Header</DropdownItem>
+          <DropdownItem disabled>Action</DropdownItem>
+          <DropdownItem>Another Action</DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem>Another Action</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledButtonDropdown>
+    )
+  }
+]
+
+// ##############################
+// // // stories for RTL view
+// #############################
+
+const widgetStoriesRTL = [
+  {
+    // First story
+    inverted: true,
+    badgeColor: 'danger',
+    badgeIcon: 'now-ui-icons business_briefcase-24',
+    title: 'بعض العنوان',
+    titleColor: 'danger',
+    body: (
+      <p>
+        قدم أفضل وجبة يوم الأب على الإطلاق. ممتن جدا سعيد جدا حتى المباركة.
+        شكراً لك على صنع عائلتي لقد استمتعنا بالموضوع &quot;المستقبلي&quot; !!!
+        كانت ليلة ممتعة كل ذلك معا ... عرض كاني فظ دائما في الساعة 2 صباحا بيعت
+        من مشاهير مشاهدة
+      </p>
+    ),
+    footerTitle: 'قبل 11 ساعة عبر تويتر'
+  },
+  {
+    // Second story
+    inverted: true,
+    badgeColor: 'success',
+    badgeIcon: 'now-ui-icons design-2_ruler-pencil',
+    title: 'واحدة أخرى',
+    titleColor: 'success',
+    body: (
+      <p>
+        أيضًا الإشارة إلى أنه أول ألبوم ينتقل إلى رقم 1 من البث المباشر !!! أنا
+        أحبك إلين وأيضا قاعدة بلدي رقم واحد تصميم أي شيء أفعله من الأحذية إلى
+        الموسيقى إلى المنازل هو أن كيم يجب أن ترغب في ذلك
+      </p>
+    )
+  },
+  {
+    // Third story
+    inverted: true,
+    badgeColor: 'info',
+    badgeIcon: 'now-ui-icons gestures_tap-01',
+    title: 'عنوان آخر',
+    titleColor: 'info',
+    body: (
+      <div>
+        <p>
+          يسمى أنا أفتقد كاني القديم هذا كل ما كان كاني وأنا أحبك مثل كاني يحب
+          كاني مشاهدة مشاهير @ Figueroa و 12 في وسط المدينة LA 11:10 PM
+        </p>
+        <p>
+          ماذا لو قدمت كاني أغنية عن كاني رويير لا تصنع سرير الدب القطبي ولكن
+          الأريكة الدببة القطبية هي قطعة الأثاث المفضلة لدينا التي نملكها. لم
+          يكن أي مجموعة من Kanyes على أهدافه كاني
+        </p>
+        <hr />
+      </div>
+    ),
+    footer: (
+      <UncontrolledButtonDropdown group={false}>
+        <DropdownToggle caret className="btn-round" color="info">
+          <i className="now-ui-icons design_bullet-list-67" />
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem>عمل</DropdownItem>
+          <DropdownItem>إجراء آخر</DropdownItem>
+          <DropdownItem>شيء آخر هنا</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledButtonDropdown>
+    )
+  }
+]
+
+// ##############################
+// // // data for datatables.net in DataTables view
+// #############################
+
+const dataTable = {
+  headerRow: ['Name', 'Position', 'Office', 'Age', 'Actions'],
+  footerRow: ['Name', 'Position', 'Office', 'Age', 'Actions'],
+  dataRows: [
+    ['Tiger Nixon', 'System Architect', 'Edinburgh', '61'],
+    ['Garrett Winters', 'Accountant', 'Tokyo', '63'],
+    ['Ashton Cox', 'Junior Technical Author', 'San Francisco', '66'],
+    ['Cedric Kelly', 'Senior Javascript Developer', 'Edinburgh', '22'],
+    ['Airi Satou', 'Accountant', 'Tokyo', '33'],
+    ['Brielle Williamson', 'Integration Specialist', 'New York', '61'],
+    ['Herrod Chandler', 'Sales Assistant', 'San Francisco', '59'],
+    ['Rhona Davidson', 'Integration Specialist', 'Tokyo', '55'],
+    ['Colleen Hurst', 'Javascript Developer', 'San Francisco', '39'],
+    ['Sonya Frost', 'Software Engineer', 'Edinburgh', '23'],
+    ['Jena Gaines', 'Office Manager', 'London', '30'],
+    ['Quinn Flynn', 'Support Lead', 'Edinburgh', '22'],
+    ['Charde Marshall', 'Regional Director', 'San Francisco', '36'],
+    ['Haley Kennedy', 'Senior Marketing Designer', 'London', '43'],
+    ['Tatyana Fitzpatrick', 'Regional Director', 'London', '19'],
+    ['Michael Silva', 'Marketing Designer', 'London', '66'],
+    ['Paul Byrd', 'Chief Financial Officer (CFO)', 'New York', '64'],
+    ['Gloria Little', 'Systems Administrator', 'New York', '59'],
+    ['Bradley Greer', 'Software Engineer', 'London', '41'],
+    ['Dai Rios', 'Personnel Lead', 'Edinburgh', '35'],
+    ['Jenette Caldwell', 'Development Lead', 'New York', '30'],
+    ['Yuri Berry', 'Chief Marketing Officer (CMO)', 'New York', '40'],
+    ['Caesar Vance', 'Pre-Sales Support', 'New York', '21'],
+    ['Doris Wilder', 'Sales Assistant', 'Sidney', '23'],
+    ['Angelica Ramos', 'Chief Executive Officer (CEO)', 'London', '47'],
+    ['Gavin Joyce', 'Developer', 'Edinburgh', '42'],
+    ['Jennifer Chang', 'Regional Director', 'Singapore', '28'],
+    ['Brenden Wagner', 'Software Engineer', 'San Francisco', '28'],
+    ['Fiona Green', 'Chief Operating Officer (COO)', 'San Francisco', '48'],
+    ['Shou Itou', 'Regional Marketing', 'Tokyo', '20'],
+    ['Michelle House', 'Integration Specialist', 'Sidney', '37'],
+    ['Suki Burks', 'Developer', 'London', '53'],
+    ['Prescott Bartlett', 'Technical Author', 'London', '27'],
+    ['Gavin Cortez', 'Team Leader', 'San Francisco', '22'],
+    ['Martena Mccray', 'Post-Sales support', 'Edinburgh', '46'],
+    ['Unity Butler', 'Marketing Designer', 'San Francisco', '47'],
+    ['Howard Hatfield', 'Office Manager', 'San Francisco', '51'],
+    ['Hope Fuentes', 'Secretary', 'San Francisco', '41'],
+    ['Vivian Harrell', 'Financial Controller', 'San Francisco', '62'],
+    ['Timothy Mooney', 'Office Manager', 'London', '37'],
+    ['Jackson Bradshaw', 'Director', 'New York', '65'],
+    ['Olivia Liang', 'Support Engineer', 'Singapore', '64']
+  ]
+}
+
 // ##############################
 // // // data for populating the calendar in Calendar view
 // #############################
 
-var today = new Date();
-var y = today.getFullYear();
-var m = today.getMonth();
-var d = today.getDate();
+const today = new Date()
+const y = today.getFullYear()
+const m = today.getMonth()
+const d = today.getDate()
 
 const events = [
   {
-    id: 1,
-    title: "Call with Dave",
+    title: 'All Day Event',
+    allDay: true,
     start: new Date(y, m, 1),
-    allDay: true,
-    className: "bg-red",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    end: new Date(y, m, 1),
+    color: 'default'
   },
-
   {
-    id: 2,
-    title: "Lunch meeting",
+    title: 'Meeting',
     start: new Date(y, m, d - 1, 10, 30),
-    allDay: true,
-    className: "bg-orange",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    end: new Date(y, m, d - 1, 11, 30),
+    allDay: false,
+    color: 'green'
   },
-
   {
-    id: 3,
-    title: "All day conference",
+    title: 'Lunch',
     start: new Date(y, m, d + 7, 12, 0),
-    allDay: true,
-    className: "bg-green",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    end: new Date(y, m, d + 7, 14, 0),
+    allDay: false,
+    color: 'red'
   },
-
   {
-    id: 4,
-    title: "Meeting with Mary",
+    title: 'Nud-pro Launch',
     start: new Date(y, m, d - 2),
+    end: new Date(y, m, d - 2),
     allDay: true,
-    className: "bg-blue",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    color: 'azure'
   },
-
   {
-    id: 5,
-    title: "Winter Hackaton",
+    title: 'Birthday Party',
     start: new Date(y, m, d + 1, 19, 0),
-    allDay: true,
-    className: "bg-red",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    end: new Date(y, m, d + 1, 22, 30),
+    allDay: false,
+    color: 'azure'
   },
-
   {
-    id: 6,
-    title: "Digital event",
+    title: 'Click for Creative Tim',
     start: new Date(y, m, 21),
-    allDay: true,
-    className: "bg-warning",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    end: new Date(y, m, 22),
+    color: 'orange'
   },
-
   {
-    id: 7,
-    title: "Marketing event",
+    title: 'Click for Google',
     start: new Date(y, m, 21),
-    allDay: true,
-    className: "bg-purple",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-  },
-
-  {
-    id: 8,
-    title: "Dinner with Family",
-    start: new Date(y, m, 19),
-    allDay: true,
-    className: "bg-red",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-  },
-
-  {
-    id: 9,
-    title: "Black Friday",
-    start: new Date(y, m, 23),
-    allDay: true,
-    className: "bg-blue",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-  },
-
-  {
-    id: 10,
-    title: "Cyber Week",
-    start: new Date(y, m, 2),
-    allDay: true,
-    className: "bg-yellow",
-    description:
-      "Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
+    end: new Date(y, m, 22),
+    color: 'orange'
   }
-];
+]
 
 // ##############################
-// // // data for populating the calendar in Widgest view
+// // // for vector map row in Dashboard view
 // #############################
 
-const widgetEvents = [
-  {
-    title: "Lunch meeting",
-    start: "2018-11-21",
-    end: "2018-11-22",
-    className: "bg-orange"
-  },
-  {
-    title: "All day conference",
-    start: new Date(y, m - 1, 28),
-    allDay: true,
-    className: "bg-green"
-  },
-  {
-    title: "Meeting with Mary",
-    start: new Date(y, m, 2),
-    allDay: true,
-    className: "bg-blue"
-  },
-  {
-    title: "Winter Hackaton",
-    start: new Date(y, m, 4),
-    allDay: true,
-    className: "bg-red"
-  },
-  {
-    title: "Digital event",
-    start: new Date(y, m, 8),
-    end: new Date(y, m, 10),
-    allDay: true,
-    className: "bg-warning"
-  },
-  {
-    title: "Marketing event",
-    start: new Date(y, m, 11),
-    allDay: true,
-    className: "bg-purple"
-  },
-  {
-    title: "Dinner with Family",
-    start: new Date(y, m, 20),
-    allDay: true,
-    className: "bg-red"
-  },
-  {
-    title: "Black Friday",
-    start: new Date(y, m, 24),
-    allDay: true,
-    className: "bg-blue"
-  },
-  {
-    title: "Cyber Week",
-    start: new Date(y, m, 3),
-    allDay: true,
-    className: "bg-yellow"
-  }
-];
+const usFlag = require('assets/img/flags/US.png').default
+const deFlag = require('assets/img/flags/DE.png').default
+const auFlag = require('assets/img/flags/AU.png').default
+const gbFlag = require('assets/img/flags/GB.png').default
+const roFlag = require('assets/img/flags/RO.png').default
+const brFlag = require('assets/img/flags/BR.png').default
 
-// ##############################
-// // // data for populating the table in ReactTables view
-// #############################
+const tableData = [
+  { flag: usFlag, country: 'USA', count: '2.920', percentage: '53.23%' },
+  { flag: deFlag, country: 'Germany', count: '1.300', percentage: '20.43%' },
+  { flag: auFlag, country: 'Australia', count: '760', percentage: '10.35%' },
+  {
+    flag: gbFlag,
+    country: 'United Kingdom',
+    count: '690',
+    percentage: '7.87%'
+  },
+  { flag: roFlag, country: 'Romania', count: '600', percentage: '5.94%' },
+  { flag: brFlag, country: 'Brasil', count: '550', percentage: '4.34%' }
+]
 
-const dataTable = [
-  {
-    name: "Tiger Nixon",
-    position: "System Architect",
-    office: "Edinburgh",
-    age: "61",
-    start_date: "2011/04/25",
-    salary: "$320,800"
-  },
-  {
-    name: "Garrett Winters",
-    position: "Accountant",
-    office: "Tokyo",
-    age: "63",
-    start_date: "2011/07/25",
-    salary: "$170,750"
-  },
-  {
-    name: "Ashton Cox",
-    position: "Junior Technical Author",
-    office: "San Francisco",
-    age: "66",
-    start_date: "2009/01/12",
-    salary: "$86,000"
-  },
-  {
-    name: "Cedric Kelly",
-    position: "Senior Javascript Developer",
-    office: "Edinburgh",
-    age: "22",
-    start_date: "2012/03/29",
-    salary: "$433,060"
-  },
-  {
-    name: "Airi Satou",
-    position: "Accountant",
-    office: "Tokyo",
-    age: "33",
-    start_date: "2008/11/28",
-    salary: "$162,700"
-  },
-  {
-    name: "Brielle Williamson",
-    position: "Integration Specialist",
-    office: "New York",
-    age: "61",
-    start_date: "2012/12/02",
-    salary: "$372,000"
-  },
-  {
-    name: "Herrod Chandler",
-    position: "Sales Assistant",
-    office: "San Francisco",
-    age: "59",
-    start_date: "2012/08/06",
-    salary: "$137,500"
-  },
-  {
-    name: "Rhona Davidson",
-    position: "Integration Specialist",
-    office: "Tokyo",
-    age: "55",
-    start_date: "2010/10/14",
-    salary: "$327,900"
-  },
-  {
-    name: "Colleen Hurst",
-    position: "Javascript Developer",
-    office: "San Francisco",
-    age: "39",
-    start_date: "2009/09/15",
-    salary: "$205,500"
-  },
-  {
-    name: "Sonya Frost",
-    position: "Software Engineer",
-    office: "Edinburgh",
-    age: "23",
-    start_date: "2008/12/13",
-    salary: "$103,600"
-  },
-  {
-    name: "Jena Gaines",
-    position: "Office Manager",
-    office: "London",
-    age: "30",
-    start_date: "2008/12/19",
-    salary: "$90,560"
-  },
-  {
-    name: "Quinn Flynn",
-    position: "Support Lead",
-    office: "Edinburgh",
-    age: "22",
-    start_date: "2013/03/03",
-    salary: "$342,000"
-  },
-  {
-    name: "Charde Marshall",
-    position: "Regional Director",
-    office: "San Francisco",
-    age: "36",
-    start_date: "2008/10/16",
-    salary: "$470,600"
-  },
-  {
-    name: "Haley Kennedy",
-    position: "Senior Marketing Designer",
-    office: "London",
-    age: "43",
-    start_date: "2012/12/18",
-    salary: "$313,500"
-  },
-  {
-    name: "Tatyana Fitzpatrick",
-    position: "Regional Director",
-    office: "London",
-    age: "19",
-    start_date: "2010/03/17",
-    salary: "$385,750"
-  },
-  {
-    name: "Michael Silva",
-    position: "Marketing Designer",
-    office: "London",
-    age: "66",
-    start_date: "2012/11/27",
-    salary: "$198,500"
-  },
-  {
-    name: "Paul Byrd",
-    position: "Chief Financial Officer (CFO)",
-    office: "New York",
-    age: "64",
-    start_date: "2010/06/09",
-    salary: "$725,000"
-  },
-  {
-    name: "Gloria Little",
-    position: "Systems Administrator",
-    office: "New York",
-    age: "59",
-    start_date: "2009/04/10",
-    salary: "$237,500"
-  },
-  {
-    name: "Bradley Greer",
-    position: "Software Engineer",
-    office: "London",
-    age: "41",
-    start_date: "2012/10/13",
-    salary: "$132,000"
-  },
-  {
-    name: "Dai Rios",
-    position: "Personnel Lead",
-    office: "Edinburgh",
-    age: "35",
-    start_date: "2012/09/26",
-    salary: "$217,500"
-  },
-  {
-    name: "Jenette Caldwell",
-    position: "Development Lead",
-    office: "New York",
-    age: "30",
-    start_date: "2011/09/03",
-    salary: "$345,000"
-  },
-  {
-    name: "Yuri Berry",
-    position: "Chief Marketing Officer (CMO)",
-    office: "New York",
-    age: "40",
-    start_date: "2009/06/25",
-    salary: "$675,000"
-  },
-  {
-    name: "Caesar Vance",
-    position: "Pre-Sales Support",
-    office: "New York",
-    age: "21",
-    start_date: "2011/12/12",
-    salary: "$106,450"
-  },
-  {
-    name: "Doris Wilder",
-    position: "Sales Assistant",
-    office: "Sidney",
-    age: "23",
-    start_date: "2010/09/20",
-    salary: "$85,600"
-  },
-  {
-    name: "Angelica Ramos",
-    position: "Chief Executive Officer (CEO)",
-    office: "London",
-    age: "47",
-    start_date: "2009/10/09",
-    salary: "$1,200,000"
-  },
-  {
-    name: "Gavin Joyce",
-    position: "Developer",
-    office: "Edinburgh",
-    age: "42",
-    start_date: "2010/12/22",
-    salary: "$92,575"
-  },
-  {
-    name: "Jennifer Chang",
-    position: "Regional Director",
-    office: "Singapore",
-    age: "28",
-    start_date: "2010/11/14",
-    salary: "$357,650"
-  },
-  {
-    name: "Brenden Wagner",
-    position: "Software Engineer",
-    office: "San Francisco",
-    age: "28",
-    start_date: "2011/06/07",
-    salary: "$206,850"
-  },
-  {
-    name: "Fiona Green",
-    position: "Chief Operating Officer (COO)",
-    office: "San Francisco",
-    age: "48",
-    start_date: "2010/03/11",
-    salary: "$850,000"
-  },
-  {
-    name: "Shou Itou",
-    position: "Regional Marketing",
-    office: "Tokyo",
-    age: "20",
-    start_date: "2011/08/14",
-    salary: "$163,000"
-  },
-  {
-    name: "Michelle House",
-    position: "Integration Specialist",
-    office: "Sidney",
-    age: "37",
-    start_date: "2011/06/02",
-    salary: "$95,400"
-  },
-  {
-    name: "Suki Burks",
-    position: "Developer",
-    office: "London",
-    age: "53",
-    start_date: "2009/10/22",
-    salary: "$114,500"
-  },
-  {
-    name: "Prescott Bartlett",
-    position: "Technical Author",
-    office: "London",
-    age: "27",
-    start_date: "2011/05/07",
-    salary: "$145,000"
-  },
-  {
-    name: "Gavin Cortez",
-    position: "Team Leader",
-    office: "San Francisco",
-    age: "22",
-    start_date: "2008/10/26",
-    salary: "$235,500"
-  },
-  {
-    name: "Martena Mccray",
-    position: "Post-Sales support",
-    office: "Edinburgh",
-    age: "46",
-    start_date: "2011/03/09",
-    salary: "$324,050"
-  },
-  {
-    name: "Unity Butler",
-    position: "Marketing Designer",
-    office: "San Francisco",
-    age: "47",
-    start_date: "2009/12/09",
-    salary: "$85,675"
-  },
-  {
-    name: "Howard Hatfield",
-    position: "Office Manager",
-    office: "San Francisco",
-    age: "51",
-    start_date: "2008/12/16",
-    salary: "$164,500"
-  },
-  {
-    name: "Hope Fuentes",
-    position: "Secretary",
-    office: "San Francisco",
-    age: "41",
-    start_date: "2010/02/12",
-    salary: "$109,850"
-  },
-  {
-    name: "Vivian Harrell",
-    position: "Financial Controller",
-    office: "San Francisco",
-    age: "62",
-    start_date: "2009/02/14",
-    salary: "$452,500"
-  },
-  {
-    name: "Timothy Mooney",
-    position: "Office Manager",
-    office: "London",
-    age: "37",
-    start_date: "2008/12/11",
-    salary: "$136,200"
-  },
-  {
-    name: "Jackson Bradshaw",
-    position: "Director",
-    office: "New York",
-    age: "65",
-    start_date: "2008/09/26",
-    salary: "$645,750"
-  },
-  {
-    name: "Olivia Liang",
-    position: "Support Engineer",
-    office: "Singapore",
-    age: "64",
-    start_date: "2011/02/03",
-    salary: "$234,500"
-  },
-  {
-    name: "Bruno Nash",
-    position: "Software Engineer",
-    office: "London",
-    age: "38",
-    start_date: "2011/05/03",
-    salary: "$163,500"
-  },
-  {
-    name: "Sakura Yamamoto",
-    position: "Support Engineer",
-    office: "Tokyo",
-    age: "37",
-    start_date: "2009/08/19",
-    salary: "$139,575"
-  },
-  {
-    name: "Thor Walton",
-    position: "Developer",
-    office: "New York",
-    age: "61",
-    start_date: "2013/08/11",
-    salary: "$98,540"
-  },
-  {
-    name: "Finn Camacho",
-    position: "Support Engineer",
-    office: "San Francisco",
-    age: "47",
-    start_date: "2009/07/07",
-    salary: "$87,500"
-  },
-  {
-    name: "Serge Baldwin",
-    position: "Data Coordinator",
-    office: "Singapore",
-    age: "64",
-    start_date: "2012/04/09",
-    salary: "$138,575"
-  },
-  {
-    name: "Zenaida Frank",
-    position: "Software Engineer",
-    office: "New York",
-    age: "63",
-    start_date: "2010/01/04",
-    salary: "$125,250"
-  },
-  {
-    name: "Zorita Serrano",
-    position: "Software Engineer",
-    office: "San Francisco",
-    age: "56",
-    start_date: "2012/06/01",
-    salary: "$115,000"
-  },
-  {
-    name: "Jennifer Acosta",
-    position: "Junior Javascript Developer",
-    office: "Edinburgh",
-    age: "43",
-    start_date: "2013/02/01",
-    salary: "$75,650"
-  },
-  {
-    name: "Cara Stevens",
-    position: "Sales Assistant",
-    office: "New York",
-    age: "46",
-    start_date: "2011/12/06",
-    salary: "$145,600"
-  },
-  {
-    name: "Hermione Butler",
-    position: "Regional Director",
-    office: "London",
-    age: "47",
-    start_date: "2011/03/21",
-    salary: "$356,250"
-  },
-  {
-    name: "Lael Greer",
-    position: "Systems Administrator",
-    office: "London",
-    age: "21",
-    start_date: "2009/02/27",
-    salary: "$103,500"
-  },
-  {
-    name: "Jonas Alexander",
-    position: "Developer",
-    office: "San Francisco",
-    age: "30",
-    start_date: "2010/07/14",
-    salary: "$86,500"
-  },
-  {
-    name: "Shad Decker",
-    position: "Regional Director",
-    office: "Edinburgh",
-    age: "51",
-    start_date: "2008/11/13",
-    salary: "$183,000"
-  },
-  {
-    name: "Michael Bruce",
-    position: "Javascript Developer",
-    office: "Singapore",
-    age: "29",
-    start_date: "2011/06/27",
-    salary: "$183,000"
-  },
-  {
-    name: "Donna Snider",
-    position: "Customer Support",
-    office: "New York",
-    age: "27",
-    start_date: "2011/01/25",
-    salary: "$112,000"
-  }
-];
-
-export { events, widgetEvents, dataTable };
+// tasks list for Tasks card in Dashboard view
+// data for <thead> of table in Tables view
+// data for <tbody> of table in Tables view
+// data for the timeline in Timeline view
+// data for the timeline in Widgets view
+// data for datatables.net in DataTables view
+// data for populating the calendar in Calendar view
+// data for populating the table from Dashboard view
+export {
+  tasks,
+  tasksRTL,
+  thead,
+  tbody,
+  stories,
+  widgetStories,
+  widgetStoriesRTL,
+  dataTable,
+  events,
+  tableData
+}
