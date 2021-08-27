@@ -36,6 +36,7 @@
     "reactstrap": "8.9.0"
   },
   "scripts": {
+    "lint": "eslint src/",
     "start": "react-scripts start",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test",
