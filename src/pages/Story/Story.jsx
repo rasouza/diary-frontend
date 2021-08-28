@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import PanelHeader from 'components/PanelHeader/PanelHeader'
+import React, { useState, useRef } from 'react'
 import {
   Row,
   Col,
@@ -15,18 +14,47 @@ import {
   Container
 } from 'reactstrap'
 import Datetime from 'react-datetime'
-import 'moment/locale/en-gb'
 import ReactQuill from 'react-quill'
+import Loader from 'react-loader-spinner'
+import NotificationAlert from 'react-notification-alert'
+
 import 'react-quill/dist/quill.snow.css'
+import 'moment/locale/en-gb'
+
+import PanelHeader from 'components/PanelHeader/PanelHeader'
+import { useMutation } from 'react-query'
+import { createStory } from './api'
+import { sendSuccess, sendError } from 'lib/notify'
 
 export default function Story() {
-  const [editor, setEditor] = useState('')
+  const notify = useRef(null)
+
+  const [thoughts, setThoughts] = useState('')
   const [date, setDate] = useState(new Date())
   const [link, setLink] = useState('')
   const [summary, setSummary] = useState('')
 
+  const mutation = useMutation((story) => createStory(story), {
+    onSuccess: () =>
+      notify.current.notificationAlert(sendSuccess('Story saved successfully')),
+    onError: (error) =>
+      notify.current.notificationAlert(sendError(error.response.data.message))
+  })
+  const mutateStory = () => {
+    mutation.mutate({ date, link, summary, thoughts })
+  }
+
+  const handleLink = (event) => {
+    setLink(event.target.value)
+  }
+
+  const handleSummary = (event) => {
+    setSummary(event.target.value)
+  }
+
   return (
     <>
+      <NotificationAlert ref={notify} />
       <PanelHeader size="sm" />
       <div className="content">
         <Row className="justify-content-center">
@@ -38,8 +66,20 @@ export default function Story() {
                     <CardTitle tag="h4">What have you achieved?</CardTitle>
                   </Col>
                   <Col>
-                    <Button color="success" className="float-right">
-                      <strong>Create</strong>
+                    <Button
+                      onClick={mutateStory}
+                      color="success"
+                      className="float-right">
+                      {mutation.isLoading ? (
+                        <Loader
+                          type="TailSpin"
+                          color="#FFF"
+                          height={15}
+                          width={41}
+                        />
+                      ) : (
+                        <strong>Create</strong>
+                      )}
                     </Button>
                   </Col>
                 </Row>
@@ -63,7 +103,7 @@ export default function Story() {
                         <Input
                           type="url"
                           id="link"
-                          onChange={setLink}
+                          onChange={handleLink}
                           value={link}
                         />
                       </FormGroup>
@@ -73,7 +113,7 @@ export default function Story() {
                       <Input
                         id="summary"
                         placeholder="I started a new component on my frontend..."
-                        onChange={setSummary}
+                        onChange={handleSummary}
                         value={summary}
                       />
                     </FormGroup>
@@ -82,8 +122,8 @@ export default function Story() {
                       <ReactQuill
                         id="thoughts"
                         theme="snow"
-                        value={editor}
-                        onChange={setEditor}
+                        value={thoughts}
+                        onChange={setThoughts}
                       />
                     </FormGroup>
                   </Form>

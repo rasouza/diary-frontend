@@ -125,7 +125,9 @@ function AdminNavbar(props) {
                 </p>
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem tag={Link}>Settings</DropdownItem>
+                <DropdownItem tag={Link} to="/admin/user/profile">
+                  Settings
+                </DropdownItem>
                 <DropdownItem tag={Link} to="/auth" onClick={signOut}>
                   Logout
                 </DropdownItem>

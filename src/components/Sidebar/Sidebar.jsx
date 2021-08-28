@@ -200,13 +200,13 @@ function Sidebar(props) {
               <img src={avatar_url} alt="Avatar" />
             </div>
             <div className="info">
-              <a
-                href="#pablo"
+              <NavLink
+                to="/admin/user/profile"
               >
                 <span>
                   {full_name}
                 </span>
-              </a>              
+              </NavLink>              
             </div>
           </div>
           <Nav>{createLinks(props.routes)}</Nav>
