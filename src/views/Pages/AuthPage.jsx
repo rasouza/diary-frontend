@@ -26,7 +26,7 @@ import {
   Col,
   Button
 } from 'reactstrap'
-import { githubSignIn, twitterSignIn, getUser } from 'services/supabase'
+import { githubSignIn, twitterSignIn, getUser } from 'api/supabase'
 // core components
 import bgImage from 'assets/img/bg16.jpg'
 import { Redirect } from 'react-router-dom'

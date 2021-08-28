@@ -32,7 +32,7 @@ import {
   DropdownItem,
   Container
 } from 'reactstrap'
-import { signOut } from 'services/supabase'
+import { signOut } from 'api/supabase'
 
 function AdminNavbar(props) {
   const location = useLocation()

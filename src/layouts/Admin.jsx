@@ -101,7 +101,7 @@ function Admin(props) {
         <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="/admin" to="/admin/dashboard" />
+          <Redirect from="/admin" to="/admin/story" />
         </Switch>
         {
           // we don't want the Footer to be rendered on full screen maps page

@@ -28,7 +28,7 @@ import { Nav, Collapse, Button } from "reactstrap";
 // core components
 import logo from "assets/img/logo.png";
 
-import { getUser, signOut } from 'services/supabase'
+import { getUser } from 'api/supabase'
 
 
 var ps;
