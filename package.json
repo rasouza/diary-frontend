@@ -52,6 +52,7 @@
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
   },
   "devDependencies": {
+    "@semantic-release/git": "^9.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -67,6 +68,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.3.2",
     "prettier-config-standard": "^4.0.0",
+    "semantic-release": "^17.4.7",
     "typescript": "4.2.4"
   },
   "eslintConfig": {
