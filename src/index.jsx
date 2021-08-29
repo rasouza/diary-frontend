@@ -22,17 +22,25 @@ import 'bootstrap/dist/css/bootstrap.css'
 // eslint-disable-next-line import/no-unresolved
 import 'assets/scss/now-ui-dashboard.scss?v=1.5.0'
 import 'assets/css/demo.css'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import AdminLayout from 'layouts/Admin'
 import AuthLayout from 'layouts/Auth'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient()
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Redirect to="/admin/dashboard" />
-    </Switch>
-  </BrowserRouter>,
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+        <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+        <Redirect to="/admin/story" />
+      </Switch>
+    </BrowserRouter>
+    <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+  </QueryClientProvider>,
   document.getElementById('root')
 )

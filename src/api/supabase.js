@@ -22,7 +22,7 @@ export function getUser() {
 export function githubSignIn() {
   return db.auth.signIn(
     { provider: 'github' },
-    { redirectTo: `${window.BASE_URL}/auth` }
+    { redirectTo: `${window.location.origin}/auth` }
   )
 }
 
@@ -32,4 +32,8 @@ export function twitterSignIn() {
 
 export function signOut() {
   return db.auth.signOut()
+}
+
+export function getToken() {
+  return db.auth.session().access_token
 }
