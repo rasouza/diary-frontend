@@ -22,7 +22,7 @@ export function getUser() {
 export function githubSignIn() {
   return db.auth.signIn(
     { provider: 'github' },
-    { redirectTo: `${window.BASE_URL}/auth` }
+    { redirectTo: `${window.location.origin}/auth` }
   )
 }
 
