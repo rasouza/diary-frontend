@@ -1,17 +1,16 @@
 import React from 'react'
 
-export function sendSuccess(message) {
-  return {
+export function sendSuccess(message, notifyRef) {
+  notifyRef.current.notificationAlert({
     place: 'tr',
     autoDismiss: 5,
     type: 'success',
     icon: 'fa fa-check',
     message
-  }
+  })
 }
 
-export function sendError(errors) {
-  console.log(`errors`, errors)
+export function sendError(errors, notifyRef) {
   const message = (
     <ul>
       {errors.map((error, key) => {
@@ -20,12 +19,11 @@ export function sendError(errors) {
       })}
     </ul>
   )
-  console.log(`message`, message)
-  return {
+  notifyRef.current.notificationAlert({
     place: 'tr',
     autoDismiss: 5,
     type: 'danger',
     icon: 'fas fa-ban',
     message
-  }
+  })
 }

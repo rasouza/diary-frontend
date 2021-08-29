@@ -4,11 +4,12 @@
   "private": true,
   "homepage": "https://diary.rasouza.dev",
   "dependencies": {
+    "@hookform/resolvers": "^2.8.0",
     "@supabase/supabase-js": "^1.22.2",
     "axios": "^0.21.1",
     "bootstrap": "4.6.0",
     "chart.js": "3.2.1",
-    "classnames": "2.3.1",
+    "classnames": "^2.3.1",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.9",
     "match-sorter": "6.3.0",
@@ -25,6 +26,7 @@
     "react-chartjs-2": "3.0.3",
     "react-datetime": "3.0.4",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.14.0",
     "react-jvectormap": "0.0.16",
     "react-loader-spinner": "^4.0.0",
     "react-notification-alert": "0.0.13",
@@ -35,7 +37,8 @@
     "react-select": "4.3.1",
     "react-table": "7.7.0",
     "react-tagsinput": "3.19.0",
-    "reactstrap": "8.9.0"
+    "reactstrap": "8.9.0",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "lint": "eslint src/",
