@@ -15,26 +15,25 @@
 
 */
 import { UserProfile } from 'pages/UserProfile'
-import { Timeline } from 'pages/Timeline'
 import { Tweets } from 'pages/Tweets'
-import { Auth } from 'pages/Auth'
-import { Story } from 'pages/Story'
+import { Login } from 'pages/Login'
+import { CreateStory, Timeline } from 'pages/Story'
 
 const routes = [
   {
     path: '/',
-    name: 'Auth Page',
-    short: 'Auth',
+    name: 'Login Page',
+    short: 'Login',
     mini: 'AU',
-    component: Auth,
+    component: Login,
     layout: '/auth'
   },
   {
     path: '/story',
-    name: 'New story',
+    name: 'New Story',
     short: 'Story',
     icon: 'now-ui-icons ui-1_simple-add',
-    component: Story,
+    component: CreateStory,
     layout: '/admin'
   },
   {
