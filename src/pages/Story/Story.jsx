@@ -30,7 +30,7 @@ import { useMutation } from 'react-query'
 import { createStory } from './api'
 import { sendSuccess, sendError } from 'lib/notify'
 
-export default function Story() {
+export function Story() {
   const notify = useRef(null)
 
   const schema = yup.object().shape({
