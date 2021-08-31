@@ -17,7 +17,7 @@
 import { UserProfile } from 'pages/UserProfile'
 import { Tweets } from 'pages/Tweets'
 import { Login } from 'pages/Login'
-import { CreateStory, Timeline } from 'pages/Story'
+import { NewStory, Timeline } from 'pages/Story'
 
 const routes = [
   {
@@ -33,7 +33,7 @@ const routes = [
     name: 'New Story',
     short: 'Story',
     icon: 'now-ui-icons ui-1_simple-add',
-    component: CreateStory,
+    component: NewStory,
     layout: '/admin'
   },
   {
@@ -46,7 +46,7 @@ const routes = [
   },
   {
     path: '/timeline',
-    name: 'Timeline Page',
+    name: 'My Timeline',
     icon: 'fas fa-stream',
     component: Timeline,
     layout: '/admin'

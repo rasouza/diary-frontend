@@ -1,2 +1,2 @@
-export * from './CreateStory'
+export * from './NewStory'
 export * from './Timeline'

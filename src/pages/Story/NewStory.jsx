@@ -21,16 +21,16 @@ import classNames from 'classnames'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { useMutation } from 'react-query'
 
 import 'react-quill/dist/quill.snow.css'
-import 'moment/locale/en-gb'
+import 'moment/min/locales'
 
 import PanelHeader from 'components/PanelHeader/PanelHeader'
-import { useMutation } from 'react-query'
 import { createStory } from './api'
 import { sendSuccess, sendError } from 'lib/notify'
 
-export function CreateStory() {
+export function NewStory() {
   const notify = useRef(null)
 
   const schema = yup.object().shape({
@@ -70,14 +70,16 @@ export function CreateStory() {
               <Form onSubmit={handleSubmit(onSubmit, onError)}>
                 <CardHeader>
                   <Row>
-                    <Col>
-                      <CardTitle tag="h4">What have you achieved?</CardTitle>
+                    <Col xs="auto">
+                      <CardTitle tag="h4">
+                        What have you achieved today?
+                      </CardTitle>
                     </Col>
                     <Col>
                       <Button
                         type="submit"
                         color="success"
-                        className="float-right">
+                        className="float-right col-sm-12 col-md-auto">
                         {mutation.isLoading ? (
                           <Loader
                             type="TailSpin"
@@ -107,6 +109,7 @@ export function CreateStory() {
                                 {...field}
                                 timeFormat={false}
                                 dateFormat={true}
+                                locale={window.navigator.language}
                               />
                             )}
                           />
@@ -119,7 +122,10 @@ export function CreateStory() {
                             'has-success': touchedFields.link && !errors.link
                           })}>
                           <Label for="link">Link (optional)</Label>
-                          <Input {...register('link')} />
+                          <Input
+                            placeholder="Anything you would like to share"
+                            {...register('link')}
+                          />
                         </FormGroup>
                       </Col>
                     </Row>
