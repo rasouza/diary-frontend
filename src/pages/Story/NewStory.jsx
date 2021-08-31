@@ -21,14 +21,13 @@ import classNames from 'classnames'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { useMutation } from 'react-query'
 
 import 'react-quill/dist/quill.snow.css'
 import 'moment/min/locales'
 
 import PanelHeader from 'components/PanelHeader/PanelHeader'
-import { createStory } from './api'
-import { sendSuccess, sendError } from 'lib/notify'
+import { useMutateStory } from './hooks'
+import { sendError } from 'lib/notify'
 
 export function NewStory() {
   const notify = useRef(null)
@@ -45,10 +44,7 @@ export function NewStory() {
     formState: { errors, touchedFields }
   } = useForm({ resolver: yupResolver(schema), mode: 'onBlur' })
 
-  const mutation = useMutation((story) => createStory(story), {
-    onSuccess: () => sendSuccess('Story saved successfully', notify),
-    onError: (error) => sendError(error.response.data.message, notify)
-  })
+  const mutation = useMutateStory(notify)
 
   const onSubmit = (data) => {
     mutation.mutate(data)

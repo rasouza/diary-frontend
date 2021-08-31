@@ -22,15 +22,15 @@ import LoadingOverlay from 'react-loading-overlay'
 
 // core components
 import PanelHeader from 'components/PanelHeader/PanelHeader'
-import { useStoriesByChunk } from './hooks/useStories'
+import { useStoriesByChunk } from './hooks'
 import { TimelineCard } from './components/TimelineCard'
 
 export function Timeline() {
-  const { data, isLoading } = useStoriesByChunk(2)
+  const { data, isFetching } = useStoriesByChunk(2)
 
   return (
     <>
-      <LoadingOverlay active={isLoading} spinner>
+      <LoadingOverlay active={isFetching} spinner>
         <PanelHeader size="sm" />
         <div className="content">
           <div className="header text-center">
@@ -41,7 +41,7 @@ export function Timeline() {
               <Card className="card-timeline card-plain">
                 <CardBody>
                   <ul className="timeline">
-                    {!isLoading &&
+                    {!isFetching &&
                       data.map((chunk, key) => (
                         <React.Fragment key={key}>
                           <TimelineCard story={chunk[0]} inverted />
