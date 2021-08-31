@@ -18,43 +18,42 @@ import React from 'react'
 
 // reactstrap components
 import { Card, CardBody, Row, Col } from 'reactstrap'
-import LoadingOverlay from 'react-loading-overlay'
+import { splitEvery } from 'ramda'
 
 // core components
 import PanelHeader from 'components/PanelHeader/PanelHeader'
-import { useStoriesByChunk } from './hooks'
+import { useStories } from './hooks'
 import { TimelineCard } from './components/TimelineCard'
 
 export function Timeline() {
-  const { data, isFetching } = useStoriesByChunk(2)
+  const { data = [], isFetching } = useStories()
+  const chunks = splitEvery(2, data)
 
   return (
     <>
-      <LoadingOverlay active={isFetching} spinner>
-        <PanelHeader size="sm" />
-        <div className="content">
-          <div className="header text-center">
-            <h3 className="title">Timeline</h3>
-          </div>
-          <Row>
-            <Col md="12">
-              <Card className="card-timeline card-plain">
-                <CardBody>
-                  <ul className="timeline">
-                    {!isFetching &&
-                      data.map((chunk, key) => (
-                        <React.Fragment key={key}>
-                          <TimelineCard story={chunk[0]} inverted />
-                          {chunk[1] && <TimelineCard story={chunk[1]} />}
-                        </React.Fragment>
-                      ))}
-                  </ul>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
+      <PanelHeader size="sm" />
+      <div className="content">
+        <div className="header text-center">
+          <h3 className="title">Timeline</h3>
         </div>
-      </LoadingOverlay>
+        <Row>
+          <Col md="12">
+            <Card className="card-timeline card-plain">
+              <CardBody>
+                <ul className="timeline">
+                  {!isFetching &&
+                    chunks.map((chunk, key) => (
+                      <React.Fragment key={key}>
+                        {chunk[0] && <TimelineCard story={chunk[0]} inverted />}
+                        {chunk[1] && <TimelineCard story={chunk[1]} />}
+                      </React.Fragment>
+                    ))}
+                </ul>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </div>
     </>
   )
 }
