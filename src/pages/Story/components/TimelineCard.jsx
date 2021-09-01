@@ -10,11 +10,13 @@ import {
 import moment from 'moment'
 import parse from 'html-react-parser'
 import classNames from 'classnames'
+import { useDeleteStory } from '../hooks'
 
 moment.locale(window.navigator.language)
 
 export function TimelineCard({ story, inverted = false }) {
   const { id, date, link, summary, thoughts } = story
+  const deleteStory = useDeleteStory()
   return (
     <li key={id} className={classNames({ 'timeline-inverted': inverted })}>
       <div className="timeline-badge">
@@ -46,7 +48,7 @@ export function TimelineCard({ story, inverted = false }) {
               <i className="now-ui-icons ui-1_simple-remove" />
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+              <DropdownItem onClick={() => deleteStory.mutate(id)}>
                 <span className="text-danger">Delete</span>
               </DropdownItem>
             </DropdownMenu>
