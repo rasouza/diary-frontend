@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 const LoadingContext = createContext(null)
 
-export function LoadingProvider({ loading, children }) {
-  const [isLoading, setLoading] = useState(loading)
+export function LoadingProvider({ children }) {
+  const [isLoading, setLoading] = useState(false)
 
   return (
     <LoadingContext.Provider value={{ isLoading, setLoading }}>
@@ -16,6 +16,5 @@ export function LoadingProvider({ loading, children }) {
 export const useLoading = () => useContext(LoadingContext)
 
 LoadingProvider.propTypes = {
-  loading: PropTypes.bool,
   children: PropTypes.element
 }

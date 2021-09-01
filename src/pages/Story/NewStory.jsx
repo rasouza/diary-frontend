@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import {
   Row,
   Col,
@@ -16,7 +16,6 @@ import {
 import Datetime from 'react-datetime'
 import ReactQuill from 'react-quill'
 import Loader from 'react-loader-spinner'
-import NotificationAlert from 'react-notification-alert'
 import classNames from 'classnames'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -26,12 +25,12 @@ import 'react-quill/dist/quill.snow.css'
 import 'moment/min/locales'
 
 import PanelHeader from 'components/PanelHeader/PanelHeader'
-import { useMutateStory } from './hooks'
-import { sendError } from 'lib/notify'
+import { useCreateStory } from './hooks'
+import { useNotify } from 'lib/NotifyProvider'
+import { pipe, values, pluck, forEach } from 'ramda'
 
 export function NewStory() {
-  const notify = useRef(null)
-
+  const { notifyError } = useNotify()
   const schema = yup.object().shape({
     link: yup.string().url(),
     summary: yup.string().required()
@@ -44,20 +43,19 @@ export function NewStory() {
     formState: { errors, touchedFields }
   } = useForm({ resolver: yupResolver(schema), mode: 'onBlur' })
 
-  const mutation = useMutateStory(notify)
+  const createStory = useCreateStory()
 
   const onSubmit = (data) => {
-    mutation.mutate(data)
+    createStory.mutate(data)
   }
 
   const onError = (errors) => {
-    const messages = Object.values(errors).map((error) => error.message)
-    sendError(messages, notify)
+    const notify = pipe(values, pluck('message'), forEach(notifyError))
+    notify(errors)
   }
 
   return (
     <>
-      <NotificationAlert ref={notify} />
       <PanelHeader size="sm" />
       <div className="content">
         <Row className="justify-content-center">
@@ -76,7 +74,7 @@ export function NewStory() {
                         type="submit"
                         color="success"
                         className="float-right col-sm-12 col-md-auto">
-                        {mutation.isLoading ? (
+                        {createStory.isLoading ? (
                           <Loader
                             type="TailSpin"
                             color="#FFF"

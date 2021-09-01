@@ -1,28 +1,30 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
-import { sendSuccess, sendError } from 'lib/notify'
 import { getStories, createStory, deleteStory } from '../api'
 import { propEq, reject, splitEvery } from 'ramda'
+import { useNotify } from 'lib/NotifyProvider'
 
 export const useStories = () => useQuery('stories', getStories)
 export const useStoriesByChunk = (chunks) =>
   useQuery('stories', getStories, { select: splitEvery(chunks) })
 
-export const useMutateStory = (notify) => {
+export const useCreateStory = () => {
   const queryClient = useQueryClient()
+  const { notifyError, notifySuccess } = useNotify()
 
   return useMutation(createStory, {
     onSuccess: () => {
       queryClient.invalidateQueries('stories')
-      sendSuccess('Story saved successfully', notify)
+      notifySuccess('Story saved successfully')
     },
     onError: (error) => {
-      sendError(error.response.data.message, notify)
+      notifyError(error.response.data.message)
     }
   })
 }
 
-export const useDeleteStory = (notify) => {
+export const useDeleteStory = () => {
   const queryClient = useQueryClient()
+  const { notifyError } = useNotify()
   const rejectById = (id) => reject(propEq('id', id))
 
   return useMutation((id) => deleteStory(id), {
@@ -35,10 +37,11 @@ export const useDeleteStory = (notify) => {
       return { previousStories }
     },
     onError: (_error, id, context) => {
-      sendError(
-        ['Not possible to delete story, please try again later'],
-        notify
-      )
+      try {
+        notifyError('Not possible to delete story, please try again later')
+      } catch (error) {
+        console.log(error)
+      }
 
       queryClient.setQueryData('stories', context.previousStories)
     }

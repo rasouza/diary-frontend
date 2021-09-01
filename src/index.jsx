@@ -41,7 +41,7 @@ const queryClient = new QueryClient({
 
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
-    <LoadingProvider loading={false}>
+    <LoadingProvider>
       <NotifyProvider>
         <BrowserRouter>
           <Switch>

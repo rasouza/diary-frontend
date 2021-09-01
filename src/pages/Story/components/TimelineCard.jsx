@@ -11,14 +11,12 @@ import moment from 'moment'
 import parse from 'html-react-parser'
 import classNames from 'classnames'
 import { useDeleteStory } from '../hooks'
-import { useNotify } from 'lib/NotifyProvider'
 
 moment.locale(window.navigator.language)
 
 export function TimelineCard({ story, inverted = false }) {
   const { id, date, link, summary, thoughts } = story
-  const { notify } = useNotify()
-  const deleteStory = useDeleteStory(notify)
+  const deleteStory = useDeleteStory()
 
   return (
     <li key={id} className={classNames({ 'timeline-inverted': inverted })}>
@@ -38,8 +36,13 @@ export function TimelineCard({ story, inverted = false }) {
         </div>
         <div className="timeline-body">
           <p>{summary}</p>
-          <hr />
-          {thoughts && parse(thoughts)}
+
+          {thoughts && (
+            <>
+              <hr />
+              {parse(thoughts)}
+            </>
+          )}
         </div>
         <div className="timeline-footer float-right">
           <UncontrolledDropdown>
