@@ -24,12 +24,10 @@ import PanelHeader from 'components/PanelHeader/PanelHeader'
 import { useStoriesByChunk } from './hooks'
 import { TimelineCard } from './components/TimelineCard'
 import { useLoading } from 'lib/LoadingProvider'
-import ReactNotificationAlert from 'react-notification-alert'
 
 export function Timeline() {
   const { data = [], isLoading } = useStoriesByChunk(2)
   const { setLoading } = useLoading()
-  const notify = React.useRef(null)
 
   React.useEffect(() => {
     setLoading(isLoading)
@@ -37,7 +35,6 @@ export function Timeline() {
 
   return (
     <>
-      <ReactNotificationAlert ref={notify} />
       <PanelHeader size="sm" />
       <div className="content">
         <div className="header text-center">
@@ -50,16 +47,8 @@ export function Timeline() {
                 <ul className="timeline">
                   {data.map((chunk, key) => (
                     <React.Fragment key={key}>
-                      {chunk[0] && (
-                        <TimelineCard
-                          story={chunk[0]}
-                          inverted
-                          notify={notify}
-                        />
-                      )}
-                      {chunk[1] && (
-                        <TimelineCard story={chunk[1]} notify={notify} />
-                      )}
+                      {chunk[0] && <TimelineCard story={chunk[0]} inverted />}
+                      {chunk[1] && <TimelineCard story={chunk[1]} />}
                     </React.Fragment>
                   ))}
                 </ul>

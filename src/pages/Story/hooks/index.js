@@ -21,7 +21,7 @@ export const useMutateStory = (notify) => {
   })
 }
 
-export const useDeleteStory = () => {
+export const useDeleteStory = (notify) => {
   const queryClient = useQueryClient()
   const rejectById = (id) => reject(propEq('id', id))
 
@@ -35,7 +35,10 @@ export const useDeleteStory = () => {
       return { previousStories }
     },
     onError: (_error, id, context) => {
-      // @TODO: sendError('Not possible to delete story, please try again later', notify)
+      sendError(
+        ['Not possible to delete story, please try again later'],
+        notify
+      )
 
       queryClient.setQueryData('stories', context.previousStories)
     }

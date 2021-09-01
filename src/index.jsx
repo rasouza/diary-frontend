@@ -29,6 +29,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import AdminLayout from 'layouts/Admin'
 import AuthLayout from 'layouts/Auth'
 import { LoadingProvider } from 'lib/LoadingProvider'
+import { NotifyProvider } from 'lib/NotifyProvider'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,13 +42,18 @@ const queryClient = new QueryClient({
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
     <LoadingProvider loading={false}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-          <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-          <Redirect to="/admin/story" />
-        </Switch>
-      </BrowserRouter>
+      <NotifyProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route
+              path="/admin"
+              render={(props) => <AdminLayout {...props} />}
+            />
+            <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+            <Redirect to="/admin/story" />
+          </Switch>
+        </BrowserRouter>
+      </NotifyProvider>
     </LoadingProvider>
     <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
   </QueryClientProvider>,

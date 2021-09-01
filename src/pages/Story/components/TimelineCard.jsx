@@ -11,12 +11,15 @@ import moment from 'moment'
 import parse from 'html-react-parser'
 import classNames from 'classnames'
 import { useDeleteStory } from '../hooks'
+import { useNotify } from 'lib/NotifyProvider'
 
 moment.locale(window.navigator.language)
 
 export function TimelineCard({ story, inverted = false }) {
   const { id, date, link, summary, thoughts } = story
-  const deleteStory = useDeleteStory()
+  const { notify } = useNotify()
+  const deleteStory = useDeleteStory(notify)
+
   return (
     <li key={id} className={classNames({ 'timeline-inverted': inverted })}>
       <div className="timeline-badge">
