@@ -1,3 +1,4 @@
+/*eslint-disable*/
 /*!
 
 =========================================================
@@ -14,103 +15,99 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-/*eslint-disable*/
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 // used for making the prop types of this component
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 // javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from "perfect-scrollbar";
+import PerfectScrollbar from 'perfect-scrollbar'
 
 // reactstrap components
-import { Nav, Collapse, Button } from "reactstrap";
+import { Nav, Collapse, Button } from 'reactstrap'
 
 // core components
-import logo from "assets/img/logo.png";
+import logo from 'assets/img/logo.png'
 
 import { getUser } from 'api/supabase'
 
-
-var ps;
+let ps
 
 function Sidebar(props) {
   const { avatar_url, full_name } = getUser() || {}
-  const [openAvatar, setOpenAvatar] = React.useState(false);
-  const [collapseStates, setCollapseStates] = React.useState({});
-  const sidebar = React.useRef();
+  const [openAvatar, setOpenAvatar] = React.useState(false)
+  const [collapseStates, setCollapseStates] = React.useState({})
+  const sidebar = React.useRef()
   React.useEffect(() => {
     // if you are using a Windows Machine, the scrollbars will have a Mac look
-    if (navigator.platform.indexOf("Win") > -1) {
+    if (navigator.platform.indexOf('Win') > -1) {
       ps = new PerfectScrollbar(sidebar.current, {
         suppressScrollX: true,
-        suppressScrollY: false,
-      });
+        suppressScrollY: false
+      })
     }
     return function cleanup() {
       // we need to destroy the false scrollbar when we navigate
       // to a page that doesn't have this component rendered
-      if (navigator.platform.indexOf("Win") > -1) {
-        ps.destroy();
+      if (navigator.platform.indexOf('Win') > -1) {
+        ps.destroy()
       }
       // to stop the warning of calling setState of unmounted component
-      var id = window.setTimeout(null, 0);
+      let id = window.setTimeout(null, 0)
       while (id--) {
-        window.clearTimeout(id);
+        window.clearTimeout(id)
       }
-    };
-  });
+    }
+  })
   React.useEffect(() => {
-    setCollapseStates(getCollapseStates(props.routes));
-  }, []);
+    setCollapseStates(getCollapseStates(props.routes))
+  }, [])
   // this creates the intial state of this component based on the collapse routes
   // that it gets through props.routes
   const getCollapseStates = (routes) => {
-    let initialState = {};
+    let initialState = {}
     routes.map((prop, key) => {
       if (prop.collapse) {
         initialState = {
           [prop.state]: getCollapseInitialState(prop.views),
           ...getCollapseStates(prop.views),
-          ...initialState,
-        };
+          ...initialState
+        }
       }
-      return null;
-    });
-    return initialState;
-  };
+      return null
+    })
+    return initialState
+  }
   // this verifies if any of the collapses should be default opened on a rerender of this component
   // for example, on the refresh of the page,
   // while on the src/views/forms/RegularForms.js - route /admin/regular-forms
   const getCollapseInitialState = (routes) => {
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse && getCollapseInitialState(routes[i].views)) {
-        return true;
+        return true
       } else if (window.location.href.indexOf(routes[i].path) !== -1) {
-        return true;
+        return true
       }
     }
-    return false;
-  };
+    return false
+  }
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.collapse) {
-        var st = {};
-        st[prop["state"]] = !collapseStates[prop.state];
+      if (prop.collapse && prop.hidden == false) {
+        const st = {}
+        st[prop.state] = !collapseStates[prop.state]
         return (
           <li
-            className={getCollapseInitialState(prop.views) ? "active" : ""}
-            key={key}
-          >
+            className={getCollapseInitialState(prop.views) ? 'active' : ''}
+            key={key}>
             <a
-              href="#pablo"
+              href="#"
               data-toggle="collapse"
               aria-expanded={collapseStates[prop.state]}
               onClick={(e) => {
-                e.preventDefault();
-                setCollapseStates(st);
-              }}
-            >
+                e.preventDefault()
+                setCollapseStates(st)
+              }}>
               {prop.icon !== undefined ? (
                 <>
                   <i className={prop.icon} />
@@ -133,9 +130,9 @@ function Sidebar(props) {
               <ul className="nav">{createLinks(prop.views)}</ul>
             </Collapse>
           </li>
-        );
+        )
       }
-      if (prop.layout && prop.layout === '/admin') {
+      if (prop.layout && prop.layout === '/admin' && !prop.hidden) {
         return (
           <li className={activeRoute(prop.layout + prop.path)} key={key}>
             <NavLink to={prop.layout + prop.path} activeClassName="">
@@ -152,32 +149,24 @@ function Sidebar(props) {
               )}
             </NavLink>
           </li>
-        );
+        )
       }
-    });
-  };
+    })
+  }
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
-    return window.location.href.indexOf(routeName) > -1 ? "active" : "";
-  };
+    return window.location.href.indexOf(routeName) > -1 ? 'active' : ''
+  }
   return (
     <>
       <div className="sidebar" data-color="black">
         <div className="logo">
-          <a
-            href="#"
-            className="simple-text logo-mini"
-            target="_blank"
-          >
+          <a href="#" className="simple-text logo-mini">
             <div className="logo-img">
               <img src={logo} alt="react-logo" />
             </div>
           </a>
-          <a
-            href="#"
-            className="simple-text logo-normal"
-            target="_blank"
-          >
+          <a href="#" className="simple-text logo-normal">
             Coding Diary
           </a>
           <div className="navbar-minimize">
@@ -186,8 +175,7 @@ function Sidebar(props) {
               className="btn-round btn-icon"
               color="neutral"
               id="minimizeSidebar"
-              onClick={() => props.minimizeSidebar()}
-            >
+              onClick={() => props.minimizeSidebar()}>
               <i className="now-ui-icons text_align-center visible-on-sidebar-regular" />
               <i className="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini" />
             </Button>
@@ -200,28 +188,33 @@ function Sidebar(props) {
               <img src={avatar_url} alt="Avatar" />
             </div>
             <div className="info">
-              <NavLink
-                to="/admin/user/profile"
-              >
-                <span>
-                  {full_name}
-                </span>
-              </NavLink>              
+              <NavLink to="/admin/user/profile">
+                <span>{full_name}</span>
+              </NavLink>
             </div>
           </div>
-          <Nav>{createLinks(props.routes)}</Nav>
+          <Nav>
+            {createLinks(props.routes)}
+            <div className="user"/>
+            <li>
+              <a href="https://www.100daysofcode.com/" target="_blank">
+                <i className="fas fa-file-alt" />
+                <p>100 Days of Code Challenge</p>
+              </a>
+            </li>
+          </Nav>
         </div>
       </div>
     </>
-  );
+  )
 }
 
 Sidebar.defaultProps = {
   routes: [],
   showNotification: false,
-  backgroundColor: "blue",
-  minimizeSidebar: () => {},
-};
+  backgroundColor: 'blue',
+  minimizeSidebar: () => {}
+}
 
 Sidebar.propTypes = {
   // links that are rendered
@@ -230,14 +223,14 @@ Sidebar.propTypes = {
   showNotification: PropTypes.bool,
   // background color for the component
   backgroundColor: PropTypes.oneOf([
-    "blue",
-    "yellow",
-    "green",
-    "orange",
-    "red",
+    'blue',
+    'yellow',
+    'green',
+    'orange',
+    'red'
   ]),
   // function that is called upon pressing the button near the logo
-  minimizeSidebar: PropTypes.func,
-};
+  minimizeSidebar: PropTypes.func
+}
 
-export default Sidebar;
+export default Sidebar

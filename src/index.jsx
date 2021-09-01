@@ -17,6 +17,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 import 'bootstrap/dist/css/bootstrap.css'
 // eslint-disable-next-line import/no-unresolved
@@ -26,20 +28,33 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import AdminLayout from 'layouts/Admin'
 import AuthLayout from 'layouts/Auth'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { LoadingProvider } from 'lib/LoadingProvider'
+import { NotifyProvider } from 'lib/NotifyProvider'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 20 // 20s
+    }
+  }
+})
 
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Switch>
-        <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-        <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-        <Redirect to="/admin/story" />
-      </Switch>
-    </BrowserRouter>
+    <LoadingProvider>
+      <NotifyProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route
+              path="/admin"
+              render={(props) => <AdminLayout {...props} />}
+            />
+            <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+            <Redirect to="/admin/story" />
+          </Switch>
+        </BrowserRouter>
+      </NotifyProvider>
+    </LoadingProvider>
     <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
   </QueryClientProvider>,
   document.getElementById('root')

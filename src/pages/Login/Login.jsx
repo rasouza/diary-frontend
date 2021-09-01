@@ -31,7 +31,7 @@ import { githubSignIn, twitterSignIn, getUser } from 'api/supabase'
 import bgImage from 'assets/img/bg16.jpg'
 import { Redirect } from 'react-router-dom'
 
-export default function Auth() {
+export function Login() {
   React.useEffect(() => {
     document.body.classList.add('register-page')
     return function cleanup() {

@@ -20,6 +20,7 @@ import { Switch, Redirect, useLocation } from 'react-router-dom'
 import PerfectScrollbar from 'perfect-scrollbar'
 // react plugin for creating notifications
 import NotificationAlert from 'react-notification-alert'
+import LoadingOverlay from 'react-loading-overlay'
 
 // core components
 import AdminNavbar from 'components/Navbars/AdminNavbar'
@@ -28,13 +29,16 @@ import Sidebar from 'components/Sidebar/Sidebar'
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute'
 
 import routes from 'routes'
+import { useLoading } from 'lib/LoadingProvider'
 
 let ps
 
 function Admin(props) {
+  const { isLoading } = useLoading()
   const location = useLocation()
   const notificationAlert = React.useRef()
   const mainPanel = React.useRef()
+
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
       document.documentElement.className += ' perfect-scrollbar-on'
@@ -98,17 +102,19 @@ function Admin(props) {
         backgroundColor="yellow"
       />
       <div className="main-panel" ref={mainPanel}>
-        <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
-        <Switch>
-          {getRoutes(routes)}
-          <Redirect from="/admin" to="/admin/story" />
-        </Switch>
-        {
-          // we don't want the Footer to be rendered on full screen maps page
-          window.location.href.indexOf('full-screen-maps') !== -1 ? null : (
-            <Footer fluid />
-          )
-        }
+        <LoadingOverlay active={isLoading} spinner>
+          <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
+          <Switch>
+            {getRoutes(routes)}
+            <Redirect from="/admin" to="/admin/story" />
+          </Switch>
+          {
+            // we don't want the Footer to be rendered on full screen maps page
+            window.location.href.indexOf('full-screen-maps') !== -1 ? null : (
+              <Footer fluid />
+            )
+          }
+        </LoadingOverlay>
       </div>
     </div>
   )
