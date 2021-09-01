@@ -18,16 +18,20 @@ import React from 'react'
 
 // reactstrap components
 import { Card, CardBody, Row, Col } from 'reactstrap'
-import { splitEvery } from 'ramda'
 
 // core components
 import PanelHeader from 'components/PanelHeader/PanelHeader'
-import { useStories } from './hooks'
+import { useStoriesByChunk } from './hooks'
 import { TimelineCard } from './components/TimelineCard'
+import { useLoading } from 'lib/LoadingProvider'
 
 export function Timeline() {
-  const { data = [], isFetching } = useStories()
-  const chunks = splitEvery(2, data)
+  const { data = [], isLoading } = useStoriesByChunk(2)
+  const { setLoading } = useLoading()
+
+  React.useEffect(() => {
+    setLoading(isLoading)
+  }, [isLoading])
 
   return (
     <>
@@ -41,13 +45,12 @@ export function Timeline() {
             <Card className="card-timeline card-plain">
               <CardBody>
                 <ul className="timeline">
-                  {!isFetching &&
-                    chunks.map((chunk, key) => (
-                      <React.Fragment key={key}>
-                        {chunk[0] && <TimelineCard story={chunk[0]} inverted />}
-                        {chunk[1] && <TimelineCard story={chunk[1]} />}
-                      </React.Fragment>
-                    ))}
+                  {data.map((chunk, key) => (
+                    <React.Fragment key={key}>
+                      {chunk[0] && <TimelineCard story={chunk[0]} inverted />}
+                      {chunk[1] && <TimelineCard story={chunk[1]} />}
+                    </React.Fragment>
+                  ))}
                 </ul>
               </CardBody>
             </Card>

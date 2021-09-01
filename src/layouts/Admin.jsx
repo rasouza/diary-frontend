@@ -21,7 +21,7 @@ import PerfectScrollbar from 'perfect-scrollbar'
 // react plugin for creating notifications
 import NotificationAlert from 'react-notification-alert'
 import LoadingOverlay from 'react-loading-overlay'
-import { useIsFetching } from 'react-query'
+
 // core components
 import AdminNavbar from 'components/Navbars/AdminNavbar'
 import Footer from 'components/Footer/Footer'
@@ -29,14 +29,15 @@ import Sidebar from 'components/Sidebar/Sidebar'
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute'
 
 import routes from 'routes'
+import { useLoading } from 'lib/LoadingProvider'
 
 let ps
 
 function Admin(props) {
+  const { isLoading } = useLoading()
   const location = useLocation()
   const notificationAlert = React.useRef()
   const mainPanel = React.useRef()
-  const queries = useIsFetching('stories')
 
   React.useEffect(() => {
     if (navigator.platform.indexOf('Win') > -1) {
@@ -101,7 +102,7 @@ function Admin(props) {
         backgroundColor="yellow"
       />
       <div className="main-panel" ref={mainPanel}>
-        <LoadingOverlay active={Boolean(queries)} spinner>
+        <LoadingOverlay active={isLoading} spinner>
           <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
           <Switch>
             {getRoutes(routes)}
