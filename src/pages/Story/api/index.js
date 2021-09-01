@@ -1,4 +1,5 @@
 import axios from 'lib/axios'
+import { reject, equals } from 'ramda'
 
 // @TODO: Implement repo/project selection
 const MAIN_REPO = 'main'
@@ -8,6 +9,6 @@ export function getStories() {
 }
 
 export function createStory(story) {
-  const data = { ...story, repo: MAIN_REPO }
+  const data = reject(equals(''))({ ...story, repo: MAIN_REPO })
   return axios.post('/stories', data).then((resp) => resp.data)
 }
