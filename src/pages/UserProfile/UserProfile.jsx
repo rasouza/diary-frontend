@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /*!
 
 =========================================================
@@ -28,11 +29,39 @@ import {
   Input,
   FormGroup
 } from 'reactstrap'
+import Switch from 'react-bootstrap-switch'
+import { useForm } from 'react-hook-form'
+import classNames from 'classnames'
+import { useDebounceFn } from 'ahooks'
 
 // core components
 import PanelHeader from 'components/PanelHeader/PanelHeader'
+import { getUser } from 'api/supabase'
+
+const DEBOUNCE_TIME = 300
 
 export function UserProfile() {
+  const { avatar_url, full_name, user_name, email } = getUser()
+  const [saved, setSaved] = React.useState({ name: false, bio: false })
+  const { register, watch } = useForm({
+    defaultValues: {
+      name: full_name,
+      bio: 'Short Bio'
+    }
+  })
+
+  const onChange = (value, { name }) => {
+    // @TODO: send update request to backend
+    setSaved({ [name]: true })
+    console.log(value, name)
+  }
+
+  const { run } = useDebounceFn(onChange, { wait: DEBOUNCE_TIME })
+
+  React.useEffect(() => {
+    watch(run)
+  }, [watch])
+
   return (
     <>
       <PanelHeader size="sm" />
@@ -46,109 +75,74 @@ export function UserProfile() {
               <CardBody>
                 <Form>
                   <Row>
-                    <Col className="pr-1" md="5">
-                      <FormGroup>
-                        <label>Company (disabled)</label>
+                    <Col>
+                      <FormGroup
+                        className={classNames('has-label', {
+                          'has-success': saved.name
+                        })}>
+                        <label>Name</label>
                         <Input
-                          defaultValue="Creative Code Inc."
+                          defaultValue={full_name}
+                          placeholder="name"
+                          type="text"
+                          {...register('name')}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col>
+                      <FormGroup>
+                        <label>Email</label>
+                        <Input
                           disabled
-                          placeholder="Company"
-                          type="text"
+                          defaultValue={email}
+                          placeholder="Email"
+                          type="email"
                         />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-1" md="3">
-                      <FormGroup>
-                        <label>Username</label>
-                        <Input
-                          defaultValue="michael23"
-                          placeholder="Username"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="4">
-                      <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          Email address
-                        </label>
-                        <Input placeholder="Email" type="email" />
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-1" md="6">
-                      <FormGroup>
-                        <label>First Name</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="Company"
-                          type="text"
-                        />
+                    <Col>
+                      <label>Link accounts</label>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <FormGroup className="d-flex justify-content-center align-items-baseline">
+                        <Button className="btn-icon" color="github">
+                          <i className="fab fa-github" />
+                        </Button>
+
+                        <div className="mx-3">
+                          <Switch defaultValue={true} onColor="success" />
+                        </div>
                       </FormGroup>
                     </Col>
-                    <Col className="pl-1" md="6">
-                      <FormGroup>
-                        <label>Last Name</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
-                          type="text"
-                        />
+                    <Col>
+                      <FormGroup className="d-flex justify-content-center align-items-baseline">
+                        <Button className="btn-icon" color="twitter">
+                          <i className="fab fa-twitter" />
+                        </Button>
+                        <div className="mx-3">
+                          <Switch defaultValue={false} readonly />
+                        </div>
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col md="12">
-                      <FormGroup>
-                        <label>Address</label>
-                        <Input
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
+                      <FormGroup
+                        className={classNames('has-label', {
+                          'has-success': saved.bio
+                        })}>
                         <label>About Me</label>
                         <Input
                           cols="80"
-                          defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
+                          defaultValue="Short Bio"
                           placeholder="Here can be your description"
                           rows="4"
                           type="textarea"
+                          {...register('bio')}
                         />
                       </FormGroup>
                     </Col>
@@ -159,52 +153,28 @@ export function UserProfile() {
           </Col>
           <Col md="4">
             <Card className="card-user">
-              <div className="image">
-                <img alt="..." src={require('assets/img/bg5.jpg').default} />
-              </div>
               <CardBody>
                 <div className="author">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                  <a href="#" onClick={(e) => e.preventDefault()}>
                     <img
-                      alt="..."
+                      alt={full_name}
                       className="avatar border-gray"
-                      src={require('assets/img/mike.jpg').default}
+                      src={avatar_url}
                     />
-                    <h5 className="title">Mike Andrew</h5>
+                    <h5 className="title">{full_name}</h5>
                   </a>
-                  <p className="description">michael24</p>
                 </div>
-                <p className="description text-center">
-                  &quot;Lamborghini Mercy <br />
-                  Your chick she so thirsty <br />
-                  I&apos;m in that two seat Lambo&quot;
-                </p>
+                <p className="description text-center">Short Bio</p>
               </CardBody>
               <hr />
               <div className="button-container">
                 <Button
                   className="btn-icon btn-round"
                   color="neutral"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
+                  href={`https://github.com/${user_name}`}
+                  target="_blank"
                   size="lg">
-                  <i className="fab fa-facebook-square" />
-                </Button>
-                <Button
-                  className="btn-icon btn-round"
-                  color="neutral"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  size="lg">
-                  <i className="fab fa-twitter" />
-                </Button>
-                <Button
-                  className="btn-icon btn-round"
-                  color="neutral"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  size="lg">
-                  <i className="fab fa-google-plus-square" />
+                  <i className="fab fa-github" />
                 </Button>
               </div>
             </Card>
