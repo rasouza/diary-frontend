@@ -7,6 +7,28 @@ function Footer(props) {
   return (
     <footer className={'footer' + (props.default ? ' footer-default' : '')}>
       <Container fluid={props.fluid}>
+        <nav>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/rasouza/diary-frontend"
+                className="mr-4-px"
+                target="_blank"
+                rel="noreferrer">
+                <i className="fab fa-github" /> Github
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.100daysofcode.com/"
+                className="mr-4-px"
+                target="_blank"
+                rel="noreferrer">
+                100 Days of Code
+              </a>
+            </li>
+          </ul>
+        </nav>
         <div className="copyright">
           &copy; {1900 + new Date().getYear()}, Coded by{' '}
           <a href="https://rasouza.com.br" target="_blank" rel="noreferrer">

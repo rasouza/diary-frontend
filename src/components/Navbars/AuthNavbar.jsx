@@ -59,7 +59,7 @@ function AuthNavbar() {
           <Nav className="ml-auto" navbar>
             <NavItem>
               <a
-                href="https://github.com/users/rasouza/projects/2"
+                href="https://github.com/rasouza/diary-frontend"
                 className="nav-link"
                 target="_blank"
                 rel="noreferrer">
