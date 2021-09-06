@@ -46,7 +46,32 @@ export function Login() {
       <div className="content">
         <div className="register-page">
           <Container>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center align-items-center">
+              <Col lg={5} md={8} xs={12}>
+                <div className="info-area info-horizontal mt-5">
+                  <div className="icon icon-primary">
+                    <i className="now-ui-icons design_app" />
+                  </div>
+                  <div className="description">
+                    <h5 className="info-title">Code</h5>
+                    <p className="description">
+                      Code minimum an hour every day for the next 100 days
+                    </p>
+                  </div>
+                </div>
+                <div className="info-area info-horizontal">
+                  <div className="icon icon-primary">
+                    <i className="fab fa-twitter" />
+                  </div>
+                  <div className="description">
+                    <h5 className="info-title">Tweet</h5>
+                    <p className="description">
+                      Tweet your progress every day with the #100DaysOfCode
+                      hashtag.
+                    </p>
+                  </div>
+                </div>
+              </Col>
               <Col lg={4} md={8} xs={12}>
                 <Card className="card-signup">
                   <CardHeader className="text-center">
@@ -54,7 +79,7 @@ export function Login() {
                     <div className="social btns-mr-5">
                       <Button
                         onClick={twitterSignIn}
-                        className="btn-icon btn-round"
+                        className="btn-icon btn-round disabled"
                         color="twitter">
                         <i className="fab fa-twitter" />
                       </Button>

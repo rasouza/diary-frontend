@@ -24,15 +24,13 @@ import {
   NavItem,
   Container
 } from 'reactstrap'
+import logo from 'assets/img/logo.png'
 
 function AuthNavbar() {
   const [isOpen, setIsOpen] = React.useState(false)
   const toggle = () => {
     setIsOpen(!isOpen)
   }
-  // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) =>
-    window.location.href.indexOf(routeName) > -1 ? 'active' : ''
   return (
     <Navbar
       expand="lg"
@@ -50,36 +48,32 @@ function AuthNavbar() {
               <span className="navbar-toggler-bar bar3" />
             </NavbarToggler>
           </div>
+          <div className="logo-img mr-2">
+            <img height="32" src={logo} alt="Coding Diary" />
+          </div>
           <Link to="/" className="navbar-brand">
-            Now Ui Dashboard Pro - React
+            Coding Diary
           </Link>
         </div>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <Link to="/admin/dashboard" className="nav-link">
-                <i className="now-ui-icons design_bullet-list-67" /> Dashboard
-              </Link>
+              <a
+                href="https://github.com/users/rasouza/projects/2"
+                className="nav-link"
+                target="_blank"
+                rel="noreferrer">
+                <i className="fab fa-github" /> Github
+              </a>
             </NavItem>
-            <NavItem className={activeRoute('/auth/register-page')}>
-              <Link to="/auth/register-page" className="nav-link">
-                <i className="now-ui-icons tech_mobile" /> Register
-              </Link>
-            </NavItem>
-            <NavItem className={activeRoute('/auth/login-page')}>
-              <Link to="/auth/login-page" className="nav-link">
-                <i className="now-ui-icons users_circle-08" /> Login
-              </Link>
-            </NavItem>
-            <NavItem className={activeRoute('/auth/pricing-page')}>
-              <Link to="/auth/pricing-page" className="nav-link">
-                <i className="now-ui-icons business_money-coins" /> Pricing
-              </Link>
-            </NavItem>
-            <NavItem className={activeRoute('/auth/lock-screen-page')}>
-              <Link to="/auth/lock-screen-page" className="nav-link">
-                <i className="now-ui-icons ui-1_lock-circle-open" /> Lock
-              </Link>
+            <NavItem>
+              <a
+                href="https://www.100daysofcode.com/"
+                className="nav-link"
+                target="_blank"
+                rel="noreferrer">
+                <i className="far fa-file-alt" /> 100 Days of Code Challenge
+              </a>
             </NavItem>
           </Nav>
         </Collapse>
