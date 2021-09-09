@@ -75,6 +75,40 @@ export function UserProfile() {
               <CardBody>
                 <Form>
                   <Row>
+                    <Col xl="8" sm="12">
+                      <FormGroup>
+                        <label>Email</label>
+                        <Input
+                          disabled
+                          defaultValue={email}
+                          placeholder="Email"
+                          type="email"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col xl="2" sm="6">
+                      <FormGroup className="d-flex justify-content-xl-center align-items-baseline">
+                        <Button className="btn-icon" color="github">
+                          <i className="fab fa-github" />
+                        </Button>
+
+                        <div className="mx-1">
+                          <Switch defaultValue={true} onColor="success" />
+                        </div>
+                      </FormGroup>
+                    </Col>
+                    <Col xl="2" sm="6">
+                      <FormGroup className="d-flex justify-content-xl-center align-items-baseline">
+                        <Button className="btn-icon" color="twitter" disabled>
+                          <i className="fab fa-twitter" />
+                        </Button>
+                        <div className="mx-1">
+                          <Switch defaultValue={false} readonly />
+                        </div>
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row>
                     <Col>
                       <FormGroup
                         className={classNames('has-label', {
@@ -87,45 +121,6 @@ export function UserProfile() {
                           type="text"
                           {...register('name')}
                         />
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup>
-                        <label>Email</label>
-                        <Input
-                          disabled
-                          defaultValue={email}
-                          placeholder="Email"
-                          type="email"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <label>Link accounts</label>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col>
-                      <FormGroup className="d-flex justify-content-center align-items-baseline">
-                        <Button className="btn-icon" color="github">
-                          <i className="fab fa-github" />
-                        </Button>
-
-                        <div className="mx-3">
-                          <Switch defaultValue={true} onColor="success" />
-                        </div>
-                      </FormGroup>
-                    </Col>
-                    <Col>
-                      <FormGroup className="d-flex justify-content-center align-items-baseline">
-                        <Button className="btn-icon" color="twitter">
-                          <i className="fab fa-twitter" />
-                        </Button>
-                        <div className="mx-3">
-                          <Switch defaultValue={false} readonly />
-                        </div>
                       </FormGroup>
                     </Col>
                   </Row>
