@@ -1,4 +1,4 @@
-/*eslint-disable*/
+/* eslint-disable camelcase */
 /*!
 
 =========================================================
@@ -34,7 +34,6 @@ let ps
 
 function Sidebar(props) {
   const { avatar_url, full_name } = getUser() || {}
-  const [openAvatar, setOpenAvatar] = React.useState(false)
   const [collapseStates, setCollapseStates] = React.useState({})
   const sidebar = React.useRef()
   React.useEffect(() => {
@@ -93,7 +92,7 @@ function Sidebar(props) {
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.collapse && prop.hidden == false) {
+      if (prop.collapse && prop.hidden === false) {
         const st = {}
         st[prop.state] = !collapseStates[prop.state]
         return (
@@ -151,6 +150,8 @@ function Sidebar(props) {
           </li>
         )
       }
+
+      return null
     })
   }
   // verifies if routeName is the one active (in browser input)
@@ -163,7 +164,7 @@ function Sidebar(props) {
         <div className="logo">
           <a href="#" className="simple-text logo-mini">
             <div className="logo-img">
-              <img src={logo} alt="react-logo" />
+              <img src={logo} alt="Coding Diary" />
             </div>
           </a>
           <a href="#" className="simple-text logo-normal">
@@ -195,9 +196,12 @@ function Sidebar(props) {
           </div>
           <Nav>
             {createLinks(props.routes)}
-            <div className="user"/>
+            <div className="user" />
             <li>
-              <a href="https://www.100daysofcode.com/" target="_blank">
+              <a
+                href="https://www.100daysofcode.com/"
+                target="_blank"
+                rel="noreferrer">
                 <i className="fas fa-file-alt" />
                 <p>100 Days of Code Challenge</p>
               </a>

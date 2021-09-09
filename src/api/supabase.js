@@ -14,7 +14,7 @@ export function getUser() {
   }
 
   const user = db.auth.user()
-  if (user) return user.user_metadata
+  if (user) return { ...user.user_metadata, email: user.email }
 
   return null
 }
