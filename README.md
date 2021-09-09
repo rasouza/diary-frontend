@@ -1,6 +1,6 @@
 # [Coding Diary](https://diary.rasouza.dev)
 
-![version](https://img.shields.io/github/package-json/v/rasouza/diary-frontend) [![Build status](https://badge.buildkite.com/55852d1dad9b64b4cd76739169bf77dff52c226845c3bd4e5b.svg)](https://buildkite.com/rasouza/diary-frontend)
+![version](https://img.shields.io/github/v/release/rasouza/diary-frontend?sort=semver) [![Build status](https://badge.buildkite.com/55852d1dad9b64b4cd76739169bf77dff52c226845c3bd4e5b.svg)](https://buildkite.com/rasouza/diary-frontend)
 
 ![Product Gif](./docs/diary.png)
 
