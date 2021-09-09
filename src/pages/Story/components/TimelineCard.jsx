@@ -35,7 +35,7 @@ export function TimelineCard({ story, inverted = false }) {
           )}
         </div>
         <div className="timeline-body">
-          <p>{summary}</p>
+          <strong>{summary}</strong>
 
           {thoughts && (
             <>
