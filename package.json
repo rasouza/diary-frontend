@@ -16,7 +16,7 @@
     "html-react-parser": "^1.2.8",
     "match-sorter": "6.3.0",
     "moment": "2.29.1",
-    "node-sass": "6.0.0",
+    "node-sass": "7.0.0",
     "nouislider": "15.1.1",
     "perfect-scrollbar": "1.5.1",
     "prop-types": "^15.7.2",
