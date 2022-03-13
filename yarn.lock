@@ -1374,6 +1374,18 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.2.tgz#30aa825f11d438671d585bd44e7fd564535fc210"
   integrity sha512-82cpyJyKRoQoRi+14ibCeGPu0CwypgtBAdBhq1WfvagpCZNKqwXbKwXllYSMG91DhmG4jt9gN8eP6lGOtozuaw==
 
+"@growthbook/growthbook-react@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@growthbook/growthbook-react/-/growthbook-react-0.8.0.tgz#bdf2f6bcdcef67e641621acc5c845373b0b5231f"
+  integrity sha512-HjuzgbyD8Hn1tIQ54HPaLRjbhZu9UZ91UgzTjasDL/oWTnB5UyeEV+P6Jx8Pukv1StRh/9+FtK3J2/ryqYr3qg==
+  dependencies:
+    "@growthbook/growthbook" "^0.17.0"
+
+"@growthbook/growthbook@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@growthbook/growthbook/-/growthbook-0.17.0.tgz#7848084a8b419bb028e677481d47b087f55bd184"
+  integrity sha512-CfDKCsemHPS8IwE73nyVnSUjKMrkI/1Kp9F6hxm3TLeQgr3xjspA77J9VPl3Ejv2+2Ka2P7yMRBv3XmrX2qiDA==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"

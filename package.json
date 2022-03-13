@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://diary.rasouza.dev",
   "dependencies": {
+    "@growthbook/growthbook-react": "^0.8.0",
     "@hookform/resolvers": "^2.8.0",
     "@supabase/supabase-js": "^1.22.2",
     "ahooks": "^2.10.9",
