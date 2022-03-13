@@ -14,10 +14,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { GrowthBook, GrowthBookProvider } from '@growthbook/growthbook-react'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -30,6 +31,9 @@ import AdminLayout from 'layouts/Admin'
 import AuthLayout from 'layouts/Auth'
 import { LoadingProvider } from 'lib/LoadingProvider'
 import { NotifyProvider } from 'lib/NotifyProvider'
+import { AuthProvider } from 'lib/AuthProvider'
+import { loadFeatures } from 'api/growthbook'
+import { loadClient } from 'api/supabase'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,23 +43,51 @@ const queryClient = new QueryClient({
   }
 })
 
-ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
-    <LoadingProvider>
-      <NotifyProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route
-              path="/admin"
-              render={(props) => <AdminLayout {...props} />}
-            />
-            <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-            <Redirect to="/admin/story" />
-          </Switch>
-        </BrowserRouter>
-      </NotifyProvider>
-    </LoadingProvider>
-    <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-  </QueryClientProvider>,
-  document.getElementById('root')
-)
+const growthbook = new GrowthBook({
+  trackingCallback: (experiment, result) => {
+    console.log({
+      experimentId: experiment.key,
+      variationId: result.variationId
+    })
+  }
+})
+
+let supabaseClient
+
+function App() {
+  const [, setLoading] = useState(true)
+  useEffect(async () => {
+    await loadFeatures(growthbook)
+    supabaseClient = loadClient()
+    setLoading(false)
+  }, [])
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <LoadingProvider>
+        <NotifyProvider>
+          <GrowthBookProvider growthbook={growthbook}>
+            <AuthProvider client={supabaseClient}>
+              <BrowserRouter>
+                <Switch>
+                  <Route
+                    path="/admin"
+                    render={(props) => <AdminLayout {...props} />}
+                  />
+                  <Route
+                    path="/auth"
+                    render={(props) => <AuthLayout {...props} />}
+                  />
+                  <Redirect to="/admin/story" />
+                </Switch>
+              </BrowserRouter>
+            </AuthProvider>
+          </GrowthBookProvider>
+        </NotifyProvider>
+      </LoadingProvider>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))

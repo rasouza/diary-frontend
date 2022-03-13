@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // reactstrap components
 import {
@@ -26,20 +26,25 @@ import {
   Col,
   Button
 } from 'reactstrap'
-import { githubSignIn, twitterSignIn, getUser } from 'api/supabase'
-// core components
-import bgImage from 'assets/img/bg16.jpg'
 import { Redirect } from 'react-router-dom'
 
+import { useAuth } from 'lib/AuthProvider'
+
+// core components
+import bgImage from 'assets/img/bg16.jpg'
+
 export function Login() {
-  React.useEffect(() => {
+  // const loginEnabled = useFeature('enable-login').on
+  const { github, twitter, user } = useAuth()
+  console.log('user', user)
+  useEffect(() => {
     document.body.classList.add('register-page')
     return function cleanup() {
       document.body.classList.remove('register-page')
     }
   }, [])
 
-  if (getUser()) return <Redirect to="/" />
+  if (user) return <Redirect to="/" />
 
   return (
     <>
@@ -78,13 +83,13 @@ export function Login() {
                     <CardTitle tag="h4">Sign In with</CardTitle>
                     <div className="social btns-mr-5">
                       <Button
-                        onClick={twitterSignIn}
+                        onClick={twitter}
                         className="btn-icon btn-round disabled"
                         color="twitter">
                         <i className="fab fa-twitter" />
                       </Button>
                       <Button
-                        onClick={githubSignIn}
+                        onClick={github}
                         className="btn-icon btn-round"
                         color="github">
                         <i className="fab fa-github" />
