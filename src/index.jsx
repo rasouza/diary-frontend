@@ -33,7 +33,7 @@ import { LoadingProvider } from 'lib/LoadingProvider'
 import { NotifyProvider } from 'lib/NotifyProvider'
 import { AuthProvider } from 'lib/AuthProvider'
 import { loadFeatures } from 'api/growthbook'
-import { loadClient } from 'api/supabase'
+import { createClient } from '@supabase/supabase-js'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,13 +52,12 @@ const growthbook = new GrowthBook({
   }
 })
 
-let supabaseClient
+const supabaseClient = createClient(window.SUPABASE_URL, window.SUPABASE_KEY)
 
 function App() {
   const [, setLoading] = useState(true)
   useEffect(async () => {
     await loadFeatures(growthbook)
-    supabaseClient = loadClient()
     setLoading(false)
   }, [])
 

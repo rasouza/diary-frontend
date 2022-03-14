@@ -26,10 +26,3 @@ export function signOut() {
 export function getToken() {
   return db.auth.session().access_token
 }
-
-export function loadClient() {
-  const { SUPABASE_URL, SUPABASE_KEY } = JSON.parse(
-    window.localStorage.getItem('supabase')
-  )
-  return createClient(SUPABASE_URL, SUPABASE_KEY)
-}
