@@ -27,16 +27,35 @@ import {
   Button
 } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
+import { useFeature } from '@growthbook/growthbook-react'
 
 import { useAuth } from 'lib/AuthProvider'
+import config from 'config'
 
 // core components
 import bgImage from 'assets/img/bg16.jpg'
 
 export function Login() {
-  // const loginEnabled = useFeature('enable-login').on
-  const { github, twitter, user } = useAuth()
-  console.log('user', user)
+  const { github, twitter, auth } = useAuth()
+  const login = useFeature('enable-login')
+  const { dummyUser } = config
+
+  let user = null
+  if (login.value && login.off) {
+    user = dummyUser
+  } else if (auth.user()) {
+    const {
+      user_metadata: {
+        avatar_url: avatar,
+        full_name: name,
+        user_name: username,
+        email
+      }
+    } = auth.user()
+    user = { avatar, name, email, username }
+  }
+  window.localStorage.setItem('user', JSON.stringify(user))
+
   useEffect(() => {
     document.body.classList.add('register-page')
     return function cleanup() {

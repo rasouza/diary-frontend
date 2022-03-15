@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -55,17 +55,15 @@ const growthbook = new GrowthBook({
 const supabaseClient = createClient(window.SUPABASE_URL, window.SUPABASE_KEY)
 
 function App() {
-  const [, setLoading] = useState(true)
   useEffect(async () => {
     await loadFeatures(growthbook)
-    setLoading(false)
   }, [])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <LoadingProvider>
-        <NotifyProvider>
-          <GrowthBookProvider growthbook={growthbook}>
+    <GrowthBookProvider growthbook={growthbook}>
+      <QueryClientProvider client={queryClient}>
+        <LoadingProvider>
+          <NotifyProvider>
             <AuthProvider client={supabaseClient}>
               <BrowserRouter>
                 <Switch>
@@ -81,11 +79,11 @@ function App() {
                 </Switch>
               </BrowserRouter>
             </AuthProvider>
-          </GrowthBookProvider>
-        </NotifyProvider>
-      </LoadingProvider>
-      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-    </QueryClientProvider>
+          </NotifyProvider>
+        </LoadingProvider>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      </QueryClientProvider>
+    </GrowthBookProvider>
   )
 }
 
