@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 const SupabaseContext = createContext(null)
 
 export function AuthProvider({ children, client }) {
+  const profile = JSON.parse(window.localStorage.getItem('user'))
+
   const github = () =>
     client.auth.signIn(
       { provider: 'github' },
-      { redirectTo: `${window.location.origin}/auth` }
+      { redirectTo: `${window.location.origin}/auth/callback` }
     )
 
   const twitter = () =>
@@ -17,7 +19,13 @@ export function AuthProvider({ children, client }) {
     )
 
   return (
-    <SupabaseContext.Provider value={{ github, twitter, auth: client.auth }}>
+    <SupabaseContext.Provider
+      value={{
+        github,
+        twitter,
+        auth: client.auth,
+        profile
+      }}>
       {children}
     </SupabaseContext.Provider>
   )
@@ -27,5 +35,5 @@ export const useAuth = () => useContext(SupabaseContext)
 
 AuthProvider.propTypes = {
   children: PropTypes.element,
-  client: PropTypes.any
+  client: PropTypes.object
 }

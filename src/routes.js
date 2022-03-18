@@ -16,10 +16,18 @@
 */
 import { UserProfile } from 'pages/UserProfile'
 import { Tweets } from 'pages/Tweets'
-import { Login } from 'pages/Login'
+import { Login, Callback } from 'pages/Login'
 import { NewStory, Timeline } from 'pages/Story'
 
 const routes = [
+  {
+    path: '/callback',
+    name: 'Auth Callback',
+    short: 'Teste',
+    mini: 'AU',
+    component: Callback,
+    layout: '/auth'
+  },
   {
     path: '/',
     name: 'Login Page',
@@ -28,6 +36,7 @@ const routes = [
     component: Login,
     layout: '/auth'
   },
+
   {
     path: '/story',
     name: 'New Story',

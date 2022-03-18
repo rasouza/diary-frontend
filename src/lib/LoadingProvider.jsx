@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
+import LoadingOverlay from 'react-loading-overlay'
 
 const LoadingContext = createContext(null)
 
@@ -8,7 +9,9 @@ export function LoadingProvider({ children }) {
 
   return (
     <LoadingContext.Provider value={{ isLoading, setLoading }}>
-      {children}
+      <LoadingOverlay active={isLoading} spinner>
+        {children}
+      </LoadingOverlay>
     </LoadingContext.Provider>
   )
 }
