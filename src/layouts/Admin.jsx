@@ -15,26 +15,23 @@
 
 */
 import React from 'react'
-import { Switch, Redirect, useLocation } from 'react-router-dom'
+import { Switch, Redirect, useLocation, Route } from 'react-router-dom'
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from 'perfect-scrollbar'
 // react plugin for creating notifications
 import NotificationAlert from 'react-notification-alert'
-import LoadingOverlay from 'react-loading-overlay'
 
 // core components
 import AdminNavbar from 'components/Navbars/AdminNavbar'
 import Footer from 'components/Footer/Footer'
 import Sidebar from 'components/Sidebar/Sidebar'
-import PrivateRoute from 'components/PrivateRoute/PrivateRoute'
+import { withAuth } from 'components/withAuth'
 
 import routes from 'routes'
-import { useLoading } from 'lib/LoadingProvider'
 
 let ps
 
 function Admin(props) {
-  const { isLoading } = useLoading()
   const location = useLocation()
   const notificationAlert = React.useRef()
   const mainPanel = React.useRef()
@@ -66,7 +63,7 @@ function Admin(props) {
       }
       if (prop.layout === '/admin') {
         return (
-          <PrivateRoute
+          <Route
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
@@ -102,22 +99,20 @@ function Admin(props) {
         backgroundColor="yellow"
       />
       <div className="main-panel" ref={mainPanel}>
-        <LoadingOverlay active={isLoading} spinner>
-          <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
-          <Switch>
-            {getRoutes(routes)}
-            <Redirect from="/admin" to="/admin/story" />
-          </Switch>
-          {
-            // we don't want the Footer to be rendered on full screen maps page
-            window.location.href.indexOf('full-screen-maps') !== -1 ? null : (
-              <Footer fluid />
-            )
-          }
-        </LoadingOverlay>
+        <AdminNavbar {...props} brandText={getActiveRoute(routes)} />
+        <Switch>
+          {getRoutes(routes)}
+          <Redirect from="/admin" to="/admin/story" />
+        </Switch>
+        {
+          // we don't want the Footer to be rendered on full screen maps page
+          window.location.href.indexOf('full-screen-maps') !== -1 ? null : (
+            <Footer fluid />
+          )
+        }
       </div>
     </div>
   )
 }
 
-export default Admin
+export default withAuth(Admin)
