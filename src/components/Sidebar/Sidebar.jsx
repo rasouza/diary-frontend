@@ -28,12 +28,12 @@ import { Nav, Collapse, Button } from 'reactstrap'
 // core components
 import logo from 'assets/img/logo.png'
 
-import { getUser } from 'api/supabase'
+import { useAuth } from 'lib/AuthProvider'
 
 let ps
 
 function Sidebar(props) {
-  const { avatar_url, full_name } = getUser() || {}
+  const { profile } = useAuth()
   const [collapseStates, setCollapseStates] = React.useState({})
   const sidebar = React.useRef()
   React.useEffect(() => {
@@ -186,11 +186,11 @@ function Sidebar(props) {
         <div className="sidebar-wrapper" ref={sidebar}>
           <div className="user">
             <div className="photo">
-              <img src={avatar_url} alt="Avatar" />
+              <img src={profile.avatar} alt="Avatar" />
             </div>
             <div className="info">
               <NavLink to="/admin/user/profile">
-                <span>{full_name}</span>
+                <span>{profile.name}</span>
               </NavLink>
             </div>
           </div>
