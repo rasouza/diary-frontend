@@ -18,6 +18,7 @@ export function LoadingProvider({ children }) {
 
 export const useLoading = () => useContext(LoadingContext)
 
+LoadingOverlay.propTypes = undefined
 LoadingProvider.propTypes = {
   children: PropTypes.element
 }
