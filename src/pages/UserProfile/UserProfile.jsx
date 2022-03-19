@@ -36,16 +36,16 @@ import { useDebounceFn } from 'ahooks'
 
 // core components
 import PanelHeader from 'components/PanelHeader/PanelHeader'
-import { getUser } from 'api/supabase'
+import { useAuth } from 'lib/AuthProvider'
 
 const DEBOUNCE_TIME = 300
 
 export function UserProfile() {
-  const { avatar_url, full_name, user_name, email } = getUser()
+  const { profile } = useAuth()
   const [saved, setSaved] = React.useState({ name: false, bio: false })
   const { register, watch } = useForm({
     defaultValues: {
-      name: full_name,
+      name: profile.name,
       bio: 'Short Bio'
     }
   })
@@ -80,7 +80,7 @@ export function UserProfile() {
                         <label>Email</label>
                         <Input
                           disabled
-                          defaultValue={email}
+                          defaultValue={profile.email}
                           placeholder="Email"
                           type="email"
                         />
@@ -116,7 +116,7 @@ export function UserProfile() {
                         })}>
                         <label>Name</label>
                         <Input
-                          defaultValue={full_name}
+                          defaultValue={profile.name}
                           placeholder="name"
                           type="text"
                           {...register('name')}
@@ -152,11 +152,11 @@ export function UserProfile() {
                 <div className="author">
                   <a href="#" onClick={(e) => e.preventDefault()}>
                     <img
-                      alt={full_name}
+                      alt={profile.name}
                       className="avatar border-gray"
-                      src={avatar_url}
+                      src={profile.avatar}
                     />
-                    <h5 className="title">{full_name}</h5>
+                    <h5 className="title">{profile.name}</h5>
                   </a>
                 </div>
                 <p className="description text-center">Short Bio</p>
@@ -166,7 +166,7 @@ export function UserProfile() {
                 <Button
                   className="btn-icon btn-round"
                   color="neutral"
-                  href={`https://github.com/${user_name}`}
+                  href={`https://github.com/${profile.username}`}
                   target="_blank"
                   size="lg">
                   <i className="fab fa-github" />

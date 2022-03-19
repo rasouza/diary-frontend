@@ -32,10 +32,11 @@ import {
   DropdownItem,
   Container
 } from 'reactstrap'
-import { signOut } from 'api/supabase'
+import { useAuth } from 'lib/AuthProvider'
 
 function AdminNavbar(props) {
   const location = useLocation()
+  const { auth } = useAuth()
   const [isOpen, setIsOpen] = React.useState(false)
   const [dropdownOpen, setDropdownOpen] = React.useState(false)
   const [color, setColor] = React.useState('transparent')
@@ -128,7 +129,10 @@ function AdminNavbar(props) {
                 <DropdownItem tag={Link} to="/admin/user/profile">
                   Settings
                 </DropdownItem>
-                <DropdownItem tag={Link} to="/auth" onClick={signOut}>
+                <DropdownItem
+                  tag={Link}
+                  to="/auth"
+                  onClick={() => auth.signOut()}>
                   Logout
                 </DropdownItem>
               </DropdownMenu>
