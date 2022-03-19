@@ -9,7 +9,6 @@ import {
   Form,
   FormGroup,
   Label,
-  Input,
   Button,
   Container
 } from 'reactstrap'
@@ -25,6 +24,7 @@ import 'react-quill/dist/quill.snow.css'
 import 'moment/min/locales'
 
 import PanelHeader from 'components/PanelHeader/PanelHeader'
+import Input from 'components/Input'
 import { useCreateStory } from './hooks'
 import { useNotify } from 'lib/NotifyProvider'
 import { pipe, values, pluck, forEach } from 'ramda'
