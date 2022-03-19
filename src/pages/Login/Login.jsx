@@ -26,7 +26,9 @@ import {
   Col,
   Button
 } from 'reactstrap'
+import { Redirect } from 'react-router-dom'
 
+import { useFeature } from '@growthbook/growthbook-react'
 import { useAuth } from 'lib/AuthProvider'
 
 // core components
@@ -34,6 +36,11 @@ import bgImage from 'assets/img/bg16.jpg'
 
 export function Login() {
   const { github, twitter } = useAuth()
+  const login = useFeature('enable-login')
+
+  if (login.value !== null && login.off) {
+    return <Redirect to="/auth/callback" />
+  }
 
   useEffect(() => {
     document.body.classList.add('register-page')
