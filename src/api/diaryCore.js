@@ -1,15 +1,15 @@
-import Axios from 'axios'
-import { getToken } from '../api/supabase'
+import axios from 'axios'
+import { getToken } from './supabase'
 
-const axios = Axios.create({
+const diaryCore = axios.create({
   baseURL: window.CORE_URL
 })
 
-axios.interceptors.request.use(
+diaryCore.interceptors.request.use(
   (config) => {
     config.headers.Authorization = `Bearer ${getToken()}`
     return config
   },
   (error) => Promise.reject(error)
 )
-export default axios
+export default diaryCore
