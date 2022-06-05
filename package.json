@@ -7,7 +7,7 @@
     "@hookform/resolvers": "^2.8.0",
     "@supabase/supabase-js": "^1.22.2",
     "ahooks": "^2.10.9",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bootstrap": "4.6.0",
     "chart.js": "3.2.1",
     "classnames": "^2.3.1",
